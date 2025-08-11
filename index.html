@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>קסם הקשב - הקשב שלך הוא מתנה קסומה</title>
+    <meta name="description" content="מרחב תומך אמיתי לאנשים עם ADHD - כלים, סיפורים, והמון הבנה. פגישה מחודשת עם עצמך.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Heebo', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #e8f4fd 0%, #fff7e6 50%, #fff0e6 100%);
+            min-height: 100vh;
+        }
+        
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: linear-gradient(45deg, #4fc3f7, #ffb74d);
+            border-radius: 50%;
+            animation: float 8s infinite ease-in-out;
+            opacity: 0.6;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+            25% { transform: translateY(-20px) rotate(90deg); opacity: 0.8; }
+            50% { transform: translateY(-40px) rotate(180deg); opacity: 0.4; }
+            75% { transform: translateY(-20px) rotate(270deg); opacity: 0.7; }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(135deg, rgba(79, 195, 247, 0.1) 0%, rgba(255, 183, 77, 0.1) 100%);
+            border-radius: 30px;
+            margin: 40px 0;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transition: all 0.5s ease;
+        }
+        
+        .hero:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.15);
+        }
+        
+        .logo-placeholder {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #4fc3f7, #ffb74d);
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            animation: pulse 3s infinite;
+            box-shadow: 0 15px 30px rgba(79, 195, 247, 0.3);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #1565c0, #ff8f00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            animation: slideInUp 1s ease-out;
+        }
+        
+        .subtitle {
+            font-size: 1.4rem;
+            color: #546e7a;
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: slideInUp 1s ease-out 0.2s both;
+        }
+        
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        
+        .btn {
+            padding: 18px 36px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Heebo', sans-serif;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #4fc3f7, #29b6f6);
+            color: white;
+            box-shadow: 0 8px 25px rgba(79, 195, 247, 0.4);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(79, 195, 247, 0.6);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #ffb74d, #ffa726);
+            color: white;
+            box-shadow: 0 8px 25px rgba(255, 183, 77, 0.4);
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 183, 77, 0.6);
+        }
+        
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25d366, #20c157);
+            color: white;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+        
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
+        }
+        
+        /* Sections */
+        .section {
+            margin: 80px 0;
+            padding: 60px 40px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #1565c0, #ff8f00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .about-section {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 40px;
+            align-items: center;
+            text-align: right;
+        }
+        
+        .profile-image {
+            width: 180px;
+            height: 180px;
+            background: linear-gradient(135deg, #e3f2fd, #fff3e0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #546e7a;
+            border: 4px solid #4fc3f7;
+            box-shadow: 0 15px 30px rgba(79, 195, 247, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .profile-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(79, 195, 247, 0.4);
+        }
+        
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #37474f;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, rgba(255, 183, 77, 0.3) 0%, rgba(79, 195, 247, 0.3) 100%);
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+        
+        /* Book Section */
+        .book-section {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        
+        .book-image {
+            width: 220px;
+            height: 300px;
+            background: linear-gradient(135deg, #e8f5e8, #fff8e1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            color: #546e7a;
+            border: 3px solid #ffb74d;
+            box-shadow: 0 20px 40px rgba(255, 183, 77, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .book-image:hover {
+            transform: translateY(-10px) rotate(2deg);
+            box-shadow: 0 30px 60px rgba(255, 183, 77, 0.4);
+        }
+        
+        .book-content h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #1565c0;
+        }
+        
+        .book-content p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #37474f;
+            line-height: 1.7;
+        }
+        
+        .book-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        /* Community Section */
+        .community-stats {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #4fc3f7, #ffb74d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            color: #546e7a;
+        }
+        
+        /* Social Media */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .social-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-icon small {
+            font-size: 11px;
+            margin-top: 2px;
+            font-weight: 600;
+        }
+        
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .social-icon:hover::before {
+            transform: translateX(100%);
+        }
+        
+        .instagram { background: linear-gradient(135deg, #e4405f, #f77737); }
+        .facebook { background: linear-gradient(135deg, #1877f2, #42a5f5); }
+        .tiktok { background: linear-gradient(135deg, #000000, #ff0050); }
+        
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 60px 0;
+            background: linear-gradient(135deg, rgba(79, 195, 247, 0.1), rgba(255, 183, 77, 0.1));
+            border-radius: 25px;
+            margin-top: 60px;
+        }
+        
+        .development-notice {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1565c0;
+            margin-bottom: 15px;
+        }
+        
+        .development-subtitle {
+            font-size: 1.1rem;
+            color: #546e7a;
+            margin-bottom: 30px;
+        }
+        
+        .contact-info {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 20px;
+            display: inline-block;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .contact-info h4 {
+            color: #1565c0;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .contact-info a {
+            color: #ff8f00;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title { font-size: 2.5rem; }
+            .subtitle { font-size: 1.2rem; }
+            .about-section { grid-template-columns: 1fr; text-align: center; gap: 30px; }
+            .book-section { grid-template-columns: 1fr; text-align: center; gap: 30px; }
+            .cta-buttons { flex-direction: column; align-items: center; }
+            .btn { width: 280px; justify-content: center; }
+            .section { padding: 40px 20px; margin: 40px 0; }
+        }
+        
+        .emoji {
+            font-size: 1.2em;
+            margin-left: 8px;
+        }
+        
+        .glowing-text {
+            text-shadow: 0 0 20px rgba(79, 195, 247, 0.5);
+        }
+        
+        /* Coming Soon Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,248,230,0.95));
+            margin: 10% auto;
+            padding: 40px;
+            border-radius: 25px;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+        
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-content h3 {
+            font-size: 2rem;
+            color: #1565c0;
+            margin-bottom: 20px;
+        }
+        
+        .modal-content p {
+            font-size: 1.2rem;
+            color: #546e7a;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .close-modal {
+            background: linear-gradient(135deg, #4fc3f7, #29b6f6);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(79, 195, 247, 0.4);
+        }
+        
+        .bounce {
+            animation: bounceIn 1s ease-out;
+        }
+        
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Particles -->
+    <div class="floating-particles" id="particles"></div>
+    
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="logo-placeholder bounce">
+                🧠✨
+            </div>
+            <h1 class="main-title glowing-text">קסם הקשב, עולם של הפתעות</h1>
+            <p class="subtitle">📚 אתר | 📖 ספרים | 🎓 קורסים | 🧩 אביזרים | 🛠️ כלים | 💬 הכוונה | 💡 ידע</p>
+            
+            <div class="cta-buttons">
+                <a href="#" target="_blank" class="btn btn-primary">
+                    🌐 האתר המלא
+                </a>
+                <a href="#" target="_blank" class="btn btn-secondary">
+                    📚 הספרים שלנו
+                </a>
+                <a href="https://chat.whatsapp.com/Em4hYD57Fk24dOMOwjZGWu" target="_blank" class="btn btn-whatsapp">
+                    💬 הצטרף לקבוצה
+                </a>
+            </div>
+        </section>
+        
+        <!-- About Section -->
+        <section class="section">
+            <h2 class="section-title">מאחורי הקסם</h2>
+            <div class="about-section">
+                <div class="profile-image">
+                    תמונה אישית
+                </div>
+                <div class="about-text">
+                    <p>אני מנהל פרויקטים במשרד ראש הממשלה. <span class="highlight">פגשתי את הקשב שלי בטעות</span> - ולא יכולתי לתאר את החוויה של הפגישה המחודשת עם עצמי.</p>
+                    <p>הרגשתי שזו <span class="highlight">מתנה שאי אפשר לשמור בבטן</span>. מתוך החוויה הזאת הקמתי את 'קסם הקשב' - מרחב תומך אמיתי שבו אני מעלה תכנים על המתנה השקופה... וגם על האתגרים שבדרך.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Book Section -->
+        <section class="section">
+            <h2 class="section-title">הספר הראשון בסדרה</h2>
+            <div class="book-section">
+                <div class="book-image">
+                    📚<br>תמונת הספר
+                </div>
+                <div class="book-content">
+                    <h3>סיפור מרגש ומרתק עד העמוד האחרון</h3>
+                    <p>ספר ילדים שמעביר מסר עמוק של הבנה וקבלה עצמית. מתאים למתבגרים, מבוגרים, הורים ומטפלים. סיפור שמלמד שהקשב הוא לא בעיה - הוא מתנה קסומה שצריך רק ללמוד איך להשתמש בה.</p>
+                    
+                    <div class="book-buttons">
+                        <a href="https://drive.google.com/drive/folders/1ID8j3h4UQww4vTJVmL1cKs_JolxUceuD?usp=sharing" target="_blank" class="btn btn-primary">
+                            👀 הצצה לתוכן
+                        </a>
+                        <a href="#" target="_blank" class="btn btn-secondary">
+                            🛒 הזמן עכשיו
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Community Section -->
+        <section class="section">
+            <h2 class="section-title">הקהילה שלנו</h2>
+            <div class="community-stats">
+                <span class="stat-number">500+</span>
+                <span class="stat-label">משתתפים בקבוצת הוואטסאפ</span>
+            </div>
+            <p style="text-align: center; font-size: 1.2rem; color: #37474f; margin-bottom: 30px;">
+                קהילה חמה ותומכת שבה אני מעלה תכנים על המתנה השקופה... וגם על האתגרים שבדרך
+            </p>
+            <div style="text-align: center;">
+                <a href="https://chat.whatsapp.com/Em4hYD57Fk24dOMOwjZGWu" target="_blank" class="btn btn-whatsapp">
+                    🚀 הצטרף אלינו עכשיו
+                </a>
+            </div>
+        </section>
+        
+        <!-- Social Media -->
+        <section class="section">
+            <h2 class="section-title">עקבו אחרינו</h2>
+            <p style="text-align: center; font-size: 1.1rem; color: #546e7a; margin-bottom: 30px;">
+                לעוד תוכן, עדכונים והשראה יומיומית
+            </p>
+            <div class="social-links">
+                <a href="https://www.instagram.com/kesemakeshev?igsh=dWNqd3Ruc2k0YWQy" target="_blank" class="social-icon instagram">
+                    📷<br><small>Instagram</small>
+                </a>
+                <a href="https://www.facebook.com/share/18EsiiNY7k/" target="_blank" class="social-icon facebook">
+                    📘<br><small>Facebook</small>
+                </a>
+                <a href="https://www.tiktok.com/@user948390443534?_t=ZS-8yn1tyFMUIj&_r=1" target="_blank" class="social-icon tiktok">
+                    🎵<br><small>TikTok</small>
+                </a>
+            </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="footer">
+            <h3 class="development-notice">האתר המלא בפיתוח 🔧</h3>
+            <p class="development-subtitle">בקרוב: מדריכים, כלים נוספים ותוכן מורחב</p>
+            
+            <div class="contact-info">
+                <h4>📞 צור קשר</h4>
+                <p>וואטסאפ: 0542347839</p>
+                <p>מייל: <a href="mailto:kesemhakeshev@gmail.com">kesemhakeshev@gmail.com</a></p>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Coming Soon Modal -->
+    <div id="comingSoonModal" class="modal">
+        <div class="modal-content">
+            <h3>🚧 בקרוב!</h3>
+            <p>אנחנו עובדים קשה להביא לכם את האתר המלא עם כל הכלים, הספרים והקורסים המדהימים שלנו!</p>
+            <p>הצטרפו לקבוצת הוואטסאפ כדי להיות הראשונים לדעת על כל עדכון 💫</p>
+            <button class="close-modal" onclick="closeModal()">מובן, תודה! ✨</button>
+        </div>
+    </div>
+    
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 15;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.animationDuration = (6 + Math.random() * 4) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Parallax effect for sections
+        function addParallaxEffect() {
+            const sections = document.querySelectorAll('.section');
+            
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                sections.forEach((section, index) => {
+                    const rate = scrolled * -0.5 * (index + 1) * 0.1;
+                    section.style.transform = `translateY(${rate}px)`;
+                });
+            });
+        }
+        
+        // Initialize effects
+        document.addEventListener('DOMContentLoaded', () => {
+            createParticles();
+            addParallaxEffect();
+            
+            // Add click events for coming soon buttons
+            document.querySelectorAll('a[href="#"]').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showModal();
+                });
+            });
+        });
+        
+        // Modal functions
+        function showModal() {
+            document.getElementById('comingSoonModal').style.display = 'block';
+        }
+        
+        function closeModal() {
+            document.getElementById('comingSoonModal').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            const modal = document.getElementById('comingSoonModal');
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+        
+        // Button click animations
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                // Create ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255,255,255,0.6);
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                `;
+                
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+        
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to { transform: scale(4); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
