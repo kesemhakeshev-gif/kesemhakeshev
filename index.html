@@ -245,10 +245,15 @@
             transition: all 0.3s ease;
         }
         
-        .profile-image:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 40px rgba(79, 195, 247, 0.4);
-        }
+      .profile-image {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%; /* הופך את התמונה לעיגול */
+    overflow: hidden; /* חותך את מה שיוצא מחוץ לעיגול */
+    border: 4px solid #4fc3f7; 
+    box-shadow: 0 15px 30px rgba(79, 195, 247, 0.3);
+    transition: all 0.3s ease;
+}
         
         .about-text {
             font-size: 1.2rem;
@@ -558,7 +563,6 @@
                <div class="profile-image">
     <img src="https://raw.githubusercontent.com/kesemhakeshev-gif/kesemhakeshev/main/moshik-1.jpg" 
          alt="מושיק - קסם הקשב" 
-         style="width:250px; height:auto; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.3);">
 </div>
                 <div class="about-text">
                     <p>אני מנהל פרויקטים במשרד ראש הממשלה. <span class="highlight">פגשתי את הקשב שלי בטעות</span> - ואני לא לתאר את החוויה הקסומה של הפגישה המחודשת עם עצמי.</p>
