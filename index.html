@@ -50,6 +50,7 @@
         
         .logo-container {
             margin-bottom: 30px;
+            text-align: center;
         }
         
         /* Image optimization */
@@ -60,35 +61,12 @@
         }
         
         .logo-container img {
-            width: 120px;
-            height: 120px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
             box-shadow: 0 10px 25px rgba(79, 195, 247, 0.3);
             object-fit: cover;
-        }
-        
-        .book-image img {
-            width: 180px;
-            height: 240px;
-            border-radius: 15px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-            object-fit: cover;
-        }
-        
-        .profile-image {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            overflow: hidden;
-            border: 4px solid #4fc3f7;
-            box-shadow: 0 10px 25px rgba(79, 195, 247, 0.3);
             margin: 0 auto;
-        }
-        
-        .profile-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
         }
         
         .main-title {
@@ -142,9 +120,10 @@
         
         .book-image img {
             width: 180px;
-            height: auto;
+            height: 240px;
             border-radius: 15px;
             box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            object-fit: cover;
         }
         
         .book-details {
@@ -280,14 +259,6 @@
             text-align: right;
         }
         
-        .book-image img {
-            width: 180px;
-            height: 240px;
-            border-radius: 15px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
-            object-fit: cover;
-        }
-        
         .profile-image {
             width: 160px;
             height: 160px;
@@ -295,6 +266,7 @@
             overflow: hidden;
             border: 4px solid #4fc3f7;
             box-shadow: 0 10px 25px rgba(79, 195, 247, 0.3);
+            margin: 0 auto;
         }
         
         .profile-image img {
@@ -436,12 +408,20 @@
             .main-title { font-size: 2.2rem; }
             .subtitle { font-size: 1.1rem; }
             .site-status { font-size: 0.9rem; padding: 10px 20px; margin-top: 15px; }
-            .book-showcase { grid-template-columns: 1fr; text-align: center; gap: 20px; }
+            .book-showcase { 
+                grid-template-columns: 1fr; 
+                text-align: center; 
+                gap: 20px; 
+            }
+            .book-image {
+                display: flex;
+                justify-content: center;
+            }
             .about-section { grid-template-columns: 1fr; text-align: center; gap: 25px; }
             .main-cta-button { padding: 18px 35px; font-size: 1.2rem; }
             .section { padding: 30px 20px; margin: 30px 0; }
             .book-details { text-align: center; }
-            .logo-container img { width: 100px; height: 100px; }
+            .logo-container img { width: 130px; height: 130px; }
             .book-image img { width: 150px; height: 200px; }
             .profile-image { width: 140px; height: 140px; }
         }
@@ -578,7 +558,7 @@
                 <a href="https://www.tiktok.com/@user948390443534?_t=ZS-8yn1tyFMUIj&_r=1" 
                    target="_blank" class="social-icon tiktok">
                     🎵<br><small>TikTok</small>
-                </a>
+</a>
             </div>
         </section>
         
