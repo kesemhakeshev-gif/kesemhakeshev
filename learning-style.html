@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>אבחון סגנון למידה | קסם הקשב</title>
+    <title>שאלון סגנונות למידה | קסם הקשב</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -13,6 +13,7 @@
         .question-card { transition: all 0.2s ease; border: 2px solid #f1f5f9; }
         .question-card:hover { border-color: #3b82f6; background-color: #f8fbff; }
         input[type="radio"] { accent-color: #2563eb; transform: scale(1.2); }
+        .detailed-table th, .detailed-table td { border: 1px solid #e2e8f0; padding: 12px; text-align: right; }
     </style>
 </head>
 <body class="text-gray-800">
@@ -24,7 +25,7 @@
                 <span class="text-xs text-gray-400 font-bold">משה מדינה - ADHD</span>
             </a>
             <a href="index.html" class="bg-blue-50 text-blue-600 px-4 py-2 rounded-full font-black text-sm hover:bg-blue-600 hover:text-white transition">
-                בית / מאמרים ←
+                ← חזרה לדף הבית
             </a>
         </div>
     </nav>
@@ -32,89 +33,119 @@
     <div class="container mx-auto max-w-3xl px-6 py-12">
         <div class="bg-white rounded-[2.5rem] shadow-2xl p-8 md:p-12 border border-gray-100">
             <header class="text-center mb-12">
-                <div class="inline-block bg-blue-100 text-blue-600 px-4 py-1 rounded-full text-sm font-black mb-4">כלי אבחון חינמי</div>
                 <h1 class="text-4xl md:text-5xl font-black text-blue-900 mb-4 leading-tight">מה עוזר לי ללמוד ולזכור?</h1>
-                <p class="text-lg text-gray-600 max-w-md mx-auto italic">סמנו את התשובות הכי כנות כדי לגלות איך המוח שלכם מעדיף לקלוט מידע.</p>
+                <p class="text-lg text-gray-600 italic">סמנו בכל משפט עד כמה הוא מתאים לכם. ענו בכנות לתוצאה מדויקת.</p>
             </header>
 
             <form id="learningForm" class="space-y-6">
                 <div id="questionsContainer" class="space-y-4"></div>
-                
-                <div class="pt-10">
-                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-5 rounded-2xl text-2xl shadow-xl transition transform hover:scale-[1.02] active:scale-95">
-                        חשב סגנון למידה והצג תוצאות
-                    </button>
-                </div>
+                <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-black py-5 rounded-2xl text-2xl shadow-xl transition transform hover:scale-[1.02]">
+                    חשב סגנון למידה והצג תוצאות
+                </button>
             </form>
 
-            <div id="captureArea" class="hidden mt-16 p-8 border-4 border-blue-50 rounded-[2rem] bg-white relative overflow-hidden">
+            <div id="captureArea" class="hidden mt-16 p-8 border-4 border-blue-50 rounded-[2rem] bg-white">
                 <div class="text-center mb-8">
-                    <h2 class="text-3xl font-black text-blue-900">תוצאות האבחון שלי</h2>
-                    <p class="text-blue-500 font-bold uppercase tracking-widest text-sm">Kesem Hakeshev - קסם הקשב</p>
+                    <h2 class="text-3xl font-black text-blue-900">תוצאות אבחון סגנונות למידה</h2>
+                    <p class="text-blue-500 font-bold tracking-widest text-sm uppercase">קסם הקשב - משה מדינה</p>
                 </div>
                 
-                <canvas id="resultsChart" class="mb-10 max-h-[400px]"></canvas>
+                <canvas id="resultsChart" class="mb-10"></canvas>
                 
-                <div id="adviceContainer" class="space-y-4"></div>
+                <h3 class="text-2xl font-black mb-6 text-blue-900 border-r-4 border-blue-500 pr-4">פירוט סגנונות משניים</h3>
+                <table class="detailed-table w-full mb-10 rounded-xl overflow-hidden shadow-sm">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th>ערוץ ראשי</th>
+                            <th>ערוץ משני</th>
+                            <th>ניקוד</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white">
+                        <tr>
+                            <td rowspan="2" class="font-bold text-blue-700">חזותי</td>
+                            <td>מרחבי (תמונות, מפות, תרשימים)</td>
+                            <td id="score-spatial" class="font-black text-lg text-center"></td>
+                        </tr>
+                        <tr>
+                            <td>מילולי (קריאה וכתיבה)</td>
+                            <td id="score-verbal" class="font-black text-lg text-center"></td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold text-green-700">שמיעתי</td>
+                            <td>שמיעתי (הקשבה, דיבור, דקלום)</td>
+                            <td id="score-auditory" class="font-black text-lg text-center"></td>
+                        </tr>
+                        <tr>
+                            <td rowspan="2" class="font-bold text-orange-700">תנועתי/מגעי</td>
+                            <td>תנועתי (תנועה במרחב)</td>
+                            <td id="score-movement" class="font-black text-lg text-center"></td>
+                        </tr>
+                        <tr>
+                            <td>מגעי (עשייה בידיים, מגע)</td>
+                            <td id="score-tactile" class="font-black text-lg text-center"></td>
+                        </tr>
+                    </tbody>
+                </table>
 
-                <div class="mt-12 p-6 bg-gray-50 rounded-2xl border border-gray-100">
-                    <h4 class="font-black text-gray-900 mb-2">רוצים להעמיק?</h4>
-                    <p class="text-gray-600 text-sm">התוצאות האלו הן רק ההתחלה. באתר מחכים לכם מאמרים, כלים וסרטונים שיהפכו את הקשב שלכם לקסם אמיתי.</p>
-                </div>
+                <div id="adviceContainer" class="bg-yellow-50 border-r-8 border-yellow-400 p-6 rounded-xl prose max-w-none"></div>
             </div>
 
             <div id="actionButtons" class="hidden mt-8 space-y-4">
-                <button id="downloadBtn" class="w-full bg-gray-800 text-white font-bold py-4 rounded-xl shadow hover:bg-gray-900 transition flex justify-center items-center gap-2">
+                <button id="downloadBtn" class="w-full bg-blue-600 text-white font-black py-4 rounded-xl shadow-lg hover:bg-blue-700 transition flex justify-center items-center gap-2">
                     📥 שמור את התוצאות כתמונה
                 </button>
-                
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <button id="shareLinkBtn" class="bg-blue-100 text-blue-700 font-bold py-4 rounded-xl hover:bg-blue-200 transition flex justify-center items-center gap-2">
-                        🔗 שתפו קישור לכלי
-                    </button>
-                    <a id="shareWaBtn" href="#" target="_blank" class="bg-green-500 text-white font-bold py-4 rounded-xl shadow hover:bg-green-600 transition flex justify-center items-center gap-2">
-                        💬 שלחו בוואטסאפ
-                    </a>
+                    <button id="copyLinkBtn" class="bg-gray-100 text-gray-700 font-bold py-4 rounded-xl hover:bg-gray-200 transition">🔗 העתק קישור לשיתוף</button>
+                    <a id="waShareBtn" href="#" target="_blank" class="bg-green-500 text-white font-bold py-4 rounded-xl shadow hover:bg-green-600 transition flex justify-center items-center gap-2">💬 שלח בוואטסאפ</a>
                 </div>
-
-                <a href="https://wa.me/972506841168" class="block text-center text-blue-600 font-black py-4 border-2 border-dashed border-blue-200 rounded-xl hover:bg-blue-50">
-                    לייעוץ אישי עם משה ←
-                </a>
             </div>
         </div>
     </div>
 
-    <footer class="py-12 text-center text-gray-400">
-        <p class="font-bold">© 2026 קסם הקשב - משה מדינה</p>
-        <a href="index.html" class="text-blue-500 underline text-sm">חזרה לאתר הראשי</a>
-    </footer>
-
     <script>
         const questions = [
-            { id: 1, text: "אני לומד טוב יותר מחומר שמוצג בתמונות, תרשימים, סרטונים, גרפים ומפות", category: "visual" },
-            { id: 2, text: "כדי לזכור מילים של שירים מספיק לי להקשיב להם", category: "auditory" },
-            { id: 3, text: "מספיק לי לשמוע מישהו מסביר כדי להבין ולזכור את ההסבר", category: "auditory" },
-            { id: 5, text: "אני אוהב ללעוס ולאכול בזמן שאני לומד דברים חדשים", category: "kinesthetic" },
-            { id: 6, text: "אני מוצא את עצמי הרבה פעמים בתנועה ובהסתובבות בזמן שאני לומד משהו חדש", category: "kinesthetic" },
-            { id: 7, text: "אני אוהב להכין פוסטרים, מודלים, ולהתנסות בדברים", category: "kinesthetic" },
-            { id: 10, text: "אני מעדיף לשמוע ספרים מוקלטים או שיקריאו לי מאשר לקרוא בעצמי", category: "auditory" },
-            { id: 12, text: "כשאני לומד אני אוהב לסכם את הדברים בכתב ולקרוא שוב ושוב", category: "visual" },
-            { id: 16, text: "אני זוכר טוב יותר דברים שראיתי עליהם סרטים", category: "visual" },
-            { id: 18, text: "אני לומד וזוכר טוב יותר כשאני שומע שיעור או הסבר בע\"פ", category: "auditory" },
-            { id: 19, text: "אני מעדיף מורה שכותב הרבה דיאגרמות ותרשימים על לוח", category: "visual" },
-            { id: 23, text: "בזמן שיעור או הסבר אני אוהב לצייר ולקשקש", category: "kinesthetic" }
+            { id: 1, text: "אני לומד טוב יותר מחומר שמוצג בתמונות, תרשימים, סרטונים, גרפים ומפות", category: "visual", subCategory: "spatial" },
+            { id: 2, text: "כדי לזכור מילים של שירים מספיק לי להקשיב להם", category: "auditory", subCategory: "auditory" },
+            { id: 3, text: "מספיק לי לשמוע מישהו מסביר כדי להבין ולזכור את ההסבר", category: "auditory", subCategory: "auditory" },
+            { id: 4, text: "כשאני נזכר במספר טלפון, מספר ארוך – אני 'שומע' או 'מדקלם' אותם בדמיון שלי", category: "auditory", subCategory: "auditory" },
+            { id: 5, text: "אני אוהב ללעוס ולאכול בזמן שאני לומד דברים חדשים", category: "kinesthetic", subCategory: "movement" },
+            { id: 6, text: "אני מוצא את עצמי הרבה פעמים בתנועה ובהסתובבות בזמן שאני לומד משהו חדש", category: "kinesthetic", subCategory: "movement" },
+            { id: 7, text: "אני אוהב להכין פוסטרים, מודלים, ולהתנסות בדברים", category: "kinesthetic", subCategory: "tactile" },
+            { id: 8, text: "אני נהנה לעבוד עם הידיים ולהכין דברים", category: "kinesthetic", subCategory: "tactile" },
+            { id: 9, text: "אני מרגיש בנוח ללחוץ ידיים ולחבק (אנשים שאני מכיר)", category: "kinesthetic", subCategory: "tactile" },
+            { id: 10, text: "אני מעדיף לשמוע ספרים מוקלטים או שיקריאו לי מאשר לקרוא בעצמי", category: "auditory", subCategory: "auditory" },
+            { id: 11, text: "אני צריך להחזיק משהו ביד ולהתעסק איתו בזמן שאני לומד משהו חדש", category: "kinesthetic", subCategory: "tactile" },
+            { id: 12, text: "כשאני לומד אני אוהב לסכם את הדברים בכתב ולקרוא מספר פעמים את הסיכום", category: "visual", subCategory: "verbal" },
+            { id: 13, text: "כדי לזכור איך מאייתים מילה אני צריך לכתוב אותה הרבה פעמים שוב ושוב", category: "kinesthetic", subCategory: "tactile" },
+            { id: 14, text: "כשאני מקבל הסבר איך להגיע למקום מסוים, מספיק לי לקבל הסבר בע\"פ", category: "auditory", subCategory: "auditory" },
+            { id: 15, text: "כשאני מקבל הסבר איך להגיע למקום מסוים, מספיק לי לקבל הסבר בכתב", category: "visual", subCategory: "verbal" },
+            { id: 16, text: "אני זוכר טוב יותר דברים שראיתי עליהם סרטים", category: "visual", subCategory: "spatial" },
+            { id: 17, text: "אני מבין טוב יותר כשמקריאים לי מאשר כשאני קורא לבד", category: "auditory", subCategory: "auditory" },
+            { id: 18, text: "אני לומד וזוכר טוב יותר כשאני שומע שיעור או הסבר בע\"פ", category: "auditory", subCategory: "auditory" },
+            { id: 19, text: "אני מעדיף מורה או מדריך שכותב הרבה דיאגרמות ותרשימים על לוח", category: "visual", subCategory: "spatial" },
+            { id: 20, text: "אני מעדיף מורה או מדריך שכותב משפטים עיקריים של החומר על לוח", category: "visual", subCategory: "verbal" },
+            { id: 21, text: "אני מעדיף מורה או מדריך שמשקיע הרבה זמן בהסברים בעל פה", category: "auditory", subCategory: "auditory" },
+            { id: 22, text: "אם אני לא רושם בזמן שיעור או הסבר אני לא זוכר כלום", category: "visual", subCategory: "verbal" },
+            { id: 23, text: "בזמן שיעור או הסבר אני אוהב לצייר ולקשקש", category: "kinesthetic", subCategory: "movement" },
+            { id: 24, text: "כשאני מקבל הסבר איך להגיע למקום מסוים מספיק לי לקבל מפה", category: "visual", subCategory: "spatial" }
         ];
 
+        const adviceData = {
+            visual: `<h3>💡 עצות לסגנון חזותי</h3><ul><li>השתמש במרקרים וצבעים.</li><li>צור תרשימי זרימה ומפות.</li><li>צייר במחברת את מה שהמורה מסבירה.</li></ul>`,
+            auditory: `<h3>💡 עצות לסגנון שמיעתי</h3><ul><li>הקלט את עצמך וקרא בקול.</li><li>צור חרוזים וראשי תיבות.</li><li>בקש הסברים בעל פה.</li></ul>`,
+            kinesthetic: `<h3>💡 עצות לסגנון תנועתי</h3><ul><li>התהלך בחדר תוך כדי שינון.</li><li>החזק חפץ ביד (Fidget) בזמן למידה.</li><li>סכם בכתב תוך כדי שיעור.</li></ul>`
+        };
+
         const container = document.getElementById('questionsContainer');
-        questions.forEach((q, index) => {
+        questions.forEach((q, i) => {
             const card = document.createElement('div');
-            card.className = 'question-card rounded-2xl p-6 bg-white';
-            card.innerHTML = `
-                <p class="font-black text-lg mb-4 text-blue-900">${index + 1}. ${q.text}</p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <label class="flex-1 flex items-center gap-3 p-3 border rounded-xl cursor-pointer hover:bg-blue-50"><input type="radio" name="q${q.id}" value="2" required> <span class="font-bold">נכון מאוד</span></label>
-                    <label class="flex-1 flex items-center gap-3 p-3 border rounded-xl cursor-pointer hover:bg-blue-50"><input type="radio" name="q${q.id}" value="1"> <span class="font-bold">לפעמים</span></label>
-                    <label class="flex-1 flex items-center gap-3 p-3 border rounded-xl cursor-pointer hover:bg-blue-50"><input type="radio" name="q${q.id}" value="0"> <span class="font-bold">לא ממש</span></label>
+            card.className = 'question-card p-6 rounded-2xl bg-white';
+            card.innerHTML = `<p class="font-black text-lg mb-4">${i+1}. ${q.text}</p>
+                <div class="flex flex-wrap gap-4">
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q${q.id}" value="2" required> מתאים לי</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q${q.id}" value="1"> לפעמים</label>
+                    <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="q${q.id}" value="0"> לא מתאים</label>
                 </div>`;
             container.appendChild(card);
         });
@@ -123,48 +154,65 @@
         document.getElementById('learningForm').addEventListener('submit', function(e) {
             e.preventDefault();
             let scores = { visual: 0, auditory: 0, kinesthetic: 0 };
+            let subScores = { spatial: 0, verbal: 0, auditory: 0, movement: 0, tactile: 0 };
+
             questions.forEach(q => {
                 const sel = document.querySelector(`input[name="q${q.id}"]:checked`);
-                if (sel) scores[q.category] += parseInt(sel.value);
+                if (sel) {
+                    let val = parseInt(sel.value);
+                    scores[q.category] += val;
+                    subScores[q.subCategory] += val;
+                }
             });
 
+            // עדכון טבלה
+            ['spatial','verbal','auditory','movement','tactile'].forEach(s => document.getElementById(`score-${s}`).innerText = subScores[s]);
+
+            // הצגת תוצאות
             document.getElementById('captureArea').classList.remove('hidden');
             document.getElementById('actionButtons').classList.remove('hidden');
 
+            // גרף עמודות מוערמות (Stacked Bar)
             const ctx = document.getElementById('resultsChart').getContext('2d');
             if (myChart) myChart.destroy();
             myChart = new Chart(ctx, {
-                type: 'doughnut',
+                type: 'bar',
                 data: {
-                    labels: ['חזותי (ראייה)', 'שמיעתי (הקשבה)', 'תנועתי (עשייה)'],
-                    datasets: [{
-                        data: [scores.visual, scores.auditory, scores.kinesthetic],
-                        backgroundColor: ['#3b82f6', '#10b981', '#f59e0b'],
-                        borderWidth: 0
-                    }]
+                    labels: ['שמיעתי', 'חזותי', 'תנועתי/מגעי'],
+                    datasets: [
+                        { label: 'שמיעתי', data: [subScores.auditory, 0, 0], backgroundColor: '#10b981' },
+                        { label: 'מרחבי', data: [0, subScores.spatial, 0], backgroundColor: '#3b82f6' },
+                        { label: 'מילולי', data: [0, subScores.verbal, 0], backgroundColor: '#60a5fa' },
+                        { label: 'תנועתי', data: [0, 0, subScores.movement], backgroundColor: '#f59e0b' },
+                        { label: 'מגעי', data: [0, 0, subScores.tactile], backgroundColor: '#fbbf24' }
+                    ]
                 },
-                options: { cutout: '70%', plugins: { legend: { position: 'bottom', labels: { font: { weight: 'bold', size: 14 } } } } }
+                options: { responsive: true, scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true } } }
             });
 
-            // עדכון כפתורי שיתוף
-            const shareText = encodeURIComponent("גיליתי איך המוח שלי הכי אוהב ללמוד! תראו מה יצא לי בשאלון של קסם הקשב:\n" + window.location.href);
-            document.getElementById('shareWaBtn').href = `https://wa.me/?text=${shareText}`;
+            // התאמת עצות
+            let top = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+            document.getElementById('adviceContainer').innerHTML = adviceData[top];
             
+            // עדכון לינק וואטסאפ
+            const txt = encodeURIComponent("גיליתי איך אני לומד בשאלון של קסם הקשב! כנסו גם: " + window.location.href);
+            document.getElementById('waShareBtn').href = `https://wa.me/?text=${txt}`;
+
             window.scrollTo({ top: document.getElementById('captureArea').offsetTop - 100, behavior: 'smooth' });
         });
 
         document.getElementById('downloadBtn').addEventListener('click', function() {
             html2canvas(document.getElementById('captureArea')).then(canvas => {
                 const link = document.createElement('a');
-                link.download = 'אבחון_סגנון_למידה_משה_מדינה.png';
+                link.download = 'אבחון_למידה_קסם_הקשב.png';
                 link.href = canvas.toDataURL();
                 link.click();
             });
         });
 
-        document.getElementById('shareLinkBtn').addEventListener('click', function() {
+        document.getElementById('copyLinkBtn').addEventListener('click', () => {
             navigator.clipboard.writeText(window.location.href);
-            alert("הקישור הועתק! עכשיו אפשר להדביק אותו בכל מקום.");
+            alert("הקישור הועתק!");
         });
     </script>
 </body>
