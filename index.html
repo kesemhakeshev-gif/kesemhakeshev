@@ -16,12 +16,13 @@
     <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="text-2xl font-black text-blue-600">קסם הקשב</div>
-            <div class="hidden md:flex space-x-reverse space-x-6 items-center">
+            <div class="hidden lg:flex space-x-reverse space-x-6 items-center">
                 <a href="#about" class="font-bold hover:text-blue-500">עלי</a>
                 <a href="#book" class="font-bold hover:text-blue-500">הספר</a>
-                <a href="#articles" class="font-bold text-blue-600">מאמרים</a>
+                <a href="learning-style.html" class="font-bold text-blue-600 hover:text-blue-800">איך אני לומד?</a>
+                <a href="#articles" class="font-bold hover:text-blue-500">מאמרים</a>
                 <a href="questionnaire.html" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg font-black transition shadow-md">שאלון ADHD</a>
-                <a href="#whatsapp" class="text-green-600 font-black border-2 border-green-600 px-4 py-2 rounded-lg hover:bg-green-50">קהילה</a>
+                <a href="#whatsapp" class="text-green-600 font-black border-2 border-green-600 px-4 py-2 rounded-lg hover:bg-green-50 transition">קהילה</a>
             </div>
         </div>
     </nav>
@@ -31,21 +32,52 @@
             <div class="md:w-1/2 text-center md:text-right">
                 <h1 class="text-5xl font-black mb-4 leading-tight">להפוך את הקושי לקסם</h1>
                 <p class="text-xl mb-8 opacity-90">משה מדינה - מומחה ADHD ויוצר "קסם הקשב". בואו נלמד לנהל את האנרגיה הזו ביחד.</p>
-                <a href="#whatsapp" class="bg-green-500 hover:bg-green-600 px-8 py-3 rounded-full font-bold text-lg inline-block transition shadow-lg">הצטרפו לקהילת ה-800+</a>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#whatsapp" class="bg-green-500 hover:bg-green-600 px-8 py-3 rounded-full font-bold text-lg shadow-lg transition text-center">הצטרפו לקהילה</a>
+                    <a href="learning-style.html" class="bg-white/10 hover:bg-white/20 border-2 border-white text-white font-bold py-3 px-8 rounded-full text-lg transition text-center">איך המוח שלי לומד? ←</a>
+                </div>
             </div>
-            <div class="md:w-1/2 flex justify-center mt-10 md:mt-0">
+            <div class="md:w-1/2 flex justify-center mt-12 md:mt-0">
                 <img src="moshe-profile.jpeg" alt="משה מדינה" class="rounded-full w-64 h-64 object-cover border-4 border-white shadow-2xl">
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 bg-blue-50">
+        <div class="container mx-auto px-6">
+            <div class="bg-white p-8 rounded-[2rem] shadow-xl border-2 border-blue-100 max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="text-right">
+                    <h2 class="text-2xl font-black text-blue-900 mb-2">גילית כבר מה סגנון הלמידה שלך?</h2>
+                    <p class="text-gray-600">הכנתי לך כלי אבחון חינמי שיעזור לך להבין איך הכי נכון לך לקלוט ולזכור מידע חדש.</p>
+                </div>
+                <a href="learning-style.html" class="bg-blue-600 text-white font-black py-4 px-10 rounded-2xl hover:bg-blue-700 transition shadow-md whitespace-nowrap">
+                    לבדיקה בחינם ←
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="book" class="py-20 bg-white border-b">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl font-black mb-16 text-blue-900 underline decoration-blue-500 underline-offset-8">הספר שלי: "קסם"</h2>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-12">
+                <div class="flex gap-4 justify-center">
+                    <img src="book-001.jpn.png" alt="כריכה קדמית" class="w-40 md:w-56 shadow-2xl transform hover:-rotate-3 transition duration-300">
+                    <img src="book-002.jpn.png" alt="כריכה אחורית" class="w-40 md:w-56 shadow-2xl transform hover:rotate-3 transition duration-300">
+                </div>
+                <div class="md:w-1/2 text-right">
+                    <p class="text-xl mb-6 leading-relaxed font-medium">ספר שמשנה את הדרך שבה אנחנו רואים קשב וריכוז בבית. מסע מרגש של קבלה, הבנה וכלים פרקטיים לחיים.</p>
+                    <a href="https://wa.me/972506841168" class="bg-blue-600 hover:bg-blue-700 text-white font-black py-3 px-10 rounded-lg shadow-md transition inline-block">להזמנת הספר בוואטסאפ</a>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="articles" class="py-20 bg-white">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-black text-center mb-16 text-blue-900 border-b-4 border-blue-500 inline-block">מאמרים ותוכן</h2>
-            
+            <h2 class="text-4xl font-black text-center mb-16 text-blue-900">מאמרים ותוכן</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                
-                <div class="bg-gray-50 rounded-3xl overflow-hidden shadow-lg flex flex-col border border-gray-100">
+                <div class="bg-gray-50 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col border border-gray-100">
                     <img src="mahamar-001.jpn.jpeg" class="h-56 w-full object-cover">
                     <div class="p-8">
                         <h3 class="text-2xl font-black mb-3 text-blue-800">שיחה עם הקשב שלי</h3>
@@ -53,8 +85,7 @@
                         <a href="article-001.html" class="inline-block bg-blue-600 text-white font-bold py-2 px-6 rounded-full hover:bg-blue-700 transition">קרא עוד ←</a>
                     </div>
                 </div>
-
-                <div class="bg-gray-50 rounded-3xl overflow-hidden shadow-lg flex flex-col border border-gray-100">
+                <div class="bg-gray-50 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col border border-gray-100">
                     <img src="mmr002.png" class="h-56 w-full object-cover">
                     <div class="p-8">
                         <h3 class="text-2xl font-black mb-3 text-blue-800">שקר וקשב</h3>
@@ -62,8 +93,7 @@
                         <a href="article-002.html" class="inline-block bg-blue-600 text-white font-bold py-2 px-6 rounded-full hover:bg-blue-700 transition">קרא עוד ←</a>
                     </div>
                 </div>
-
-                <div class="bg-gray-50 rounded-3xl overflow-hidden shadow-lg flex flex-col border border-gray-100">
+                <div class="bg-gray-50 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col border border-gray-100">
                     <img src="mamr003.jpeg" class="h-56 w-full object-cover">
                     <div class="p-8">
                         <h3 class="text-2xl font-black mb-3 text-blue-800">למה אתה מתנצל כל הזמן?</h3>
@@ -71,8 +101,7 @@
                         <a href="article-003.html" class="inline-block bg-blue-600 text-white font-bold py-2 px-6 rounded-full hover:bg-blue-700 transition">קרא עוד ←</a>
                     </div>
                 </div>
-
-                <div class="bg-gray-50 rounded-3xl overflow-hidden shadow-lg flex flex-col border border-gray-100">
+                <div class="bg-gray-50 rounded-3xl overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col border border-gray-100">
                     <img src="mmr004.jpeg" class="h-56 w-full object-cover">
                     <div class="p-8">
                         <h3 class="text-2xl font-black mb-3 text-blue-800">למה אתה לא עונה להודעות?</h3>
@@ -80,20 +109,16 @@
                         <a href="article-004.html" class="inline-block bg-blue-600 text-white font-bold py-2 px-6 rounded-full hover:bg-blue-700 transition">קרא עוד ←</a>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <section id="book" class="py-20 bg-gray-100">
+    <section id="whatsapp" class="py-20 bg-gray-50">
         <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl font-black mb-12 text-blue-900">הספר שלי: "קסם"</h2>
-            <div class="flex flex-col md:flex-row items-center justify-center gap-10">
-                <img src="book-001.jpn.png" class="w-48 shadow-xl transform -rotate-3 hover:rotate-0 transition duration-300">
-                <div class="md:w-1/2 text-right">
-                    <p class="text-xl mb-6 font-bold text-gray-700">ספר שמשנה את הדרך שבה אנחנו רואים קשב וריכוז בבית.</p>
-                    <a href="https://wa.me/972506841168" class="bg-blue-600 text-white font-black py-3 px-8 rounded-lg shadow-md inline-block">להזמנת הספר בוואטסאפ</a>
-                </div>
+            <div class="bg-green-50 rounded-[3rem] p-12 border-4 border-green-200 shadow-inner max-w-4xl mx-auto">
+                <h2 class="text-4xl font-black text-green-700 mb-6">קהילת "קסם הקשב" בוואטסאפ</h2>
+                <p class="text-2xl mb-10 text-gray-700 leading-relaxed">מעל 800 חברים כבר שם, משתפים, שואלים ולומדים יחד איך לחיות בשלום עם הקשב שלהם.</p>
+                <a href="https://chat.whatsapp.com/Em4hYD57Fk24dOMOwjZGWu" class="bg-green-500 hover:bg-green-600 text-white font-black py-5 px-14 rounded-full text-2xl shadow-2xl inline-block transform hover:scale-105 transition duration-300">אני רוצה להצטרף</a>
             </div>
         </div>
     </section>
