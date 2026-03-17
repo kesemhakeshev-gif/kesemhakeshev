@@ -3,996 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>שאלון כלי הכוונה לקשב - קסם הקשב</title>
-    <meta name="description" content="כלי סקר להכוונה ראשונית על סימני ADHD. לא אבחון רפואי - רק להכוונה לקביעת פגישה עם מקצועי.">
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
+    <title>שאלון בדיקה עצמית ADHD | קסם הקשב</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Heebo', sans-serif;
-            line-height: 1.6;
-            background: linear-gradient(135deg, #e8f4fd 0%, #fff7e6 50%, #fff0e6 100%);
-            min-height: 100vh;
-            color: #37474f;
-        }
-        
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .header {
-            text-align: center;
-            padding: 40px 0;
-            background: linear-gradient(135deg, rgba(79, 195, 247, 0.1) 0%, rgba(255, 183, 77, 0.1) 100%);
-            border-radius: 25px;
-            margin-bottom: 40px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-        
-        .header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #1565c0, #ff8f00);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-        }
-        
-        .disclaimer {
-            background: linear-gradient(135deg, #ffeb3b, #ffc107);
-            padding: 25px;
-            border-radius: 20px;
-            margin-bottom: 30px;
-            border-right: 5px solid #f57f17;
-            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.3);
-        }
-        
-        .disclaimer h3 {
-            color: #f57f17;
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
-        
-        .disclaimer p {
-            color: #f57f17;
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-        
-        .questionnaire {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 40px;
-            border-radius: 25px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-        
-        .question {
-            margin-bottom: 35px;
-            padding: 25px;
-            background: linear-gradient(135deg, rgba(79, 195, 247, 0.05), rgba(255, 183, 77, 0.05));
-            border-radius: 20px;
-            border-right: 4px solid #4fc3f7;
-        }
-        
-        .question h4 {
-            font-size: 1.2rem;
-            color: #1565c0;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-        
-        .options {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-        }
-        
-        .option {
-            position: relative;
-        }
-        
-        .option input[type="radio"] {
-            opacity: 0;
-            position: absolute;
-        }
-        
-        .option label {
-            display: block;
-            padding: 15px 20px;
-            background: linear-gradient(135deg, #ffffff, #f8f9fa);
-            border: 2px solid #e0e0e0;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            font-weight: 500;
-            color: #546e7a;
-        }
-        
-        .option input[type="radio"]:checked + label {
-            background: linear-gradient(135deg, #4fc3f7, #29b6f6);
-            border-color: #1565c0;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(79, 195, 247, 0.4);
-        }
-        
-        .option label:hover {
-            border-color: #4fc3f7;
-            transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba(79, 195, 247, 0.2);
-        }
-        
-        .calculate-btn {
-            background: linear-gradient(135deg, #ff8f00, #f57c00);
-            color: white;
-            padding: 18px 40px;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.3rem;
-            font-weight: 700;
-            cursor: pointer;
-            display: block;
-            margin: 40px auto;
-            box-shadow: 0 15px 35px rgba(255, 143, 0, 0.4);
-            transition: all 0.3s ease;
-        }
-        
-        .calculate-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 45px rgba(255, 143, 0, 0.6);
-        }
-        
-        .calculate-btn:disabled {
-            background: #cccccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-        
-        .results {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px;
-            border-radius: 25px;
-            margin-top: 30px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-            text-align: center;
-            display: none;
-        }
-        
-        .results.show {
-            display: block;
-            animation: slideIn 0.5s ease-out;
-        }
-        
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .score-display {
-            font-size: 3rem;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-        
-        .score-low {
-            background: linear-gradient(135deg, #4caf50, #66bb6a);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .score-medium {
-            background: linear-gradient(135deg, #ff9800, #ffb74d);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .score-high {
-            background: linear-gradient(135deg, #f44336, #ef5350);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        
-        .result-text {
-            font-size: 1.2rem;
-            margin-bottom: 25px;
-            color: #37474f;
-            line-height: 1.7;
-        }
-        
-        .medical-disclaimer {
-            background: linear-gradient(135deg, rgba(244, 67, 54, 0.1), rgba(239, 83, 80, 0.1));
-            padding: 20px;
-            border-radius: 15px;
-            border-right: 4px solid #f44336;
-            margin: 25px 0;
-        }
-        
-        .medical-disclaimer p {
-            color: #d32f2f;
-            font-weight: 600;
-        }
-        
-        .action-buttons {
-            margin-top: 30px;
-        }
-        
-        .contact-btn {
-            background: linear-gradient(135deg, #25d366, #20c157);
-            color: white;
-            padding: 15px 35px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            margin: 10px;
-            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .contact-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.5);
-        }
-        
-        .back-btn {
-            background: linear-gradient(135deg, #4fc3f7, #29b6f6);
-            color: white;
-            padding: 15px 35px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            margin: 10px;
-            box-shadow: 0 8px 20px rgba(79, 195, 247, 0.3);
-            transition: all 0.3s ease;
-        }
-        
-        .back-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 30px rgba(79, 195, 247, 0.5);
-        }
-        
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e0e0e0;
-            border-radius: 4px;
-            margin: 20px 0;
-            overflow: hidden;
-        }
-        
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(135deg, #4fc3f7, #29b6f6);
-            border-radius: 4px;
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-        
-        .milestone-popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, #4fc3f7, #29b6f6);
-            color: white;
-            padding: 25px 35px;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(79, 195, 247, 0.4);
-            z-index: 1000;
-            font-size: 1.2rem;
-            font-weight: 600;
-            text-align: center;
-            opacity: 0;
-            animation: popIn 0.5s ease-out forwards;
-            max-width: 300px;
-        }
-        
-        @keyframes popIn {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-        }
-        
-        @keyframes popOut {
-            0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header h1 { font-size: 2rem; }
-            .questionnaire { padding: 25px; }
-            .question { padding: 20px; }
-            .options { grid-template-columns: 1fr; }
-            .option label { padding: 12px 15px; }
-            .calculate-btn { padding: 15px 30px; font-size: 1.2rem; }
-            .milestone-popup { max-width: 250px; padding: 20px 25px; font-size: 1.1rem; }
-        }
+        body { font-family: 'Heebo', sans-serif; background-color: #f8fafc; }
+        .question-row { border-bottom: 1px solid #e2e8f0; padding: 1.5rem 0; transition: all 0.3s; }
+        .question-row:hover { background-color: #f1f5f9; padding-right: 1rem; }
+        input[type="radio"] { accent-color: #f97316; transform: scale(1.2); }
     </style>
 </head>
-<body>
-    <div class="container">
-        <!-- Header -->
-        <div class="header">
-            <h1>כלי הכוונה לקשב</h1>
-            <p style="font-size: 1.2rem; color: #546e7a; margin-top: 10px;">
-                שאלון ASRS - להכוונה ראשונית בלבד
-            </p>
+<body class="text-gray-800">
+
+    <nav class="bg-white shadow-sm py-4 sticky top-0 z-50">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-black text-orange-600 leading-none">קסם הקשב</a>
+            <a href="index.html" class="font-bold text-gray-500 hover:text-orange-600 transition">← חזרה לבית</a>
         </div>
-        
-        <!-- Disclaimer -->
-        <div class="disclaimer">
-            <h3>חשוב לדעת</h3>
-            <p>זהו כלי סקר ממוחשב להכוונה ראשונית בלבד. התוצאות מחושבות אוטומטית ואינן מחליפות הערכה רפואית מקצועית. השאלון אינו אמצעי אבחון רפואי.</p>
-        </div>
-        
-        <!-- Progress Bar -->
-        <div class="progress-bar">
-            <div class="progress-fill" id="progressBar"></div>
-        </div>
-        <p style="text-align: center; margin-bottom: 30px; color: #546e7a;">
-            התקדמות: <span id="progressText">0/18</span>
-        </p>
-        
-        <!-- Questionnaire -->
-        <form id="adhdForm" class="questionnaire">
-            <div id="question1" class="question">
-                <h4>1. כמה פעמים יש לך קושי להתרכז בפרטים או שאתה עושה טעויות רישול בעבודה או בפעילויות אחרות?</h4>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q1" value="0" id="q1_0">
-                        <label for="q1_0">לעולם לא</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q1" value="1" id="q1_1">
-                        <label for="q1_1">לעיתים רחוקות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q1" value="2" id="q1_2">
-                        <label for="q1_2">לעיתים</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q1" value="3" id="q1_3">
-                        <label for="q1_3">לעיתים קרובות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q1" value="4" id="q1_4">
-                        <label for="q1_4">לעיתים קרובות מאוד</label>
+    </nav>
+
+    <div class="container mx-auto max-w-4xl px-6 py-12">
+        <div class="bg-white rounded-[3rem] shadow-2xl p-8 md:p-12 border border-gray-100">
+            
+            <div class="bg-amber-50 border-r-8 border-amber-400 p-6 rounded-2xl mb-12">
+                <h3 class="font-black text-amber-900 text-lg mb-2">⚠️ הבהרה חשובה (Disclaimer):</h3>
+                <p class="text-amber-800 leading-relaxed">
+                    שאלון זה נועד לשימוש ככלי עזר לסינון ראשוני ולהעלאת מודעות בלבד. 
+                    <strong>התוצאות אינן מהוות אבחון רפואי, פסיכולוגי או פסיכיאטרי.</strong> 
+                    אבחון רשמי של הפרעת קשב וריכוז (ADHD) מתבצע אך ורק על ידי אנשי מקצוע מוסמכים (רופאים נוירולוגים, פסיכיאטרים או פסיכולוגים קליניים). 
+                    במידה והתוצאות מעוררות בכם שאלות, מומלץ לפנות לייעוץ מקצועי.
+                </p>
+            </div>
+
+            <header class="text-center mb-16">
+                <h1 class="text-4xl md:text-5xl font-black text-orange-600 mb-4">בדיקה עצמית: האם יש לי "קשב קסום"?</h1>
+                <p class="text-xl text-gray-600 italic">שאלון המבוסס על מאפייני ADHD נפוצים בקרב מבוגרים ובני נוער.</p>
+            </header>
+
+            <form id="adhdForm" class="space-y-2">
+                <div id="questionsContainer"></div>
+                
+                <div class="pt-12 text-center">
+                    <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white font-black py-5 px-16 rounded-2xl text-2xl shadow-xl transition transform hover:scale-[1.05]">
+                        סיים את הבדיקה וחשב תוצאה
+                    </button>
+                </div>
+            </form>
+
+            <div id="resultsArea" class="hidden mt-20 p-10 bg-white rounded-[2.5rem] border-4 border-orange-50 shadow-inner">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-black text-blue-900 mb-2">סיכום מד הקשב שלך</h2>
+                    <p class="text-orange-500 font-bold uppercase tracking-widest text-sm">ניתוח על פי "קסם הקשב" - משה מדינה</p>
+                </div>
+
+                <div class="flex justify-center mb-10">
+                    <div class="w-full max-w-md">
+                        <canvas id="gaugeChart"></canvas>
                     </div>
                 </div>
-            </div>
-            
-            <div id="question2" class="question">
-                <h4>2. כמה פעמים יש לך קושי לשמור על קשב במשימות או בפעילויות משעשעות?</h4>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q2" value="0" id="q2_0">
-                        <label for="q2_0">לעולם לא</label>
+
+                <div id="resultText" class="text-center space-y-6 max-w-2xl mx-auto">
                     </div>
-                    <div class="option">
-                        <input type="radio" name="q2" value="1" id="q2_1">
-                        <label for="q2_1">לעיתים רחוקות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q2" value="2" id="q2_2">
-                        <label for="q2_2">לעיתים</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q2" value="3" id="q2_3">
-                        <label for="q2_3">לעיתים קרובות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q2" value="4" id="q2_4">
-                        <label for="q2_4">לעיתים קרובות מאוד</label>
-                    </div>
+
+                <div class="mt-12 bg-gray-50 p-8 rounded-3xl border border-gray-100 text-center">
+                    <h4 class="text-2xl font-black text-gray-800 mb-4">מרגישים שצריכים הכוונה?</h4>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">התוצאות האלו הן פתח להבנה עמוקה יותר של המוח שלכם. בואו נבין יחד איך להפוך את הקושי הזה לכלי עבודה עוצמתי.</p>
+                    <a href="https://wa.me/972506841168?text=היי משה, סיימתי את השאלון באתר ואשמח להתייעץ איתך על התוצאות..." class="bg-green-500 hover:bg-green-600 text-white font-black py-4 px-12 rounded-full text-xl shadow-lg inline-block transition transform hover:scale-105">
+                        בואו נדבר על זה בוואטסאפ ←
+                    </a>
                 </div>
-            </div>
-            
-            <div id="question3" class="question">
-                <h4>3. כמה פעמים יש לך קושי להקשיב כאשר מישהו מדבר אליך ישירות?</h4>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q3" value="0" id="q3_0">
-                        <label for="q3_0">לעולם לא</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q3" value="1" id="q3_1">
-                        <label for="q3_1">לעיתים רחוקות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q3" value="2" id="q3_2">
-                        <label for="q3_2">לעיתים</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q3" value="3" id="q3_3">
-                        <label for="q3_3">לעיתים קרובות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q3" value="4" id="q3_4">
-                        <label for="q3_4">לעיתים קרובות מאוד</label>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="question4" class="question">
-                <h4>4. כמה פעמים אתה לא מצליח לסיים פרויקטים לאחר שעשית את החלקים הקשים?</h4>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q4" value="0" id="q4_0">
-                        <label for="q4_0">לעולם לא</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q4" value="1" id="q4_1">
-                        <label for="q4_1">לעיתים רחוקות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q4" value="2" id="q4_2">
-                        <label for="q4_2">לעיתים</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q4" value="3" id="q4_3">
-                        <label for="q4_3">לעיתים קרובות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q4" value="4" id="q4_4">
-                        <label for="q4_4">לעיתים קרובות מאוד</label>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="question5" class="question">
-                <h4>5. כמה פעמים יש לך קושי לארגן משימות ופעילויות?</h4>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q5" value="0" id="q5_0">
-                        <label for="q5_0">לעולם לא</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q5" value="1" id="q5_1">
-                        <label for="q5_1">לעיתים רחוקות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q5" value="2" id="q5_2">
-                        <label for="q5_2">לעיתים</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q5" value="3" id="q5_3">
-                        <label for="q5_3">לעיתים קרובות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q5" value="4" id="q5_4">
-                        <label for="q5_4">לעיתים קרובות מאוד</label>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="question6" class="question">
-                <h4>6. כמה פעמים אתה נמנע או מתכחש לעסוק במשימות הדורשות מחשבה מתמשכת?</h4>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q6" value="0" id="q6_0">
-                        <label for="q6_0">לעולם לא</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q6" value="1" id="q6_1">
-                        <label for="q6_1">לעיתים רחוקות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q6" value="2" id="q6_2">
-                        <label for="q6_2">לעיתים</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q6" value="3" id="q6_3">
-                        <label for="q6_3">לעיתים קרובות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q6" value="4" id="q6_4">
-                        <label for="q6_4">לעיתים קרובות מאוד</label>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="question7" class="question">
-                <h4>7. כמה פעמים אתה מאבד דברים הדרושים למשימות או פעילויות?</h4>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q7" value="0" id="q7_0">
-                        <label for="q7_0">לעולם לא</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q7" value="1" id="q7_1">
-                        <label for="q7_1">לעיתים רחוקות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q7" value="2" id="q7_2">
-                        <label for="q7_2">לעיתים</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q7" value="3" id="q7_3">
-                        <label for="q7_3">לעיתים קרובות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q7" value="4" id="q7_4">
-                        <label for="q7_4">לעיתים קרובות מאוד</label>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="question8" class="question">
-                <h4>8. כמה פעמים אתה מוסח על ידי גירויים חיצוניים?</h4>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q8" value="0" id="q8_0">
-                        <label for="q8_0">לעולם לא</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q8" value="1" id="q8_1">
-                        <label for="q8_1">לעיתים רחוקות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q8" value="2" id="q8_2">
-                        <label for="q8_2">לעיתים</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q8" value="3" id="q8_3">
-                        <label for="q8_3">לעיתים קרובות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q8" value="4" id="q8_4">
-                        <label for="q8_4">לעיתים קרובות מאוד</label>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="question9" class="question">
-                <h4>9. כמה פעמים אתה שוכח פעילויות יומיומיות?</h4>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q9" value="0" id="q9_0">
-                        <label for="q9_0">לעולם לא</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q9" value="1" id="q9_1">
-                        <label for="q9_1">לעיתים רחוקות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q9" value="2" id="q9_2">
-                        <label for="q9_2">לעיתים</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q9" value="3" id="q9_3">
-                        <label for="q9_3">לעיתים קרובות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q9" value="4" id="q9_4">
-                        <label for="q9_4">לעיתים קרובות מאוד</label>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="question10" class="question">
-                <h4>10. כמה פעמים אתה חסר מנוח או מתקשה לשבת בשקט?</h4>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q10" value="0" id="q10_0">
-                        <label for="q10_0">לעולם לא</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q10" value="1" id="q10_1">
-                        <label for="q10_1">לעיתים רחוקות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q10" value="2" id="q10_2">
-                        <label for="q10_2">לעיתים</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q10" value="3" id="q10_3">
-                        <label for="q10_3">לעיתים קרובות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q10" value="4" id="q10_4">
-                        <label for="q10_4">לעיתים קרובות מאוד</label>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="question11" class="question">
-                <h4>11. כמה פעמים אתה מרגיש מונע על ידי מנוע או כאילו אתה חייב להיות בתנועה?</h4>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q11" value="0" id="q11_0">
-                        <label for="q11_0">לעולם לא</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q11" value="1" id="q11_1">
-                        <label for="q11_1">לעיתים רחוקות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q11" value="2" id="q11_2">
-                        <label for="q11_2">לעיתים</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q11" value="3" id="q11_3">
-                        <label for="q11_3">לעיתים קרובות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q11" value="4" id="q11_4">
-                        <label for="q11_4">לעיתים קרובות מאוד</label>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="question12" class="question">
-                <h4>12. כמה פעמים אתה מדבר יותר מדי בסיטואציות חברתיות?</h4>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q12" value="0" id="q12_0">
-                        <label for="q12_0">לעולם לא</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q12" value="1" id="q12_1">
-                        <label for="q12_1">לעיתים רחוקות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q12" value="2" id="q12_2">
-                        <label for="q12_2">לעיתים</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q12" value="3" id="q12_3">
-                        <label for="q12_3">לעיתים קרובות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q12" value="4" id="q12_4">
-                        <label for="q12_4">לעיתים קרובות מאוד</label>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="question13" class="question">
-                <h4>13. כמה פעמים אתה מסיים משפטים של אנשים לפני שהם מסיימים לדבר?</h4>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q13" value="0" id="q13_0">
-                        <label for="q13_0">לעולם לא</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q13" value="1" id="q13_1">
-                        <label for="q13_1">לעיתים רחוקות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q13" value="2" id="q13_2">
-                        <label for="q13_2">לעיתים</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q13" value="3" id="q13_3">
-                        <label for="q13_3">לעיתים קרובות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q13" value="4" id="q13_4">
-                        <label for="q13_4">לעיתים קרובות מאוד</label>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="question14" class="question">
-                <h4>14. כמה פעמים יש לך קושי לחכות בתור?</h4>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q14" value="0" id="q14_0">
-                        <label for="q14_0">לעולם לא</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q14" value="1" id="q14_1">
-                        <label for="q14_1">לעיתים רחוקות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q14" value="2" id="q14_2">
-                        <label for="q14_2">לעיתים</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q14" value="3" id="q14_3">
-                        <label for="q14_3">לעיתים קרובות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q14" value="4" id="q14_4">
-                        <label for="q14_4">לעיתים קרובות מאוד</label>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="question15" class="question">
-                <h4>15. כמה פעמים אתה מפריע לאחרים כאשר הם עסוקים?</h4>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q15" value="0" id="q15_0">
-                        <label for="q15_0">לעולם לא</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q15" value="1" id="q15_1">
-                        <label for="q15_1">לעיתים רחוקות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q15" value="2" id="q15_2">
-                        <label for="q15_2">לעיתים</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q15" value="3" id="q15_3">
-                        <label for="q15_3">לעיתים קרובות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q15" value="4" id="q15_4">
-                        <label for="q15_4">לעיתים קרובות מאוד</label>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="question16" class="question">
-                <h4>16. כמה פעמים אתה עוזב את מקומך במצבים שבהם מצפים ממך לשבת במקום?</h4>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q16" value="0" id="q16_0">
-                        <label for="q16_0">לעולם לא</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q16" value="1" id="q16_1">
-                        <label for="q16_1">לעיתים רחוקות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q16" value="2" id="q16_2">
-                        <label for="q16_2">לעיתים</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q16" value="3" id="q16_3">
-                        <label for="q16_3">לעיתים קרובות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q16" value="4" id="q16_4">
-                        <label for="q16_4">לעיתים קרובות מאוד</label>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="question17" class="question">
-                <h4>17. כמה פעמים אתה מרגיש חסר מנוח או היפראקטיבי?</h4>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q17" value="0" id="q17_0">
-                        <label for="q17_0">לעולם לא</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q17" value="1" id="q17_1">
-                        <label for="q17_1">לעיתים רחוקות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q17" value="2" id="q17_2">
-                        <label for="q17_2">לעיתים</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q17" value="3" id="q17_3">
-                        <label for="q17_3">לעיתים קרובות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q17" value="4" id="q17_4">
-                        <label for="q17_4">לעיתים קרובות מאוד</label>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="question18" class="question">
-                <h4>18. כמה פעמים יש לך קושי להירגע ולהתרגע בפעילויות פנויות?</h4>
-                <div class="options">
-                    <div class="option">
-                        <input type="radio" name="q18" value="0" id="q18_0">
-                        <label for="q18_0">לעולם לא</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q18" value="1" id="q18_1">
-                        <label for="q18_1">לעיתים רחוקות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q18" value="2" id="q18_2">
-                        <label for="q18_2">לעיתים</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q18" value="3" id="q18_3">
-                        <label for="q18_3">לעיתים קרובות</label>
-                    </div>
-                    <div class="option">
-                        <input type="radio" name="q18" value="4" id="q18_4">
-                        <label for="q18_4">לעיתים קרובות מאוד</label>
-                    </div>
-                </div>
-            </div>
-            
-            <button type="button" id="calculateBtn" class="calculate-btn" disabled>
-                🧠 חשב את התוצאות
-            </button>
-        </form>
-        
-        <!-- Results -->
-        <div id="results" class="results">
-            <div id="scoreDisplay" class="score-display">0/72</div>
-            <div id="resultText" class="result-text"></div>
-            
-            <div class="medical-disclaimer">
-                <p>זהו כלי ממוחשב להכוונה בלבד. התוצאות אינן מחליפות אבחון רפואי מקצועי. לאבחון מדויק יש לפנות לרופא משפחה או פסיכיאטר מוסמך.</p>
-            </div>
-            
-            <div class="action-buttons">
-                <a href="https://wa.me/972542347839?text=היי! ראיתי את השאלון באתר, רציתי לשמוע על הספר ועל המסע שלך עם קשב" 
-                   target="_blank" class="contact-btn">
-                    💬 רוצה לשמוע על הספר והמסע שלי?
-                </a>
-                <a href="javascript:location.reload()" class="back-btn">
-                    🔄 מלא שוב
-                </a>
             </div>
         </div>
     </div>
-    
+
+    <footer class="py-12 text-center text-gray-400">
+        <p class="font-bold">© 2026 קסם הקשב - משה מדינה</p>
+    </footer>
+
     <script>
-        const form = document.getElementById('adhdForm');
-        const calculateBtn = document.getElementById('calculateBtn');
-        const results = document.getElementById('results');
-        const scoreDisplay = document.getElementById('scoreDisplay');
-        const resultText = document.getElementById('resultText');
-        const progressBar = document.getElementById('progressBar');
-        const progressText = document.getElementById('progressText');
-        
-        let answeredQuestions = 0;
-        let milestonesShown = [];
-        
-        // Monitor form changes
-        form.addEventListener('change', function() {
-            updateProgress();
-            checkFormCompletion();
-        });
-        
-        function showMilestoneMessage(count) {
-            let message = '';
-            let shouldShow = false;
-            
-            if (count === 6 && !milestonesShown.includes(6)) {
-                message = '🎉 יופי! שליש מהשאלון מאחוריך!';
-                shouldShow = true;
-                milestonesShown.push(6);
-            } else if (count === 10 && !milestonesShown.includes(10)) {
-                message = '💪 כבר עברת יותר מחצי הדרך!';
-                shouldShow = true;
-                milestonesShown.push(10);
-            } else if (count === 15 && !milestonesShown.includes(15)) {
-                message = '🚀 ממש עוד קצת ומסיימים!';
-                shouldShow = true;
-                milestonesShown.push(15);
-            }
-            
-            if (shouldShow) {
-                // Create popup element
-                const popup = document.createElement('div');
-                popup.className = 'milestone-popup';
-                popup.textContent = message;
-                document.body.appendChild(popup);
-                
-                // Remove after 2 seconds
-                setTimeout(() => {
-                    popup.style.animation = 'popOut 0.5s ease-out forwards';
-                    setTimeout(() => {
-                        document.body.removeChild(popup);
-                    }, 500);
-                }, 2000);
-            }
-        }
-        
-        function updateProgress() {
-            answeredQuestions = 0;
-            for (let i = 1; i <= 18; i++) {
-                const radios = document.getElementsByName('q' + i);
-                for (let radio of radios) {
-                    if (radio.checked) {
-                        answeredQuestions++;
-                        break;
-                    }
-                }
-            }
-            
-            const percentage = (answeredQuestions / 18) * 100;
-            progressBar.style.width = percentage + '%';
-            progressText.textContent = answeredQuestions + '/18';
-            
-            // Show milestone messages
-            showMilestoneMessage(answeredQuestions);
-        }
-        
-        function checkFormCompletion() {
-            calculateBtn.disabled = answeredQuestions < 18;
-            
-            if (answeredQuestions === 18) {
-                calculateBtn.textContent = '🎉 מוכן לתוצאות!';
-                calculateBtn.style.animation = 'pulse-glow 1s infinite';
-            } else {
-                calculateBtn.textContent = '🧠 חשב את התוצאות';
-                calculateBtn.style.animation = 'none';
-            }
-        }
-        
-        calculateBtn.addEventListener('click', function() {
-            if (answeredQuestions === 18) {
-                calculateResults();
-            }
-        });
-        
-        function calculateResults() {
-            let totalScore = 0;
-            let partAScore = 0;
-            
-            // Calculate total score and Part A score (first 6 questions)
-            for (let i = 1; i <= 18; i++) {
-                const radios = document.getElementsByName('q' + i);
-                for (let radio of radios) {
-                    if (radio.checked) {
-                        const score = parseInt(radio.value);
-                        totalScore += score;
-                        
-                        if (i <= 6) {
-                            partAScore += score;
-                        }
-                        break;
-                    }
-                }
-            }
-            
-            displayResults(totalScore, partAScore);
-        }
-        
-        function displayResults(totalScore, partAScore) {
-            let category = '';
-            let categoryClass = '';
-            let message = '';
-            
-            // Determine category based on ASRS scoring
-            if (totalScore <= 30) {
-                category = 'נמוך';
-                categoryClass = 'score-low';
-                message = 'התוצאות מצביעות על מעט סימנים התואמים ADHD. זה לא אומר שאין קשיים - ייתכן שהם מתבטאים בצורות אחרות או שהסימנים עדיין לא משמעותיים מספיק. אם חווה קשיים בחיי היומיום הקשורים לקשב או ריכוז, עדיין מומלץ להתייעץ עם מקצועי בריאות נפש.';
-            } else if (totalScore <= 43) {
-                category = 'בינוני';
-                categoryClass = 'score-medium';
-                message = 'התוצאות מצביעות על מספר סימנים שעשויים להתאים לADHD. יש כמה תחומים שבהם חווה קשיים שמשפיעים על חיי היומיום. מומלץ בחום להתייעץ עם רופא משפחה או פסיכיאטר להערכה מקצועית מפורטת.';
-            } else {
-                category = 'גבוה';
-                categoryClass = 'score-high';
-                message = 'התוצאות מצביעות על סימנים רבים התואמים ADHD במגוון תחומי חיים. הסימנים כנראה משפיעים באופן משמעותי על התפקוד היומיומי. חשוב מאוד לפנות למקצועי מוסמך (רופא משפחה או פסיכיאטר) לביצוע הערכה מקצועית מלאה ולקבלת הכוונה מתאימה.';
-            }
-            
-            // Display results
-            scoreDisplay.textContent = totalScore + '/72';
-            scoreDisplay.className = 'score-display ' + categoryClass;
-            resultText.innerHTML = `
-                <h3 style="color: #1565c0; margin-bottom: 15px;">רמת סימנים: ${category}</h3>
-                <p>${message}</p>
+        const questions = [
+            "האם אתה מוצא את עצמך מתקשה להתמקד במשימות שמשעממות אותך?",
+            "האם יש לך נטייה לדחות משימות (פרוקרסטינציה) עד לרגע האחרון?",
+            "האם אתה מרגיש חוסר שקט פנימי או צורך תמידי להיות בתנועה?",
+            "האם קורה לך שאתה שוכח פגישות, חפצים או הודעות שרצית לענות להן?",
+            "האם המחשבות שלך קופצות מנושא לנושא במהירות גבוהה?",
+            "האם אתה חווה 'היפר-פוקוס' (ריכוז עמוק ומוחלט) בדברים שאתה אוהב?",
+            "האם אתה נוטה לקטוע אנשים בשיחה או לענות לפני שסיימו את השאלה?",
+            "האם קשה לך לארגן משימות מורכבות לפי סדר עדיפויות?",
+            "האם אתה מרגיש שאתה פועל לעיתים קרובות מתוך דחף (אימפולסיביות)?",
+            "האם אתה רגיש מאוד לביקורת או מרגיש רגשות בעוצמה גבוהה מהרגיל?",
+            "האם אתה מאבד ריכוז בקלות בגלל רעשים או גירויים מסביב?",
+            "האם אתה מרגיש שיש לך פוטנציאל גבוה שאתה לא מצליח לממש?"
+        ];
+
+        const container = document.getElementById('questionsContainer');
+        questions.forEach((q, i) => {
+            const div = document.createElement('div');
+            div.className = 'question-row';
+            div.innerHTML = `
+                <p class="text-xl font-bold mb-4 text-gray-800">${i+1}. ${q}</p>
+                <div class="flex flex-wrap gap-4">
+                    <label class="flex items-center gap-2 cursor-pointer bg-orange-50 p-2 px-4 rounded-full border border-orange-100 hover:bg-orange-100"><input type="radio" name="q${i}" value="3" required> לעיתים קרובות</label>
+                    <label class="flex items-center gap-2 cursor-pointer bg-orange-50 p-2 px-4 rounded-full border border-orange-100 hover:bg-orange-100"><input type="radio" name="q${i}" value="2"> לפעמים</label>
+                    <label class="flex items-center gap-2 cursor-pointer bg-orange-50 p-2 px-4 rounded-full border border-orange-100 hover:bg-orange-100"><input type="radio" name="q${i}" value="1"> לעיתים נדירות</label>
+                    <label class="flex items-center gap-2 cursor-pointer bg-orange-50 p-2 px-4 rounded-full border border-orange-100 hover:bg-orange-100"><input type="radio" name="q${i}" value="0"> אף פעם</label>
+                </div>
             `;
-            
-            results.classList.add('show');
-            results.scrollIntoView({ behavior: 'smooth' });
-        }
+            container.appendChild(div);
+        });
+
+        let myChart = null;
+        document.getElementById('adhdForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let score = 0;
+            const maxScore = questions.length * 3;
+            questions.forEach((_, i) => {
+                const sel = document.querySelector(`input[name="q${i}"]:checked`);
+                if (sel) score += parseInt(sel.value);
+            });
+
+            document.getElementById('resultsArea').classList.remove('hidden');
+            const resultDiv = document.getElementById('resultText');
+
+            // בניית הגרף (מד מהירות)
+            const ctx = document.getElementById('gaugeChart').getContext('2d');
+            if (myChart) myChart.destroy();
+            myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['רגוע', 'קשוב', 'קופצני', 'סוער'],
+                    datasets: [{
+                        data: [score, maxScore - score],
+                        backgroundColor: [score > (maxScore*0.6) ? '#f97316' : '#3b82f6', '#e2e8f0'],
+                        borderWidth: 0,
+                        circumference: 180,
+                        rotation: 270
+                    }]
+                },
+                options: { cutout: '80%', plugins: { legend: { display: false } } }
+            });
+
+            // טקסט תוצאה
+            let title = "", desc = "";
+            if (score > (maxScore * 0.75)) {
+                title = "קשב סוער ויצירתי (סבירות גבוהה ל-ADHD)";
+                desc = "התוצאות שלך מעידות על מאפיינים בולטים מאוד של הפרעת קשב. אתה כנראה חי בעוצמה גבוהה, עם מוח שלא מפסיק לייצר רעיונות. זה קסם אמיתי, אבל הוא זקוק לניהול כדי שלא ינהל אותך.";
+            } else if (score > (maxScore * 0.4)) {
+                title = "קשב דינמי (סימנים חלקיים)";
+                desc = "יש לך נטייה מסוימת לקופצנות במחשבה או בביצוע. יכול להיות שזה נובע מתקופה עמוסה, ויכול להיות שיש שם בסיס של הפרעת קשב קלה. שווה לבדוק לעומק.";
+            } else {
+                title = "קשב יציב וממוקד";
+                desc = "המאפיינים שסימנת אינם מעידים על הפרעת קשב טיפוסית. ייתכן שיש קשיים פה ושם, אבל המערכת שלך פועלת בצורה מאוזנת יחסית.";
+            }
+
+            resultDiv.innerHTML = `<h3 class="text-3xl font-black text-blue-900">${title}</h3><p class="text-xl leading-relaxed text-gray-600">${desc}</p>`;
+            window.scrollTo({ top: document.getElementById('resultsArea').offsetTop - 100, behavior: 'smooth' });
+        });
     </script>
 </body>
 </html>
