@@ -12,7 +12,10 @@
         .card-hover { transition: all 0.3s ease; }
         .card-hover:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
         .testimonial-card { transition: all 0.3s ease; border-right: 6px solid #3b82f6; }
-        .testimonial-card:hover { transform: scale(1.02); }
+        
+        /* Mobile Menu Toggle Styles */
+        #mobile-menu { display: none; }
+        #mobile-menu.active { display: block; }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -20,9 +23,10 @@
     <nav class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-6 py-3 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <img src="logo-1.jpeg" alt="לוגו קסם הקשב" class="h-12 w-12 rounded-full object-cover">
-                <div class="text-2xl font-black text-blue-600 font-heebo">קסם הקשב</div>
+                <img src="logo-1.jpeg" alt="לוגו קסם הקשב" class="h-10 w-10 md:h-12 md:w-12 rounded-full object-cover">
+                <div class="text-xl md:text-2xl font-black text-blue-600">קסם הקשב</div>
             </div>
+            
             <div class="hidden lg:flex space-x-reverse space-x-6 items-center font-bold">
                 <a href="#about" class="hover:text-blue-500 transition">עלי</a>
                 <a href="#book" class="hover:text-blue-500 transition">הספר</a>
@@ -31,14 +35,28 @@
                 <a href="questionnaire.html" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg font-black transition shadow-md">שאלון ADHD</a>
                 <a href="#whatsapp" class="text-green-600 font-black border-2 border-green-600 px-4 py-2 rounded-lg hover:bg-green-50 transition">קהילה</a>
             </div>
+
+            <button id="menu-toggle" class="lg:hidden text-blue-600 focus:outline-none">
+                <svg class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="lg:hidden bg-white border-t border-gray-100 px-6 py-4 space-y-4 shadow-inner">
+            <a href="learning-style.html" class="block font-black text-blue-600 py-2">איך אני לומד? (אבחון)</a>
+            <a href="questionnaire.html" class="block font-black text-orange-500 py-2">שאלון ADHD</a>
+            <a href="#book" class="block font-bold py-2">הספר "קסם הקשב"</a>
+            <a href="#articles" class="block font-bold py-2">מאמרים ותובנות</a>
+            <a href="#whatsapp" class="block font-black text-green-600 py-2">הצטרפות לקהילה</a>
         </div>
     </nav>
 
-    <section id="about" class="gradient-blue text-white py-24">
+    <section id="about" class="gradient-blue text-white py-16 md:py-24">
         <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
             <div class="md:w-1/2 text-center md:text-right">
-                <h1 class="text-5xl md:text-6xl font-black mb-6 leading-tight">להפוך את הפרעת הקשב לקסם</h1>
-                <p class="text-xl mb-10 opacity-90 font-light max-w-xl">משה מדינה - מומחה ADHD, סופר ויוצר "קסם הקשב". המוח שלכם לא מקולקל - הוא פשוט בנוי אחרת.</p>
+                <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight">להפוך את הפרעת הקשב לקסם</h1>
+                <p class="text-lg md:text-xl mb-10 opacity-90 font-light max-w-xl">משה מדינה - מומחה ADHD, סופר ויוצר "קסם הקשב". המוח שלכם לא מקולקל - הוא פשוט בנוי אחרת.</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                     <a href="#whatsapp" class="bg-green-500 hover:bg-green-600 px-10 py-4 rounded-full font-bold text-lg shadow-xl transition text-center">הצטרפו לקהילה</a>
                     <a href="learning-style.html" class="bg-white/10 hover:bg-white/20 border-2 border-white text-white font-bold py-4 px-10 rounded-full text-lg transition text-center">איך המוח שלי לומד? ←</a>
@@ -46,140 +64,104 @@
             </div>
             <div class="md:w-1/2 flex justify-center mt-12 md:mt-0">
                 <div class="relative">
-                    <div class="absolute -inset-4 bg-white/20 rounded-full blur-2xl"></div>
-                    <img src="moshe-profile.jpeg" class="relative rounded-full w-72 h-72 object-cover border-8 border-white shadow-2xl">
+                    <img src="moshe-profile.jpeg" class="relative rounded-full w-56 h-56 md:w-72 md:h-72 object-cover border-8 border-white shadow-2xl">
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="book" class="py-24 bg-white">
+    <section id="book" class="py-20 bg-white">
         <div class="container mx-auto px-6">
-            <div class="max-w-5xl mx-auto bg-gray-50 rounded-[3rem] overflow-hidden flex flex-col md:flex-row items-center shadow-lg border border-gray-100">
-                <div class="md:w-1/2 p-12 flex justify-center bg-white/50">
+            <div class="max-w-5xl mx-auto bg-gray-50 rounded-[2rem] md:rounded-[3rem] overflow-hidden flex flex-col md:flex-row items-center shadow-lg border border-gray-100">
+                
+                <div class="md:w-1/2 p-8 md:p-12 flex justify-center bg-white/50 relative">
                     <div class="relative flex gap-2">
-                        <img src="book-001.jpn.png" class="w-48 shadow-2xl transform -rotate-6 z-10 transition hover:rotate-0">
-                        <img src="book-002.jpn.png" class="w-48 shadow-xl transform rotate-3 -mr-12 opacity-80">
+                        <img src="book-001.jpn.png" class="w-40 md:w-48 shadow-2xl transform -rotate-6 z-10">
+                        <img src="book-002.jpn.png" class="w-40 md:w-48 shadow-xl transform rotate-3 -mr-12 opacity-80">
+                    </div>
+                    <div class="absolute -top-4 -right-4 md:top-10 md:right-10 bg-orange-500 text-white font-black p-3 md:p-4 rounded-full shadow-xl transform rotate-12 flex flex-col items-center justify-center w-20 h-20 md:w-28 md:h-28 border-4 border-white">
+                        <span class="text-xs md:text-sm line-through opacity-70">₪78</span>
+                        <span class="text-xl md:text-2xl">₪49</span>
+                        <span class="text-[10px] md:text-xs">זמן מוגבל!</span>
                     </div>
                 </div>
-                <div class="md:w-1/2 p-12 text-right">
-                    <h2 class="text-4xl font-black text-blue-900 mb-6 italic">הספר: "קסם הקשב"</h2>
-                    <p class="text-xl text-gray-700 mb-8 leading-relaxed font-light">
-                        ספר שמשנה את השיח בבית. דרך סיפור מרגש וכלים מעשיים, הילדים (וגם אתם) תלמדו לראות את היופי שבשונות ולרתום את עוצמת הקשב לטובתכם.
+
+                <div class="md:w-1/2 p-8 md:p-12 text-right">
+                    <h2 class="text-3xl md:text-4xl font-black text-blue-900 mb-6 italic">הספר: "קסם הקשב"</h2>
+                    <p class="text-lg text-gray-700 mb-8 leading-relaxed font-light">
+                        הספר שמשנה את השיח בבית. דרך סיפור מרגש וכלים מעשיים, הילדים (וגם אתם) תלמדו לראות את היופי שבשונות.
                     </p>
-                    <a href="https://wa.me/972506841168" class="bg-blue-600 text-white font-black py-4 px-10 rounded-2xl hover:bg-blue-700 shadow-lg transition inline-block">להזמנת הספר ←</a>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center gap-2 text-green-600 font-bold">
+                            <span>📦</span>
+                            <span>אפשרות למשלוח - פרטים אצלי בוואטסאפ</span>
+                        </div>
+                    </div>
+
+                    <a href="https://wa.me/972506841168?text=%D7%94%D7%99%D7%99%20%D7%9E%D7%A9%D7%94%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%94%D7%90%D7%AA%D7%A8%20%D7%95%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A7%D7%91%D7%9C%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A0%D7%95%D7%A1%D7%A4%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%A8%D7%9B%D7%99%D7%A9%D7%AA%20%D7%94%D7%A1%D7%A4%D7%A8%20%27%D7%A7%D7%A1%D7%9D%20%D7%94%D7%A7%D7%A9%D7%91%27" 
+                       class="w-full md:w-auto bg-blue-600 text-white font-black py-4 px-10 rounded-2xl hover:bg-blue-700 shadow-xl transition inline-block text-center text-xl">
+                        לרכישה ופרטים בוואטסאפ ←
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-24 bg-blue-50">
+    <section class="py-20 bg-blue-50">
         <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-black mb-16 text-blue-900 underline decoration-blue-500 underline-offset-8">מה אומרים המומחים והקוראים</h2>
-            
+            <h2 class="text-3xl font-black mb-16 text-blue-900 underline decoration-blue-500 underline-offset-8">מה אומרים המומחים והקוראים</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-right font-heebo">
-                
-                <div class="bg-white p-8 rounded-3xl shadow-md testimonial-card flex flex-col justify-between">
-                    <p class="text-gray-600 italic mb-6 leading-relaxed">"הספר הגיע וכולנו אהבנו אותו! בהצלחה בכל העבודה הנהדרת שאתה עושה!"</p>
-                    <div class="font-bold text-blue-600">— ד"ר שירלי הרשקו</div>
-                </div>
-
-                <div class="bg-white p-8 rounded-3xl shadow-md testimonial-card flex flex-col justify-between">
-                    <p class="text-gray-600 italic mb-6 leading-relaxed">"סיפור מקסים, מרגש, מעניין, ומאוד יפה שיועיל לכולם להבין קצת יותר את חווית הקשב."</p>
-                    <div class="font-bold text-blue-600">— ורד פ., פסיכודידקטית</div>
-                </div>
-
-                <div class="bg-white p-8 rounded-3xl shadow-md testimonial-card flex flex-col justify-between">
-                    <p class="text-gray-600 italic mb-6 leading-relaxed">"נתתי לבת שלי בת ה-13 לקרוא. היא זיהתה את עצמה בספר... זה אומר המון."</p>
-                    <div class="font-bold text-blue-600">— עינת ה.</div>
-                </div>
-
-                <div class="bg-white p-8 rounded-3xl shadow-md testimonial-card flex flex-col justify-between">
-                    <p class="text-gray-600 italic mb-6 leading-relaxed">"נגעת בכל כך הרבה דברים נכונים ומדויקים שמרעידים את הלב. זו גאונות בתחפושת של פיזור."</p>
-                    <div class="font-bold text-blue-600">— ישראל מאיר אליהו, מאמן קשב</div>
-                </div>
-
-                <div class="bg-white p-8 rounded-3xl shadow-md testimonial-card flex flex-col justify-between">
-                    <p class="text-gray-600 italic mb-6 leading-relaxed">"ספר יפהפה, נכתב בצורה יפהפיה. אתה פשוט איכות. אלוף ממש ממש."</p>
-                    <div class="font-bold text-blue-600">— יהודה ר.</div>
-                </div>
-
-                <div class="bg-white p-8 rounded-3xl shadow-md testimonial-card flex flex-col justify-between">
-                    <p class="text-gray-600 italic mb-6 leading-relaxed">"ממש זורם וקולח ומשכנע, ובוודאי יעזור להמון ילדים לראות את הפלוסים של הפרעת הקשב."</p>
-                    <div class="font-bold text-blue-600">— דוד פ.</div>
-                </div>
-
+                <div class="bg-white p-8 rounded-3xl shadow-md testimonial-card"><p class="text-gray-600 italic mb-6">"הספר הגיע וכולנו אהבנו אותו! עבודה נהדרת!"</p><div class="font-bold text-blue-600">— ד"ר שירלי הרשקו</div></div>
+                <div class="bg-white p-8 rounded-3xl shadow-md testimonial-card"><p class="text-gray-600 italic mb-6">"סיפור מקסים ומרגש שיועיל לכולם להבין את הקשב."</p><div class="font-bold text-blue-600">— ורד פ., פסיכודידקטית</div></div>
+                <div class="bg-white p-8 rounded-3xl shadow-md testimonial-card"><p class="text-gray-600 italic mb-6">"הבת שלי בת ה-13 זיהתה את עצמה בספר... זה אומר המון."</p><div class="font-bold text-blue-600">— עינת ה.</div></div>
             </div>
         </div>
     </section>
 
-    <section id="articles" class="py-24 bg-white">
+    <section id="articles" class="py-20 bg-white">
         <div class="container mx-auto px-6">
             <h2 class="text-4xl font-black text-center mb-16 text-blue-900">מאמרים ותובנות</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
                 <div class="bg-white rounded-[2rem] overflow-hidden shadow-lg border border-gray-100 flex flex-col card-hover">
-                    <img src="mahamar-001.jpn.jpeg" class="h-64 w-full object-cover">
-                    <div class="p-8">
-                        <h3 class="text-2xl font-black mb-3 text-blue-800">שיחה עם הקשב שלי</h3>
-                        <p class="text-gray-600 mb-6 italic leading-relaxed text-lg">"למה זה קורה לי? למה אני לא יכול פשוט להיות... רגוע?"</p>
-                        <a href="article-001.html" class="inline-block bg-blue-100 text-blue-700 font-bold py-3 px-8 rounded-full hover:bg-blue-600 hover:text-white transition">קרא עוד ←</a>
-                    </div>
+                    <img src="mahamar-001.jpn.jpeg" class="h-56 md:h-64 w-full object-cover">
+                    <div class="p-8"><h3 class="text-2xl font-black mb-3 text-blue-800">שיחה עם הקשב שלי</h3><a href="article-001.html" class="inline-block bg-blue-100 text-blue-700 font-bold py-3 px-8 rounded-full">קרא עוד ←</a></div>
                 </div>
-
                 <div class="bg-white rounded-[2rem] overflow-hidden shadow-lg border border-gray-100 flex flex-col card-hover">
-                    <img src="mmr002.png" class="h-64 w-full object-cover">
-                    <div class="p-8">
-                        <h3 class="text-2xl font-black mb-3 text-blue-800">שקר וקשב</h3>
-                        <p class="text-gray-600 mb-6 italic leading-relaxed text-lg">"לא תכננתי לשקר. רק התחלתי ולא ידעתי איך לעצור."</p>
-                        <a href="article-002.html" class="inline-block bg-blue-100 text-blue-700 font-bold py-3 px-8 rounded-full hover:bg-blue-600 hover:text-white transition">קרא עוד ←</a>
-                    </div>
+                    <img src="mmr002.png" class="h-56 md:h-64 w-full object-cover">
+                    <div class="p-8"><h3 class="text-2xl font-black mb-3 text-blue-800">שקר וקשב</h3><a href="article-002.html" class="inline-block bg-blue-100 text-blue-700 font-bold py-3 px-8 rounded-full">קרא עוד ←</a></div>
                 </div>
-
-                <div class="bg-white rounded-[2rem] overflow-hidden shadow-lg border border-gray-100 flex flex-col card-hover">
-                    <img src="mamr003.jpeg" class="h-64 w-full object-cover">
-                    <div class="p-8">
-                        <h3 class="text-2xl font-black mb-3 text-blue-800">למה אתה מתנצל כל הזמן?</h3>
-                        <p class="text-gray-600 mb-6 italic leading-relaxed text-lg">"זה לא חוסר ביטחון, זו הגנה ישנה מהעבר."</p>
-                        <a href="article-003.html" class="inline-block bg-blue-100 text-blue-700 font-bold py-3 px-8 rounded-full hover:bg-blue-600 hover:text-white transition">קרא עוד ←</a>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-[2rem] overflow-hidden shadow-lg border border-gray-100 flex flex-col card-hover">
-                    <img src="mmr004.jpeg" class="h-64 w-full object-cover">
-                    <div class="p-8">
-                        <h3 class="text-2xl font-black mb-3 text-blue-800">למה אתה לא עונה להודעות?</h3>
-                        <p class="text-gray-600 mb-6 italic leading-relaxed text-lg">"הפער בין לדעת מה לומר לבין להקליד? אוקיינוס."</p>
-                        <a href="article-004.html" class="inline-block bg-blue-100 text-blue-700 font-bold py-3 px-8 rounded-full hover:bg-blue-600 hover:text-white transition">קרא עוד ←</a>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="whatsapp" class="py-24 bg-gray-50">
-        <div class="container mx-auto px-6 text-center">
-            <div class="bg-green-50 rounded-[3rem] p-12 border-4 border-green-200 shadow-inner max-w-4xl mx-auto">
-                <h2 class="text-4xl font-black text-green-700 mb-6 font-heebo">קהילת "קסם הקשב" בוואטסאפ</h2>
-                <p class="text-2xl mb-10 text-gray-700 leading-relaxed font-light">מעל 800 חברים כבר שם, משתפים, שואלים ולומדים יחד.</p>
-                <a href="https://chat.whatsapp.com/Em4hYD57Fk24dOMOwjZGWu" class="bg-green-500 hover:bg-green-600 text-white font-black py-5 px-14 rounded-full text-2xl shadow-2xl inline-block transform hover:scale-105 transition duration-300">אני רוצה להצטרף</a>
             </div>
         </div>
     </section>
 
     <footer class="py-16 bg-gray-900 text-white text-center">
         <div class="container mx-auto px-6">
-            <img src="logo-1.jpeg" class="h-24 w-24 rounded-full mx-auto mb-6 object-cover border-2 border-white/20">
-            <div class="text-3xl font-black mb-4">קסם הקשב</div>
-            <p class="mb-10 opacity-60 font-light italic text-xl">"להפוך את הקושי למתנה, ואת הרעש למוזיקה"</p>
-            <div class="flex justify-center gap-10 mb-12">
-                 <a href="https://vt.tiktok.com/ZSu9RXUXp/" class="hover:text-blue-400 text-2xl transition">TikTok</a>
-                 <a href="https://wa.me/972506841168" class="hover:text-green-400 text-2xl font-bold transition font-heebo">WhatsApp</a>
+            <img src="logo-1.jpeg" class="h-20 w-20 rounded-full mx-auto mb-6 object-cover border-2 border-white/20">
+            <div class="text-3xl font-black mb-4 font-heebo">קסם הקשב</div>
+            <div class="flex justify-center gap-10 mb-8 font-bold">
+                 <a href="https://vt.tiktok.com/ZSu9RXUXp/" class="hover:text-blue-400">TikTok</a>
+                 <a href="https://wa.me/972506841168" class="hover:text-green-400">WhatsApp</a>
             </div>
-            <p class="text-sm opacity-30">© 2026 קסם הקשב - משה מדינה. כל הזכויות שמורות.</p>
+            <p class="text-sm opacity-30">© 2026 קסם הקשב - משה מדינה</p>
         </div>
     </footer>
 
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
