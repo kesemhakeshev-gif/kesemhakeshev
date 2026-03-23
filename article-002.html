@@ -7,10 +7,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Heebo', sans-serif; line-height: 1.8; background-color: #ffffff; }
-        .article-content p { margin-bottom: 1.8rem; font-size: 1.25rem; color: #374151; }
+        body { font-family: 'Heebo', sans-serif; line-height: 1.9; background-color: #ffffff; }
+        .article-content p { margin-bottom: 1.5rem; font-size: 1.25rem; color: #374151; }
         .gradient-blue { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
-        .highlight { color: #2563eb; font-weight: 700; }
+        .keshev-voice { color: #2563eb; font-style: italic; font-weight: 500; border-right: 3px solid #f97316; padding-right: 1rem; margin: 2rem 0; }
+        .highlight { color: #1e3a8a; font-weight: 800; }
     </style>
 </head>
 <body class="text-right">
@@ -18,61 +19,73 @@
     <nav class="bg-white shadow-sm py-4 sticky top-0 z-50">
         <div class="container mx-auto px-6 flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <img src="logo-1.jpeg" alt="לוגו" class="h-10 w-10 rounded-full object-cover">
+                <img src="logo-1.jpeg" alt="לוגו" class="h-10 w-10 rounded-full object-cover border border-gray-100">
                 <a href="index.html" class="text-xl font-black text-blue-600">קסם הקשב</a>
             </div>
-            <a href="articles.html" class="font-bold text-gray-500 hover:text-blue-600 transition">← חזרה לכל המאמרים</a>
+            <a href="articles.html" class="font-bold text-gray-400 hover:text-blue-600 transition">← חזרה למאמרים</a>
         </div>
     </nav>
 
-    <header class="py-12 md:py-20 bg-gray-50 border-b">
+    <header class="py-16 bg-gray-50 border-b">
         <div class="container mx-auto px-6 max-w-4xl text-center">
-            <div class="inline-block bg-orange-100 text-orange-700 px-4 py-1 rounded-full text-sm font-black mb-4 uppercase italic">תובנות מהשטח</div>
             <h1 class="text-4xl md:text-6xl font-black text-blue-900 mb-6 leading-tight">שקר וקשב</h1>
-            <p class="text-xl text-gray-500 font-light">למה המוח שלנו בוחר בקיצור הדרך ואיך מפסיקים את מעגל האשמה?</p>
+            <p class="text-xl text-orange-600 font-medium italic">"המוח שלך מנסה להגן עליך, ויורה תשובה מהירה"</p>
         </div>
     </header>
 
-    <main class="container mx-auto px-6 max-w-3xl py-12 md:py-20">
-        <img src="mmr002.png" class="w-full rounded-[2.5rem] shadow-2xl mb-16 object-cover border-4 border-white">
+    <main class="container mx-auto px-6 max-w-2xl py-12 md:py-20">
+        <img src="mmr002.png" class="w-full rounded-[2.5rem] shadow-2xl mb-16 object-cover aspect-video border-4 border-white">
         
-        <article class="article-content">
-            <p class="text-2xl font-bold text-blue-800 italic border-r-4 border-orange-500 pr-6 my-10">
-                "סיימת שיעורים?" "כן." (למרות שהדף עדיין לבן לגמרי).
-            </p>
+        <article class="article-content text-lg md:text-xl">
+            <p>לא דיברתי עם הבנק. רק תכננתי. רציתי. התכוונתי. אפילו סימנתי לי תזכורת צבעונית.</p>
+            
+            <p>אבל כששאלו אותי "סידרת את זה כבר?", נפלט לי <span class="highlight">"כן, ברור"</span>.</p>
 
-            <p>הסיטואציה הזו חוזרת על עצמה באלפי בתים בכל יום. הורה שואל שאלה פשוטה, והילד – או המתבגר – עונה תשובה שהיא פשוט לא נכונה. לפעמים זה שקר קטן, ולפעמים זה משהו גדול יותר. התגובה האוטומטית שלנו כהורים היא כעס, אכזבה ותחושה של "איבדנו את האמון". אנחנו שואלים את עצמנו: <span class="highlight">"למה הוא משקר לי? מה חסר לו?"</span></p>
+            <p>הרגע הזה. שבו המילים כבר יצאו, והמוח עוד מנסה להבין מה קרה פה. רגע... למה אמרתי את זה? ואז מוצא את עצמי ממשיך. מסביר פרטים. בונה סיפור קטן (או גדול) שמאשש את מה שכבר אמרתי.</p>
+            
+            <p>לא תכננתי לשקר. רק התחלתי, ולא ידעתי איך לעצור.</p>
 
-            <p>אבל כשאנחנו מסתכלים על זה דרך המשקפיים של הפרעת הקשב, התמונה משתנה. ברוב המקרים, השקר ב-ADHD הוא לא שקר "מתוכנן" או זדוני. הוא מה שאני קורא לו <span class="highlight">"שקר הישרדותי"</span>. המוח האימפולסיבי מגיב ללחץ לפני שהחלק הלוגי בכלל מספיק להתעורר.</p>
+            <p>יש גם את ההבטחות שאני ממש מתכוון לקיים – <span class="highlight">ממש ממש!</span> אבל אז המוח שלי מתפזר, והזמן פשוט... נעלם. ואז אחרי זה אני צריך להסביר למה זה לא קרה.</p>
 
-            <p>הנה מה שקורה באמת בתוך המוח באותו רגע: הילד חווה פחד מאכזבה, פחד מעימות או פשוט רצון עז "לסגור את האירוע" ולחזור למה שהוא עסק בו. המוח בוחר בנתיב המהיר ביותר להורדת מפלס הלחץ. המילה "כן" היא הדרך הכי מהירה להשיג שקט, גם אם היא לא מחוברת למציאות.</p>
+            <p>ברגע של תסכול, ישבתי לדבר עם הקשב שלי.</p>
+            
+            <p class="font-bold text-blue-900">"תגיד," אמרתי לו: "למה אמרתי את זה? מה נסגר איתי? למה אני לא מצליח להיות פשוט... רגיל? אני הרי לא שקרן. להיפך, כל כך חשוב לי כנות ואמת."</p>
 
-            <p>רבים מאיתנו המבוגרים עם ADHD סוחבים את ההרגל הזה גם לחיים הבוגרים. אנחנו אומרים למעסיק ש"הדו"ח כמעט מוכן" למרות שעוד לא פתחנו את הקובץ. לא כי אנחנו אנשים רעים, אלא כי אנחנו <span class="highlight">מתביישים</span>. אנחנו מתביישים בכך ששוב דחינו, שוב נתקענו, שוב לא הצלחנו לעמוד בציפיות.</p>
+            <div class="keshev-voice">
+                והוא הסביר לי: "המוח שלך מהיר. סופר יצירתי. רגיש להחריד. ואימפולסיבי בצורה שלפעמים מפחידה אפילו אותי. ולכן לפעמים הוא מגיב לפני שהלב הספיק לעכל. או שהוא בונה סיפור שלם רק כדי להרגיש קצת יותר בשליטה."
+            </div>
 
-            <p>השקר הוא מגן שנועד להסתיר את תחושת הבושה הזו. אבל הבעיה היא שהמגן הזה הופך למלכודת. אחרי השקר מגיע גל של אשמה וחרדה – "מה יקרה כשיגלו?". החרדה הזו משתקת אותנו עוד יותר, מה שמוביל לעוד דחיינות, לעוד לחץ, ובסוף... לעוד שקר.</p>
+            <div class="keshev-voice">
+                "אולי הוא אפילו קצת מתבלבל בין כוונה למציאות, בין זיכרון לדמיון, בין מה שרציתי לעשות לבין מה שבאמת עשיתי."
+            </div>
 
-            <p>הדרך לשבור את המעגל הזה היא לא דרך עונשים או הטפות מוסר, אלא דרך **הבנה וביטחון**. כשאנחנו מייצרים סביבה שבה מותר להגיד "לא הספקתי" או "קשה לי להתחיל" בלי להישרף – הצורך בשקר נעלם. המטרה היא להחליף את הבושה בשקיפות, ולהבין שהאמת היא המקום היחיד שממנו אפשר להתחיל לבנות <span class="highlight">קסם אמיתי</span>.</p>
+            <p>הוא המשיך:</p>
+            
+            <div class="keshev-voice">
+                "ולפעמים בכלל זה בא מפחד. אם אני אגיד 'שכחתי' או 'לא הספקתי' או 'התבלבלתי', אז ישפטו אותי. יחשבו שאני לא מסודר, לא אחראי, לא מספיק טוב. אז המוח שלך מנסה להגן עליך, ויורה תשובה מהירה. בלי לחשוב. בלי להתכוון."
+            </div>
+
+            <p class="text-2xl font-black text-blue-900 my-10">"אתה פשוט אנושי, יצירתי, ופעמים רבות – מוצף."</p>
+
+            <p>אז קודם כל, תסלח לעצמך על זה שלפעמים המוח שלך קופץ לפני, ולפעמים הלב לא מצליח להשיג אותו.</p>
+            
+            <p>ואולי, רק אולי, המקום הכי חשוב להתחיל בו זה לא "איך אני מפסיק לשקר", אלא <span class="highlight text-orange-600">"איך אני מפסיק לפחד להגיד את האמת"</span>.</p>
         </article>
 
-        <div class="mt-24 p-10 md:p-16 gradient-blue rounded-[3rem] text-white text-center shadow-2xl relative overflow-hidden">
-            <div class="relative z-10">
-                <h3 class="text-3xl md:text-4xl font-black mb-6 italic">מרגישים שהאמון בבית נסדק?</h3>
-                <p class="text-xl opacity-90 mb-10 max-w-xl mx-auto leading-relaxed font-light">
-                    אפשר לבנות את זה אחרת. בואו נלמד איך ליצור תקשורת כנה שמבוססת על הבנה של המוח, ולא על פחד מאכזבה.
-                </p>
-                <a href="https://wa.me/972542347839?text=%D7%94%D7%99%D7%99%20%D7%9E%D7%A9%D7%94%2C%20%D7%A7%D7%A1%D7%9D%20%D7%9ה%D7%A7%D7%A9%D7%91%20%D7%A0%D7%92%D7%A2%20%D7%91%D7%99.%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%93%D7%91%D7%A8%20%D7%A2%D7%9C%20%D7%A9%D7%A7%D7%A8%20%D7%95%D7%A7%D7%A9%D7%91..." 
-                   class="bg-white text-blue-900 font-black py-5 px-14 rounded-full inline-block hover:bg-gray-100 transition shadow-xl text-xl transform hover:scale-105 duration-300">
-                    דברו איתי - זה אפשרי ←
-                </a>
-            </div>
+        <div class="mt-20 p-8 md:p-12 bg-orange-500 rounded-[2.5rem] text-white text-center shadow-2xl relative overflow-hidden">
+            <h3 class="text-2xl md:text-3xl font-black mb-6 italic">מרגישים שהפחד מהאמת חונק אתכם?</h3>
+            <p class="text-lg opacity-90 mb-10 max-w-md mx-auto leading-relaxed">בואו נלמד יחד איך ליצור מרחב בטוח שבו מותר לטעות, מותר לשכוח, ומותר להיות אתם.</p>
+            <a href="https://wa.me/972542347839?text=%D7%94%D7%99%D7%99%20%D7%9E%D7%A9%D7%94%2C%20%D7%A7%D7%A1%D7%9D%20%D7%94%D7%A7%D7%A9%D7%91%20%D7%A0%D7%92%D7%A2%20%D7%91%D7%99.%20%D7%94%D7%9E%D7%90%D7%9E%D7%A8%20%D7%A2%D7%9C%20%D7%A9%D7%A7%D7%A8%20%D7%95%D7%A7%D7%A9%D7%91%20%D7%94%D7%99%D7%94%20%D7%9B%D7%9C%20%D7%9B%D7%93%20%D7%9E%D7%93%D7%95%D7%99%D7%A7..." 
+               class="bg-white text-orange-600 font-black py-4 px-10 rounded-full inline-block hover:scale-105 transition shadow-lg">
+                בואו נדבר - זה השלב הראשון ←
+            </a>
         </div>
     </main>
 
-    <footer class="py-16 bg-gray-900 text-white text-center">
+    <footer class="py-12 bg-gray-900 text-white text-center">
         <div class="container mx-auto px-6">
-            <img src="logo-1.jpeg" class="h-20 w-20 rounded-full mx-auto mb-6 object-cover border-2 border-white/20">
-            <div class="text-3xl font-black mb-4">קסם הקשב</div>
-            <p class="opacity-40 text-sm">© 2026 קסם הקשב - משה מדינה | כל הזכויות שמורות</p>
+            <img src="logo-1.jpeg" class="h-16 w-16 rounded-full mx-auto mb-4 object-cover border-2 border-white/20">
+            <p class="opacity-40 text-sm">© 2026 קסם הקשב - משה מדינה</p>
         </div>
     </footer>
 
