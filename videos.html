@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>סרטונים וטיפים | קסם הקשב - משה מדינה</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Heebo', sans-serif; background-color: #f8fafc; }
+        .video-card { transition: all 0.3s ease; cursor: pointer; }
+        .video-card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); }
+        .modal-content { position: relative; margin: auto; top: 50%; transform: translateY(-50%); width: 90%; max-width: 400px; aspect-ratio: 9/16; }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <img src="logo-1.jpeg" alt="לוגו" class="h-10 w-10 rounded-full object-cover">
+                <a href="index.html" class="text-2xl font-black text-blue-600">קסם הקשב</a>
+            </div>
+            <a href="index.html" class="font-bold text-gray-500 hover:text-blue-600">← חזרה לבית</a>
+        </div>
+    </nav>
+
+    <header class="bg-blue-600 text-white py-16 text-center">
+        <div class="container mx-auto px-6">
+            <h1 class="text-4xl md:text-5xl font-black mb-4">רגעים של קסם (וידאו)</h1>
+            <p class="text-xl opacity-90 max-w-2xl mx-auto font-light leading-relaxed font-heebo">טיפים מהירים, תובנות מהחיים וכל מה שקשור לעולם הקשב - בפורמט קצר וקולע.</p>
+        </div>
+    </header>
+
+    <section class="py-16">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <div class="video-card bg-white rounded-3xl overflow-hidden shadow-md border border-gray-100" onclick="openVideo('VIDEO_ID_1')">
+                    <div class="relative">
+                        <img src="https://img.youtube.com/vi/VIDEO_ID_1/hqdefault.jpg" class="w-full aspect-[9/16] object-cover">
+                        <div class="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/40 transition">
+                            <span class="text-white text-5xl">▶️</span>
+                        </div>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="font-black text-blue-900 text-lg">טיפ #1: איך להתחיל משימה?</h3>
+                    </div>
+                </div>
+
+                <div class="video-card bg-white rounded-3xl overflow-hidden shadow-md border border-gray-100" onclick="openVideo('VIDEO_ID_2')">
+                    <div class="relative">
+                        <img src="https://img.youtube.com/vi/VIDEO_ID_2/hqdefault.jpg" class="w-full aspect-[9/16] object-cover">
+                        <div class="absolute inset-0 flex items-center justify-center bg-black/20">
+                            <span class="text-white text-5xl">▶️</span>
+                        </div>
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="font-black text-blue-900 text-lg">סוד ההיפר-פוקוס</h3>
+                    </div>
+                </div>
+
+                </div>
+        </div>
+    </section>
+
+    <div id="videoModal" class="modal" onclick="closeVideo()">
+        <span class="absolute top-5 right-10 text-white text-5xl font-bold cursor-pointer">&times;</span>
+        <div class="modal-content">
+            <iframe id="videoFrame" width="100%" height="100%" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="rounded-3xl shadow-2xl"></iframe>
+        </div>
+    </div>
+
+    <footer class="py-12 bg-gray-900 text-white text-center">
+        <div class="container mx-auto px-6">
+            <img src="logo-1.jpeg" class="h-16 w-16 rounded-full mx-auto mb-4 object-cover">
+            <p class="opacity-40 text-sm">© 2026 קסם הקשב - משה מדינה</p>
+        </div>
+    </footer>
+
+    <script>
+        function openVideo(videoId) {
+            const modal = document.getElementById('videoModal');
+            const frame = document.getElementById('videoFrame');
+            // שימוש ב-Embed של יוטיוב שמתאים ל-Shorts
+            frame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+            modal.style.display = "block";
+        }
+
+        function closeVideo() {
+            const modal = document.getElementById('videoModal');
+            const frame = document.getElementById('videoFrame');
+            modal.style.display = "none";
+            frame.src = ""; // עוצר את הסרטון כשסוגרים
+        }
+    </script>
+</body>
+</html>
