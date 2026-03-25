@@ -9,7 +9,7 @@
     <style>
         body { font-family: 'Heebo', sans-serif; background-color: #f8fafc; }
         .video-card { transition: all 0.3s ease; cursor: pointer; }
-        .video-card:hover { transform: translateY(-8px); shadow: 0 25px 30px -10px rgba(0, 0, 0, 0.15); }
+        .video-card:hover { transform: translateY(-8px); box-shadow: 0 25px 30px -10px rgba(0, 0, 0, 0.15); }
         .video-card:hover img { filter: brightness(0.8); }
         
         /* Modal Styles */
@@ -18,10 +18,10 @@
         .close-modal { position: absolute; top: 20px; right: 20px; color: white; font-size: 40px; cursor: pointer; z-index: 1001; }
     </style>
 </head>
-<body class="text-gray-800">
+<body class="text-gray-800 text-right">
 
     <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center text-right">
             <div class="flex items-center gap-3">
                 <img src="logo-1.jpeg" alt="לוגו" class="h-10 w-10 rounded-full object-cover">
                 <a href="index.html" class="text-2xl font-black text-blue-600 font-heebo">קסם הקשב</a>
@@ -32,7 +32,7 @@
 
     <header class="bg-blue-600 text-white py-16 md:py-24 text-center">
         <div class="container mx-auto px-6">
-            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight">רגעים של קסם (שורטס)</h1>
+            <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight italic text-heebo">רגעים של קסם (שורטס)</h1>
             <p class="text-xl opacity-90 max-w-2xl mx-auto font-light leading-relaxed">תובנות מהירות, טיפים ליומיום וכל מה שיהפוך את הקשב שלכם לקסם אמיתי.</p>
         </div>
     </header>
@@ -41,6 +41,48 @@
         <div class="container mx-auto px-6">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
                 
+                <div class="video-card bg-white rounded-[2.5rem] overflow-hidden shadow-lg border border-gray-100" onclick="openVideo('EboR4OSCjaw')">
+                    <div class="relative">
+                        <img src="https://img.youtube.com/vi/EboR4OSCjaw/hqdefault.jpg" class="w-full aspect-[9/16] object-cover">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="bg-white/90 p-4 rounded-full shadow-xl transform transition hover:scale-110">
+                                <span class="text-blue-600 text-3xl">▶️</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8 text-center bg-white">
+                        <h3 class="font-black text-blue-900 text-xl italic">שיגרה משעממת</h3>
+                    </div>
+                </div>
+
+                <div class="video-card bg-white rounded-[2.5rem] overflow-hidden shadow-lg border border-gray-100" onclick="openVideo('wOvnT8LG9yU')">
+                    <div class="relative">
+                        <img src="https://img.youtube.com/vi/wOvnT8LG9yU/hqdefault.jpg" class="w-full aspect-[9/16] object-cover">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="bg-white/90 p-4 rounded-full shadow-xl transform transition hover:scale-110">
+                                <span class="text-blue-600 text-3xl">▶️</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8 text-center bg-white">
+                        <h3 class="font-black text-blue-900 text-xl italic">לא צריך להתמיד</h3>
+                    </div>
+                </div>
+
+                <div class="video-card bg-white rounded-[2.5rem] overflow-hidden shadow-lg border border-gray-100" onclick="openVideo('ZSU2YJDkBKs')">
+                    <div class="relative">
+                        <img src="https://img.youtube.com/vi/ZSU2YJDkBKs/hqdefault.jpg" class="w-full aspect-[9/16] object-cover">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="bg-white/90 p-4 rounded-full shadow-xl transform transition hover:scale-110">
+                                <span class="text-blue-600 text-3xl">▶️</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-8 text-center bg-white">
+                        <h3 class="font-black text-blue-900 text-xl italic text-heebo">תהיו יותר מדי</h3>
+                    </div>
+                </div>
+
                 <div class="video-card bg-white rounded-[2.5rem] overflow-hidden shadow-lg border border-gray-100" onclick="openVideo('JWxJijT-DA4')">
                     <div class="relative">
                         <img src="https://img.youtube.com/vi/JWxJijT-DA4/hqdefault.jpg" class="w-full aspect-[9/16] object-cover">
@@ -79,7 +121,7 @@
                         </div>
                     </div>
                     <div class="p-8 text-center bg-white">
-                        <h3 class="font-black text-blue-900 text-xl">האם צריך משמעת עצמית?</h3>
+                        <h3 class="font-black text-blue-900 text-xl text-heebo">האם צריך משמעת עצמית?</h3>
                     </div>
                 </div>
 
@@ -130,7 +172,7 @@
     </section>
 
     <div id="videoModal" class="modal" onclick="closeVideo()">
-        <span class="close-modal">&times;</span>
+        <span class="close-modal text-heebo">&times;</span>
         <div class="modal-content">
             <iframe id="videoFrame" width="100%" height="100%" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="rounded-[2.5rem] shadow-2xl"></iframe>
         </div>
@@ -139,11 +181,11 @@
     <footer class="py-16 bg-gray-900 text-white text-center">
         <div class="container mx-auto px-6">
             <img src="logo-1.jpeg" class="h-20 w-20 rounded-full mx-auto mb-6 object-cover border-2 border-white/20">
-            <div class="text-3xl font-black mb-4">קסם הקשב</div>
+            <div class="text-3xl font-black mb-4 italic text-heebo">קסם הקשב</div>
             <div class="flex justify-center gap-8 mb-10">
                 <a href="https://wa.me/972542347839" class="bg-green-600 hover:bg-green-700 px-8 py-3 rounded-full font-bold transition">דברו איתי בוואטסאפ</a>
             </div>
-            <p class="text-xs opacity-30">© 2026 קסם הקשב - משה מדינה</p>
+            <p class="text-xs opacity-30 font-heebo">© 2026 קסם הקשב - משה מדינה</p>
         </div>
     </footer>
 
