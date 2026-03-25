@@ -3,214 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>אבחון סגנונות למידה | קסם הקשב</title>
+    <title>איך המוח שלי לומד? | קסם הקשב - משה מדינה</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Heebo', sans-serif; background-color: #f0f4f8; }
-        .question-card { transition: all 0.2s; border: 2px solid #e2e8f0; }
-        .question-card:hover { border-color: #3b82f6; background-color: #f8fbff; }
-        input[type="radio"] { accent-color: #2563eb; transform: scale(1.3); }
-        .result-box { background: white; border-radius: 2.5rem; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1); }
+        body { font-family: 'Heebo', sans-serif; background-color: #f0f9ff; }
+        .question-card { display: none; }
+        .question-card.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .gradient-blue { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
     </style>
 </head>
-<body class="text-gray-800">
+<body class="text-gray-800 text-right">
 
-    <nav class="bg-white shadow-sm py-4 sticky top-0 z-50">
+    <nav class="bg-white shadow-sm py-4">
         <div class="container mx-auto px-6 flex justify-between items-center">
-            <a href="index.html" class="text-2xl font-black text-blue-600">קסם הקשב</a>
-            <a href="index.html" class="font-bold text-gray-500">← חזרה לבית</a>
+            <div class="flex items-center gap-3">
+                <img src="logo-1.jpeg" alt="לוגו" class="h-10 w-10 rounded-full object-cover">
+                <a href="index.html" class="text-xl font-black text-blue-600">קסם הקשב</a>
+            </div>
+            <a href="index.html" class="font-bold text-gray-500 hover:text-blue-600 transition">← חזרה לבית</a>
         </div>
     </nav>
 
-    <div class="container mx-auto max-w-4xl px-6 py-12">
-        <div class="bg-white rounded-[3rem] shadow-xl p-8 md:p-12 border border-gray-100">
-            <header class="text-center mb-16">
-                <h1 class="text-4xl md:text-6xl font-black text-blue-900 mb-6 leading-tight">מהו סגנון הלמידה שלך?</h1>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">גלו איך המוח שלכם מעדיף לקלוט, לעבד ולזכור מידע חדש דרך 24 שאלות אבחון.</p>
-            </header>
-
-            <form id="learningForm" class="space-y-8">
-                <div id="questionsContainer" class="space-y-6"></div>
-                <div class="pt-10">
-                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-6 rounded-3xl text-2xl shadow-2xl transition transform hover:scale-[1.02]">
-                        הצג את תוצאות האבחון שלי ←
-                    </button>
-                </div>
-            </form>
-
-            <div id="captureArea" class="hidden mt-20 p-10 result-box border-4 border-blue-50">
-                <div class="text-center mb-12">
-                    <h2 class="text-4xl font-black text-blue-900 mb-2">פרופיל הלמידה המנצח שלך</h2>
-                    <p class="text-blue-500 font-bold tracking-widest text-lg">קבוצת "קסם הקשב" - משה מדינה</p>
-                </div>
-                
-                <div class="mb-16">
-                    <canvas id="resultsChart" style="min-height: 500px;"></canvas>
-                </div>
-                
-                <div id="adviceContainer" class="space-y-8"></div>
-
-                <div class="mt-12 p-8 bg-blue-900 text-white rounded-3xl text-center">
-                    <h4 class="text-2xl font-black mb-4">רוצים להפוך את הנתונים האלו להצלחה?</h4>
-                    <p class="text-lg opacity-90 mb-8">התוצאות האלו הן המפה שלכם. בואו נשב יחד ונדייק איך ליישם אותן בלימודים, בעבודה ובחיים האישיים.</p>
-                    <a href="https://wa.me/972506841168?text=היי משה, עשיתי את האבחון ורציתי לקבוע פגישה כדי להבין איך ליישם את התוצאות..." class="bg-white text-blue-900 font-black py-4 px-10 rounded-full inline-block hover:bg-gray-100 transition shadow-xl">בואו נדבר על זה אישית ←</a>
-                </div>
+    <main class="container mx-auto px-6 max-w-2xl py-12 md:py-20">
+        <div id="quiz-container" class="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-2xl">
+            
+            <div id="welcome-screen" class="text-center">
+                <h1 class="text-3xl md:text-4xl font-black text-blue-900 mb-6 italic">איך המוח שלי לומד?</h1>
+                <p class="text-xl text-gray-600 mb-10 leading-relaxed">
+                    לכל אדם עם ADHD יש דרך ייחודית לקלוט מידע. גלו מהו סגנון הלמידה הדומיננטי שלכם כדי להפסיק להילחם במוח ולהתחיל לעבוד איתו.
+                </p>
+                <button onclick="startQuiz()" class="bg-blue-600 text-white font-black py-4 px-12 rounded-full text-xl shadow-lg hover:bg-blue-700 transition">בואו נתחיל ←</button>
             </div>
 
-            <div id="actionButtons" class="hidden mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
-                <button id="downloadBtn" class="bg-gray-800 text-white font-black py-4 rounded-2xl flex justify-center items-center gap-2 hover:bg-gray-900 shadow-lg transition">📥 שמור תמונה</button>
-                <button id="waShareBtn" class="bg-green-500 text-white font-black py-4 rounded-2xl flex justify-center items-center gap-2 hover:bg-green-600 shadow-lg transition">💬 שתף בוואטסאפ</button>
+            <div id="quiz-questions" class="hidden">
+                <div class="mb-8 bg-gray-100 h-2 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="bg-blue-600 h-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+                <div id="question-content">
+                    </div>
+            </div>
+
+            <div id="results-screen" class="hidden text-center">
+                <div class="text-5xl mb-6">🎉</div>
+                <h2 class="text-3xl font-black text-blue-900 mb-4 italic">התוצאה שלך מוכנה!</h2>
+                <div id="result-text" class="text-xl text-gray-700 mb-10 leading-relaxed bg-blue-50 p-6 rounded-2xl border border-blue-100">
+                    </div>
+
+                <div class="p-8 bg-gray-900 rounded-[2rem] text-white">
+                    <h3 class="text-xl font-bold mb-4 italic">רוצים להבין איך ליישם את זה ביומיום?</h3>
+                    <p class="mb-8 opacity-80">משה מדינה כאן כדי לעזור לכם להפוך את הידע הזה לכלי עבודה עוצמתי.</p>
+                    <a id="whatsapp-link" href="https://wa.me/972542347839?text=היי משה, סיימתי את המבדק לסגנונות למידה ואשמח להתייעץ..." 
+                       class="bg-green-500 text-white font-black py-4 px-10 rounded-full inline-block hover:bg-green-600 transition shadow-lg">
+                        שלחו לי את התוצאה בוואטסאפ ←
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <script>
         const questions = [
-            { id: 1, text: "אני לומד טוב יותר מחומר שמוצג בתמונות, תרשימים, סרטונים, גרפים ומפות", category: "visual", subCategory: "spatial" },
-            { id: 2, text: "כדי לזכור מילים של שירים מספיק לי להקשיב להם", category: "auditory", subCategory: "auditory" },
-            { id: 3, text: "מספיק לי לשמוע מישהו מסביר כדי להבין ולזכור את ההסבר", category: "auditory", subCategory: "auditory" },
-            { id: 4, text: "כשאני נזכר במספר טלפון, מספר ארוך – אני 'שומע' או 'מדקלם' אותם בדמיון שלי", category: "auditory", subCategory: "auditory" },
-            { id: 5, text: "אני אוהב ללעוס ולאכול בזמן שאני לומד דברים חדשים", category: "kinesthetic", subCategory: "movement" },
-            { id: 6, text: "אני מוצא את עצמי הרבה פעמים בתנועה ובהסתובבות בזמן שאני לומד משהו חדש", category: "kinesthetic", subCategory: "movement" },
-            { id: 7, text: "אני אוהב להכין פוסטרים, מודלים, ולהתנסות בדברים", category: "kinesthetic", subCategory: "tactile" },
-            { id: 8, text: "אני נהנה לעבוד עם הידיים ולהכין דברים", category: "kinesthetic", subCategory: "tactile" },
-            { id: 9, text: "אני מרגיש בנוח ללחוץ ידיים ולחבק (אנשים שאני מכיר)", category: "kinesthetic", subCategory: "tactile" },
-            { id: 10, text: "אני מעדיף לשמוע ספרים מוקלטים או שיקריאו לי מאשר לקרוא בעצמי", category: "auditory", subCategory: "auditory" },
-            { id: 11, text: "אני צריך להחזיק משהו ביד ולהתעסק איתו בזמן שאני לומד משהו חדש", category: "kinesthetic", subCategory: "tactile" },
-            { id: 12, text: "כשאני לומד אני אוהב לסכם את הדברים בכתב ולקרוא מספר פעמים את הסיכום", category: "visual", subCategory: "verbal" },
-            { id: 13, text: "כדי לזכור איך מאייתים מילה אני צריך לכתוב אותה הרבה פעמים שוב ושוב", category: "kinesthetic", subCategory: "tactile" },
-            { id: 14, text: "כשאני מקבל הסבר איך להגיע למקום מסוים, מספיק לי לקבל הסבר בע\"פ", category: "auditory", subCategory: "auditory" },
-            { id: 15, text: "כשאני מקבל הסבר איך להגיע למקום מסוים, מספיק לי לקבל הסבר בכתב", category: "visual", subCategory: "verbal" },
-            { id: 16, text: "אני זוכר טוב יותר דברים שראיתי עליהם סרטים", category: "visual", subCategory: "spatial" },
-            { id: 17, text: "אני מבין טוב יותר כשמקריאים לי מאשר כשאני קורא לבד", category: "auditory", subCategory: "auditory" },
-            { id: 18, text: "אני לומד וזוכר טוב יותר כשאני שומע שיעור או הסבר בע\"פ", category: "auditory", subCategory: "auditory" },
-            { id: 19, text: "אני מעדיף מורה או מדריך שכותב הרבה דיאגרמות ותרשימים על לוח", category: "visual", subCategory: "spatial" },
-            { id: 20, text: "אני מעדיף מורה או מדריך שכותב משפטים עיקריים של החומר על לוח", category: "visual", subCategory: "verbal" },
-            { id: 21, text: "אני מעדיף מורה או מדריך שמשקיע הרבה זמן בהסברים בעל פה", category: "auditory", subCategory: "auditory" },
-            { id: 22, text: "אם אני לא רושם בזמן שיעור או הסבר אני לא זוכר כלום", category: "visual", subCategory: "verbal" },
-            { id: 23, text: "בזמן שיעור או הסבר אני אוהב לצייר ולקשקש", category: "kinesthetic", subCategory: "movement" },
-            { id: 24, text: "כשאני מקבל הסבר איך להגיע למקום מסוים מספיק לי לקבל מפה", category: "visual", subCategory: "spatial" }
+            { q: "כשאתם לומדים משהו חדש, מה הכי עוזר לכם?", a: ["לראות סרטון או תרשים", "להקשיב להסבר או פודקאסט", "לנסות בעצמי בידיים"] },
+            { q: "מה הכי מסיח את דעתכם?", a: ["בלגן בעיניים ותנועה", "רעשי רקע ודיבורים", "ישיבה ממושכת בלי תנועה"] },
+            { q: "איך אתם זוכרים מספר טלפון?", a: ["מדמיינים איך הוא כתוב", "אומרים אותו בקול רם", "האצבעות 'זוכרות' את ההקלדה"] }
         ];
 
-        const adviceData = {
-            visual: `
-                <div class="p-8 bg-blue-50 rounded-[2rem] border-r-8 border-blue-500">
-                    <h3 class="text-2xl font-black text-blue-900 mb-4">👀 המוח שלך רואה תמונות (סגנון חזותי)</h3>
-                    <p class="text-lg leading-relaxed mb-4">אתה זוכר מידע הכי טוב כשהוא מקבל צורה, צבע ומיקום. המוח שלך "מצלם" את הדף או את הסרטון שראית.</p>
-                    <ul class="list-disc pr-6 space-y-2 text-gray-700">
-                        <li><strong>שימוש במרקרים:</strong> צבעים הם הדרך שלך לסדר את המידע בראש.</li>
-                        <li><strong>תרשימי זרימה:</strong> במקום רשימות ארוכות, צייר מפות של נושאים.</li>
-                        <li><strong>סרטונים:</strong> אם אתה צריך ללמוד נושא חדש, חפש קודם סרטון הסבר ביוטיוב.</li>
-                    </ul>
-                </div>`,
-            auditory: `
-                <div class="p-8 bg-green-50 rounded-[2rem] border-r-8 border-green-500">
-                    <h3 class="text-2xl font-black text-green-900 mb-4">👂 המוח שלך מקשיב לקצב (סגנון שמיעתי)</h3>
-                    <p class="text-lg leading-relaxed mb-4">מילים ומנגינה הם המפתח שלך לזיכרון. אתה "שומע" את החומר בראש שלך בזמן שאתה נזכר בו.</p>
-                    <ul class="list-disc pr-6 space-y-2 text-gray-700">
-                        <li><strong>דיבור עצמי:</strong> הסבר לעצמך את החומר בקול רם, כאילו אתה המורה.</li>
-                        <li><strong>הקלטות:</strong> הקלט שיעורים או את עצמך קורא סיכומים והקשב לזה בזמן נסיעה.</li>
-                        <li><strong>חרוזים וקצב:</strong> הפוך הגדרות קשות לשירים קצרים או חרוזים מצחיקים.</li>
-                    </ul>
-                </div>`,
-            kinesthetic: `
-                <div class="p-8 bg-orange-50 rounded-[2rem] border-r-8 border-orange-500">
-                    <h3 class="text-2xl font-black text-orange-900 mb-4">🏃 המוח שלך חייב לזוז (סגנון תנועתי/תחושתי)</h3>
-                    <p class="text-lg leading-relaxed mb-4">אתה לומד דרך הידיים והרגליים. התנועה היא לא הפרעה - היא הדרך של המוח שלך להישאר מרוכז.</p>
-                    <ul class="list-disc pr-6 space-y-2 text-gray-700">
-                        <li><strong>למידה בתנועה:</strong> לך בחדר בזמן שאתה משנן חומר או עובר על נקודות.</li>
-                        <li><strong>חפצי מגע:</strong> החזק "פידג'ט" או כדור גמיש ביד בזמן הקשבה לשיעור.</li>
-                        <li><strong>עשייה בידיים:</strong> סכם בכתב יד, בנה דגמים או השתמש בחפצים כדי להמחיש בעיות.</li>
-                    </ul>
-                </div>`
-        };
+        let currentQ = 0;
+        let scores = { visual: 0, auditory: 0, kinesthetic: 0 };
 
-        const container = document.getElementById('questionsContainer');
-        questions.forEach((q, i) => {
-            const card = document.createElement('div');
-            card.className = 'question-card p-6 rounded-3xl bg-white shadow-sm';
-            card.innerHTML = `
-                <p class="font-black text-xl mb-6 text-blue-900">${i+1}. ${q.text}</p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <label class="flex-1 flex items-center gap-3 p-4 border rounded-2xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="q${q.id}" value="2" required><span class="font-bold">נכון מאוד</span></label>
-                    <label class="flex-1 flex items-center gap-3 p-4 border rounded-2xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="q${q.id}" value="1"><span class="font-bold">לפעמים</span></label>
-                    <label class="flex-1 flex items-center gap-3 p-4 border rounded-2xl cursor-pointer hover:bg-blue-50 transition"><input type="radio" name="q${q.id}" value="0"><span class="font-bold">לא ממש</span></label>
-                </div>`;
-            container.appendChild(card);
-        });
+        function startQuiz() {
+            document.getElementById('welcome-screen').classList.add('hidden');
+            document.getElementById('quiz-questions').classList.remove('hidden');
+            showQuestion();
+        }
 
-        let myChart = null;
-        document.getElementById('learningForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            let sub = { spatial: 0, verbal: 0, auditory: 0, movement: 0, tactile: 0 };
-            questions.forEach(q => {
-                const sel = document.querySelector(`input[name="q${q.id}"]:checked`);
-                if (sel) sub[q.subCategory] += parseInt(sel.value);
+        function showQuestion() {
+            const q = questions[currentQ];
+            let html = `<h3 class="text-2xl font-bold text-blue-900 mb-8">${q.q}</h3><div class="space-y-4">`;
+            q.a.forEach((ans, i) => {
+                html += `<button onclick="next(${i})" class="w-full text-right p-5 rounded-2xl border-2 border-gray-100 hover:border-blue-500 hover:bg-blue-50 transition font-bold text-lg">${ans}</button>`;
             });
+            html += `</div>`;
+            document.getElementById('question-content').innerHTML = html;
+            document.getElementById('progress-bar').style.width = ((currentQ / questions.length) * 100) + "%";
+        }
 
-            const totals = {
-                auditory: sub.auditory,
-                visual: sub.spatial + sub.verbal,
-                kinesthetic: sub.movement + sub.tactile
-            };
+        function next(choice) {
+            if (choice === 0) scores.visual++;
+            if (choice === 1) scores.auditory++;
+            if (choice === 2) scores.kinesthetic++;
 
-            document.getElementById('captureArea').classList.remove('hidden');
-            document.getElementById('actionButtons').classList.remove('hidden');
+            currentQ++;
+            if (currentQ < questions.length) {
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
 
-            const ctx = document.getElementById('resultsChart').getContext('2d');
-            if (myChart) myChart.destroy();
+        function showResults() {
+            document.getElementById('quiz-questions').classList.add('hidden');
+            document.getElementById('results-screen').classList.remove('hidden');
             
-            Chart.register(ChartDataLabels);
-            myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['שמיעתי', 'חזותי', 'תנועתי / מגעי'],
-                    datasets: [
-                        { label: 'שמיעתי', data: [sub.auditory, 0, 0], backgroundColor: '#10b981' },
-                        { label: 'חזותי-מרחבי', data: [0, sub.spatial, 0], backgroundColor: '#3b82f6' },
-                        { label: 'חזותי-מילולי', data: [0, sub.verbal, 0], backgroundColor: '#93c5fd' },
-                        { label: 'תנועתי', data: [0, 0, sub.movement], backgroundColor: '#f59e0b' },
-                        { label: 'מגעי', data: [0, 0, sub.tactile], backgroundColor: '#fbbf24' }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: { x: { stacked: true }, y: { stacked: true, beginAtZero: true, max: Math.max(...Object.values(totals)) + 5 } },
-                    plugins: {
-                        legend: { display: false },
-                        datalabels: {
-                            color: '#fff',
-                            font: { weight: 'bold', size: 16 },
-                            formatter: (val) => val > 0 ? val : ''
-                        }
-                    }
-                }
-            });
-
-            // הצגת העצות
-            let top = Object.keys(totals).reduce((a, b) => totals[a] > totals[b] ? a : b);
-            document.getElementById('adviceContainer').innerHTML = adviceData[top];
+            let topStyle = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+            let description = "";
             
-            // שיתוף וואטסאפ
-            const txt = encodeURIComponent("גיליתי מה סגנון הלמידה שלי בשאלון של קסם הקשב! כנסו גם: " + window.location.href);
-            document.getElementById('waShareBtn').onclick = () => window.open(`https://wa.me/?text=${txt}`);
+            if(topStyle === 'visual') description = "אתם לומדים חזותיים! אתם צריכים לראות כדי להבין. צבעים, תרשימים וסרטונים הם החברים הכי טובים שלכם.";
+            if(topStyle === 'auditory') description = "אתם לומדים שמיעתיים! הקשבה והסברים בעל פה הם המפתח שלכם. פודקאסטים ודיונים עוזרים לכם לרשום את המידע במוח.";
+            if(topStyle === 'kinesthetic') description = "אתם לומדים תנועתיים! אתם חייבים לזוז או לגעת כדי ללמוד. למידה תוך כדי הליכה או התנסות מעשית היא הדרך שלכם להצליח.";
 
-            window.scrollTo({ top: document.getElementById('captureArea').offsetTop - 100, behavior: 'smooth' });
-        });
-
-        document.getElementById('downloadBtn').addEventListener('click', () => {
-            html2canvas(document.getElementById('captureArea')).then(canvas => {
-                const link = document.createElement('a');
-                link.download = 'אבחון_למידה_משה_מדינה.png';
-                link.href = canvas.toDataURL();
-                link.click();
-            });
-        });
+            document.getElementById('result-text').innerText = description;
+            
+            // עדכון הלינק לוואטסאפ עם התוצאה הספציפית
+            const waMsg = encodeURIComponent(`היי משה, סיימתי את מבדק סגנונות הלמידה באתר. יצא לי שאני לומד ${topStyle === 'visual' ? 'חזותי' : topStyle === 'auditory' ? 'שמיעתי' : 'תנועתי'}. אשמח לשמוע איך זה יכול לעזור לי.`);
+            document.getElementById('whatsapp-link').href = `https://wa.me/972542347839?text=${waMsg}`;
+        }
     </script>
 </body>
 </html>
