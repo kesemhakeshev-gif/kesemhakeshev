@@ -5,30 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>מבדק סגנונות למידה | קסם הקשב - משה מדינה</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Heebo', sans-serif; background-color: #f8fafc; overflow-x: hidden; }
+        body { font-family: 'Heebo', sans-serif; background-color: #f8fafc; }
         .gradient-blue { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
-        .btn-option { transition: all 0.2s ease; border: 2px solid #e2e8f0; }
-        .btn-option:hover { border-color: #3b82f6; background-color: #eff6ff; }
-        .tower-container { display: flex; align-items: flex-end; justify-content: space-around; height: 350px; gap: 15px; margin-top: 50px; padding-bottom: 20px; }
-        .tower { position: relative; width: 70px; transition: height 1s ease-out; border-radius: 15px 15px 0 0; display: flex; flex-direction: column-reverse; background: #e2e8f0; min-height: 20px; }
-        .tower-label { margin-top: 15px; font-weight: 900; color: #1e3a8a; font-size: 0.85rem; text-align: center; line-height: 1.2; }
-        .sub-bar { width: 100%; transition: height 1s ease-out; position: relative; }
+        .tower-container { display: flex; align-items: flex-end; justify-content: space-around; height: 320px; gap: 10px; margin-top: 50px; padding: 20px; background: white; border-radius: 2rem; }
+        .tower { position: relative; width: 65px; transition: height 1s ease-out; border-radius: 12px 12px 0 0; display: flex; flex-direction: column-reverse; background: #f1f5f9; }
+        .tower-label { margin-top: 15px; font-weight: 900; color: #1e3a8a; font-size: 0.8rem; text-align: center; line-height: 1.2; }
+        .sub-bar { width: 100%; transition: height 1s ease-out; }
         .tower-score { position: absolute; top: -35px; width: 100%; text-align: center; font-weight: 900; color: #1e3a8a; font-size: 1.2rem; }
-        #quiz-questions { animation: fadeIn 0.4s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .btn-option { border: 2px solid #e2e8f0; transition: all 0.2s; }
+        .btn-option:hover { border-color: #3b82f6; background: #eff6ff; }
     </style>
 </head>
-<body class="text-gray-800 text-right">
+<body class="text-right">
 
     <nav class="bg-white shadow-sm py-4 sticky top-0 z-50">
-        <div class="container mx-auto px-6 flex justify-between items-center font-heebo">
+        <div class="container mx-auto px-6 flex justify-between items-center">
             <div class="flex items-center gap-3">
                 <img src="logo-1.jpeg" alt="לוגו" class="h-10 w-10 rounded-full object-cover">
                 <a href="index.html" class="text-xl font-black text-blue-600">קסם הקשב</a>
             </div>
-            <a href="index.html" class="font-bold text-gray-400 hover:text-blue-600 transition">← חזרה</a>
+            <a href="index.html" class="font-bold text-gray-400">← חזרה</a>
         </div>
     </nav>
 
@@ -36,54 +35,74 @@
         <div id="quiz-card" class="bg-white p-8 md:p-12 rounded-[3rem] shadow-2xl">
             
             <div id="welcome-screen" class="text-center">
-                <div class="text-6xl mb-6">🧠</div>
-                <h1 class="text-3xl md:text-5xl font-black text-blue-900 mb-6 italic leading-tight">מה עוזר לי ללמוד ולזכור?</h1>
-                <p class="text-xl text-gray-600 mb-10 leading-relaxed">מבדק מקצועי של 24 שאלות שיעזור לכם להבין איך המוח שלכם קולט מידע בצורה הכי טובה.</p>
-                <button onclick="startQuiz()" class="bg-blue-600 text-white font-black py-5 px-16 rounded-full text-2xl shadow-xl hover:bg-blue-700 transition transform hover:scale-105">מתחילים במבדק ←</button>
+                <div class="text-6xl mb-6">💡</div>
+                <h1 class="text-3xl font-black text-blue-900 mb-6 italic">מה עוזר לי ללמוד ולזכור?</h1>
+                <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                    המבדק שיעזור לך להבין איך המוח שלך מעבד מידע בצורה הכי מהירה וקלה.
+                </p>
+                <div class="mb-10 max-w-sm mx-auto">
+                    <label class="block text-right text-sm font-bold text-gray-500 mb-2">איך קוראים לך? (אופציונלי)</label>
+                    <input type="text" id="user-name" placeholder="השם שלך..." class="w-full p-4 rounded-2xl border-2 border-gray-100 focus:border-blue-500 outline-none text-right">
+                </div>
+                <button onclick="startQuiz()" class="bg-blue-600 text-white font-black py-5 px-14 rounded-full text-2xl shadow-lg hover:scale-105 transition">מתחילים ←</button>
             </div>
 
             <div id="quiz-questions" class="hidden">
-                <div class="flex justify-between items-center mb-10">
-                    <span id="progress-text" class="font-black text-blue-600">שאלה 1 מתוך 24</span>
-                    <div class="w-1/2 bg-gray-100 h-3 rounded-full overflow-hidden">
-                        <div id="progress-bar" class="bg-blue-600 h-full transition-all duration-300" style="width: 4%"></div>
-                    </div>
+                <div id="progress-text" class="mb-4 font-bold text-blue-600">שאלה 1 מתוך 24</div>
+                <div class="w-full bg-gray-100 h-2 rounded-full mb-8 overflow-hidden">
+                    <div id="progress-bar" class="bg-blue-600 h-full transition-all duration-300" style="width: 4%"></div>
                 </div>
-                <div id="question-area">
-                    <h3 id="question-text" class="text-2xl font-black text-blue-900 mb-10 leading-tight min-h-[80px]"></h3>
-                    <div class="grid gap-5">
-                        <button onclick="handleAnswer(2)" class="btn-option p-6 rounded-[1.5rem] text-right font-bold text-lg shadow-sm">מתאים לי מאוד</button>
-                        <button onclick="handleAnswer(1)" class="btn-option p-6 rounded-[1.5rem] text-right font-bold text-lg shadow-sm">לפעמים מתאים לי</button>
-                        <button onclick="handleAnswer(0)" class="btn-option p-6 rounded-[1.5rem] text-right font-bold text-lg shadow-sm">לא מתאים לי</button>
-                    </div>
+                <h3 id="question-text" class="text-2xl font-black text-blue-900 mb-8 min-h-[80px]"></h3>
+                <div class="grid gap-4">
+                    <button onclick="handleAnswer(2)" class="btn-option p-6 rounded-2xl text-right font-bold text-lg">מתאים לי מאוד</button>
+                    <button onclick="handleAnswer(1)" class="btn-option p-6 rounded-2xl text-right font-bold text-lg">לפעמים מתאים לי</button>
+                    <button onclick="handleAnswer(0)" class="btn-option p-6 rounded-2xl text-right font-bold text-lg">לא מתאים לי</button>
                 </div>
             </div>
 
             <div id="results-screen" class="hidden">
-                <h2 class="text-3xl font-black text-center text-blue-900 mb-4 italic">פרופיל הלמידה שלך</h2>
-                <div class="tower-container">
-                    <div class="flex flex-col items-center">
-                        <div id="tower-auditory" class="tower"><span class="tower-score" id="score-auditory">0</span><div id="bar-auditory" class="sub-bar bg-blue-500 rounded-t-xl"></div></div>
-                        <div class="tower-label">סגנון<br>שמיעתי</div>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <div id="tower-visual" class="tower"><span class="tower-score" id="score-visual">0</span><div id="bar-visual-spatial" class="sub-bar bg-blue-800" title="מרחבי"></div><div id="bar-visual-verbal" class="sub-bar bg-blue-400 rounded-t-xl" title="מילולי"></div></div>
-                        <div class="tower-label">סגנון<br>חזותי</div>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <div id="tower-kinesthetic" class="tower"><span class="tower-score" id="score-kine">0</span><div id="bar-tactile" class="sub-bar bg-orange-400" title="מגעי"></div><div id="bar-kinesthetic" class="sub-bar bg-orange-600 rounded-t-xl" title="תנועתי"></div></div>
-                        <div class="tower-label">סגנון<br>תנועתי\מגעי</div>
+                <div id="capture-area" class="p-6 bg-white rounded-[2rem] border border-gray-50">
+                    <h2 class="text-2xl font-black text-center text-blue-900 mb-2 italic">פרופיל הלמידה של <span id="display-name"></span></h2>
+                    <div class="tower-container">
+                        <div class="flex flex-col items-center">
+                            <div id="tower-auditory" class="tower">
+                                <span class="tower-score" id="score-auditory">0</span>
+                                <div class="sub-bar bg-blue-500 rounded-t-xl" style="height:100%"></div>
+                            </div>
+                            <div class="tower-label">שמיעתי</div>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div id="tower-visual" class="tower">
+                                <span class="tower-score" id="score-visual">0</span>
+                                <div id="bar-visual-spatial" class="sub-bar bg-blue-800" title="מרחבי"></div>
+                                <div id="bar-visual-verbal" class="sub-bar bg-blue-400 rounded-t-xl" title="מילולי"></div>
+                            </div>
+                            <div class="tower-label">חזותי</div>
+                        </div>
+                        <div class="flex flex-col items-center">
+                            <div id="tower-kinesthetic" class="tower">
+                                <span class="tower-score" id="score-kine">0</span>
+                                <div id="bar-tactile" class="sub-bar bg-orange-400" title="מגעי"></div>
+                                <div id="bar-kinesthetic" class="sub-bar bg-orange-600 rounded-t-xl" title="תנועתי"></div>
+                            </div>
+                            <div class="tower-label">תנועתי\מגעי</div>
+                        </div>
                     </div>
                 </div>
-                <div class="mt-16 p-8 bg-blue-50 rounded-[2.5rem] border border-blue-100">
-                    <h3 class="text-2xl font-black text-blue-900 mb-4 italic italic">ככל הנראה הסגנון הדומיננטי שלך הוא: <span id="top-style-name" class="text-blue-600"></span></h3>
-                    <p id="top-style-desc" class="text-lg text-gray-700 leading-relaxed mb-6"></p>
-                    <div id="top-style-tips" class="space-y-3 font-bold text-blue-800"></div>
-                </div>
-                <div class="mt-12 p-10 bg-gray-900 rounded-[3rem] text-white text-center shadow-2xl">
-                    <h3 class="text-2xl font-black mb-6 italic text-orange-400">רוצים ניתוח מעמיק יותר?</h3>
-                    <p class="mb-10 opacity-90 text-lg leading-relaxed">שלחו למשה את התוצאות שלכם וקבלו התאמה אישית של אסטרטגיות למידה שיעבדו עבורכם באמת.</p>
-                    <a id="wa-button" href="#" target="_blank" class="bg-green-500 hover:bg-green-600 text-white font-black py-5 px-14 rounded-full text-xl inline-block transition transform hover:scale-105 shadow-xl">שלחו למשה את התוצאות ←</a>
+
+                <div class="mt-8 flex flex-col gap-4">
+                    <button onclick="downloadImage()" class="bg-blue-100 text-blue-700 font-bold py-3 px-6 rounded-full text-center">📸 שמור את הגרף שלי כתמונה</button>
+                    
+                    <div class="p-8 bg-blue-50 rounded-[2rem] border border-blue-100 mt-4">
+                        <h3 class="text-xl font-black text-blue-900 mb-2 italic">הסגנון הדומיננטי שלך: <span id="top-style-name" class="text-blue-600 underline decoration-blue-200"></span></h3>
+                        <p id="top-style-desc" class="text-gray-700 leading-relaxed"></p>
+                    </div>
+
+                    <div class="mt-8 p-10 bg-gray-900 rounded-[3rem] text-white text-center shadow-xl">
+                        <h3 class="text-xl font-bold mb-4 italic text-orange-400">רוצים לדעת איך ליישם את זה?</h3>
+                        <p class="mb-8 opacity-80 leading-relaxed">שלחו למשה את התוצאות המפורטות (ואת התמונה ששמרתם) וקבלו הכוונה אישית להתאמת הלמידה שלכם.</p>
+                        <a id="wa-button" href="#" target="_blank" class="bg-green-500 hover:bg-green-600 text-white font-black py-5 px-12 rounded-full inline-block text-xl transition">שלחו למשה את התוצאות ←</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -91,36 +110,38 @@
 
     <script>
         const questions = [
-            { q: "אני זוכר טוב יותר אם אני כותב את הדברים", cat: "v_verbal" },
-            { q: "אני אוהב לקבל הוראות בכתב מאשר בעל פה", cat: "v_verbal" },
-            { q: "אני נהנה לקרוא ספרים וללמוד מהם", cat: "v_verbal" },
-            { q: "אני זוכר איך מילים נראות כשאני צריך לאיית אותן", cat: "v_verbal" },
-            { q: "אני אוהב לפתור תשבצים או לשחק במשחקי מילים", cat: "v_verbal" },
-            { q: "אני זוכר פנים של אנשים טוב יותר מאשר שמות", cat: "v_spatial" },
-            { q: "אני מעדיף לראות תרשימים, מפות ותמונות בזמן למידה", cat: "v_spatial" },
-            { q: "אני יכול לדמיין תמונות בראש בקלות רבה", cat: "v_spatial" },
-            { q: "אני משתמש בצבעים ומרקרים בסיכומים ובמחברת שלי", cat: "v_spatial" },
-            { q: "בזמן שאני מקשיב, אני מוצא את עצמי מצייר או מקשקש על הדף", cat: "v_spatial" },
-            { q: "אני מעדיף להקשיב להסבר מאשר לקרוא אותו בעצמי", cat: "auditory" },
-            { q: "אני נוטה לדבר לעצמי או ללחוש כשאני פותר בעיה", cat: "auditory" },
-            { q: "רעשים מסביב מוציאים אותי מריכוז בקלות", cat: "auditory" },
-            { q: "אני זוכר מה המורה אמר יותר מאשר מה שנכתב על הלוח", cat: "auditory" },
-            { q: "אני אוהב להקשיב למוזיקה בזמן שאני לומד", cat: "auditory" },
-            { q: "אני חייב לזוז או לקום מדי פעם בזמן שאני לומד", cat: "kinesthetic" },
-            { q: "אני משתמש בתנועות ידיים רבות כשאני מדבר", cat: "kinesthetic" },
-            { q: "קשה לי מאוד לשבת בשקט זמן ממושך מבלי להתנועע", cat: "kinesthetic" },
-            { q: "אני לומד הכי טוב כשאני מתנסה פיזית או עושה משהו", cat: "kinesthetic" },
-            { q: "אני אוהב ללמוד תוך כדי הליכה בחדר", cat: "kinesthetic" },
-            { q: "אני אוהב לגעת בחפצים כדי להבין איך הם פועלים", cat: "tactile" },
-            { q: "אני נהנה מעבודה בידיים - בניה, פירוק או יצירה", cat: "tactile" },
-            { q: "חשוב לי שהדפים והעטים שלי ירגישו נעים למגע", cat: "tactile" },
-            { q: "אני זוכר טוב יותר דברים שנגעתי בהם או החזקתי ביד", cat: "tactile" }
+            { q: "אני לומד טוב יותר מחומר שמוצג בתמונות, תרשימים, סרטונים, גרפים ומפות", cat: "v_spatial" },
+            { q: "כדי לזכור מילים של שירים מספיק לי להקשיב להם", cat: "auditory" },
+            { q: "מספיק לי לשמוע מישהו מסביר כדי להבין ולזכור את ההסבר", cat: "auditory" },
+            { q: "כשאני נזכר במספר טלפון, מספר ארוך – אני \"שומע\" או \"מדקלם\" אותם בדמיון שלי", cat: "auditory" },
+            { q: "אני אוהב ללעוס ולאכול בזמן שאני לומד דברים חדשים", cat: "kinesthetic" },
+            { q: "אני מוצא את עצמי הרבה פעמים בתנועה ובהסתובבות בזמן שאני לומד משהו חדש", cat: "kinesthetic" },
+            { q: "אני אוהב להכין פוסטרים, מודלים, ולהתנסות בדברים", cat: "tactile" },
+            { q: "אני נהנה לעבוד עם הידיים ולהכין דברים", cat: "tactile" },
+            { q: "אני מרגיש בנוח ללחוץ ידיים ולחבק (אנשים שאני מכיר)", cat: "tactile" },
+            { q: "אני מעדיף לשמוע ספרים מוקלטים או שיקריאו לי מאשר לקרוא בעצמי", cat: "auditory" },
+            { q: "אני צריך להחזיק משהו ביד ולהתעסק איתו בזמן שאני לומד משהו חדש", cat: "tactile" },
+            { q: "כשאני לומד אני אוהב לסכם את הדברים בכתב ולקרוא מספר פעמים את הסיכום", cat: "v_verbal" },
+            { q: "כדי לזכור איך מאייתים מילה אני צריך לכתוב אותה הרבה פעמים שוב ושוב", cat: "kinesthetic" },
+            { q: "כשאני מקבל הסבר איך להגיע למקום מסוים, מספיק לי לקבל הסבר בע\"פ", cat: "auditory" },
+            { q: "כשאני מקבל הסבר איך להגיע למקום מסוים, מספיק לי לקבל הסבר בכתב", cat: "v_verbal" },
+            { q: "אני זוכר טוב יותר דברים שראיתי עליהם סרטים", cat: "v_spatial" },
+            { q: "אני נוטה לדבר לעצמי כשאני פותר בעיה או לומד", cat: "auditory" },
+            { q: "כשאני קורא אני \"שומע\" את המילים בראש שלי", cat: "auditory" },
+            { q: "אני זוכר טוב יותר תמונות ותרשימים מאשר דפים מלאים במילים", cat: "v_spatial" },
+            { q: "כשאני כותב משהו, אני זוכר אותו טוב יותר", cat: "v_verbal" },
+            { q: "אני נהנה מדיונים ושיחות על נושאים חדשים שאני לומד", cat: "auditory" },
+            { q: "אני מעדיף לקרוא הוראות מאשר שמישהו יסביר לי אותן", cat: "v_verbal" },
+            { q: "אני מעדיף ללמוד תוך כדי תנועה (כמו הליכה בחדר)", cat: "kinesthetic" },
+            { q: "כשאני נזכר במידע, אני רואה את הדף או את המקום שבו הוא היה כתוב", cat: "v_spatial" }
         ];
 
         let currentIdx = 0;
+        let userName = "";
         let scores = { v_verbal: 0, v_spatial: 0, auditory: 0, kinesthetic: 0, tactile: 0 };
 
         function startQuiz() {
+            userName = document.getElementById('user-name').value || "חבר/ה";
             document.getElementById('welcome-screen').classList.add('hidden');
             document.getElementById('quiz-questions').classList.remove('hidden');
             renderQuestion();
@@ -142,22 +163,54 @@
         function showResults() {
             document.getElementById('quiz-questions').classList.add('hidden');
             document.getElementById('results-screen').classList.remove('hidden');
-            const vTotal = scores.v_verbal + scores.v_spatial, ktTotal = scores.kinesthetic + scores.tactile, aTotal = scores.auditory;
-            document.getElementById('tower-auditory').style.height = `${Math.max(20, (aTotal / 10) * 300)}px`;
-            document.getElementById('tower-visual').style.height = `${Math.max(20, (vTotal / 20) * 300)}px`;
-            document.getElementById('tower-kinesthetic').style.height = `${Math.max(20, (ktTotal / 18) * 300)}px`;
-            document.getElementById('bar-visual-verbal').style.height = vTotal > 0 ? `${(scores.v_verbal / vTotal) * 100}%` : "0%";
-            document.getElementById('bar-visual-spatial').style.height = vTotal > 0 ? `${(scores.v_spatial / vTotal) * 100}%` : "0%";
-            document.getElementById('bar-kinesthetic').style.height = ktTotal > 0 ? `${(scores.kinesthetic / ktTotal) * 100}%` : "0%";
-            document.getElementById('bar-tactile').style.height = ktTotal > 0 ? `${(scores.tactile / ktTotal) * 100}%` : "0%";
+            document.getElementById('display-name').innerText = userName;
+            
+            const vTotal = scores.v_verbal + scores.v_spatial;
+            const ktTotal = scores.kinesthetic + scores.tactile;
+            const aTotal = scores.auditory;
+
+            document.getElementById('tower-auditory').style.height = `${Math.max(30, (aTotal / 16) * 280)}px`;
+            document.getElementById('tower-visual').style.height = `${Math.max(30, (vTotal / 16) * 280)}px`;
+            document.getElementById('tower-kinesthetic').style.height = `${Math.max(30, (ktTotal / 16) * 280)}px`;
+            
+            document.getElementById('bar-visual-verbal').style.height = vTotal > 0 ? `${(scores.v_verbal/vTotal)*100}%` : "0%";
+            document.getElementById('bar-visual-spatial').style.height = vTotal > 0 ? `${(scores.v_spatial/vTotal)*100}%` : "0%";
+            document.getElementById('bar-kinesthetic').style.height = ktTotal > 0 ? `${(scores.kinesthetic/ktTotal)*100}%` : "0%";
+            document.getElementById('bar-tactile').style.height = ktTotal > 0 ? `${(scores.tactile/ktTotal)*100}%` : "0%";
+
             document.getElementById('score-auditory').innerText = aTotal;
             document.getElementById('score-visual').innerText = vTotal;
             document.getElementById('score-kine').innerText = ktTotal;
+
             const totals = { "שמיעתי": aTotal, "חזותי": vTotal, "תנועתי-מגעי": ktTotal };
             const winner = Object.keys(totals).reduce((a, b) => totals[a] > totals[b] ? a : b);
             document.getElementById('top-style-name').innerText = winner;
-            const waText = encodeURIComponent(`היי משה, סיימתי את מבדק סגנונות הלמידה! התוצאות שלי: חזותי: ${vTotal}, שמיעתי: ${aTotal}, תנועתי/מגעי: ${ktTotal}. הסגנון הדומיננטי שלי: ${winner}. אשמח לייעוץ!`);
+
+            let desc = "";
+            if(winner === "שמיעתי") desc = "המוח שלך קולט הכי טוב דרך הקשבה ודיבור. את/ה זוכר/ת טוב יותר מה נאמר מאשר מה שנכתב. כדאי להשתמש בספרים קוליים, דיונים והקלטת החומר.";
+            else if(winner === "חזותי") desc = "העיניים הן השער שלך לידע. את/ה זקוק/ה לתמונות, צבעים ודפים מאורגנים כדי להבין ולזכור. שימוש במפות חשיבה ומרקרים יעשה פלאים.";
+            else desc = "הלמידה שלך עוברת דרך הגוף. את/ה חייב/ת לגעת, לזוז ולהתנסות כדי שהמידע יישמר. למידה תוך כדי תנועה או שימוש בידיים היא המפתח להצלחה שלך.";
+            document.getElementById('top-style-desc').innerText = desc;
+
+            const waText = encodeURIComponent(`היי משה, אני ${userName}, סיימתי את מבדק סגנונות הלמידה באתר!
+התוצאות שלי הן:
+🎧 שמיעתי: ${aTotal}
+🖼️ חזותי: ${vTotal} (מילולי: ${scores.v_verbal}, מרחבי: ${scores.v_spatial})
+🏃 תנועתי-מגעי: ${ktTotal} (תנועתי: ${scores.kinesthetic}, מגעי: ${scores.tactile})
+💎 הסגנון המוביל: ${winner}
+אשמח להתייעץ איתך!`);
+            
             document.getElementById('wa-button').href = `https://wa.me/972542347839?text=${waText}`;
+        }
+
+        function downloadImage() {
+            const area = document.getElementById('capture-area');
+            html2canvas(area).then(canvas => {
+                const link = document.createElement('a');
+                link.download = `Results-${userName}.png`;
+                link.href = canvas.toDataURL();
+                link.click();
+            });
         }
     </script>
 </body>
