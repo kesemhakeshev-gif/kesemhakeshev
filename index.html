@@ -16,12 +16,7 @@
         #mobile-menu { display: none; }
         #mobile-menu.active { display: block; }
 
-        .check-list li::before {
-            content: "✓";
-            color: #10b981;
-            font-weight: 900;
-            margin-left: 10px;
-        }
+        .magic-bg { background: radial-gradient(circle at top right, #fff7ed 0%, #ffffff 100%); }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -33,13 +28,13 @@
                 <div class="text-xl md:text-2xl font-black text-blue-600">קסם הקשב</div>
             </div>
             
-            <div class="hidden lg:flex space-x-reverse space-x-6 items-center font-bold">
+            <div class="hidden lg:flex space-x-reverse space-x-6 items-center font-bold text-sm">
                 <a href="about.html" class="hover:text-blue-500 transition">מי אני?</a>
                 <a href="book.html" class="hover:text-blue-500 transition">הספר</a>
-                <a href="task-magic.html" class="text-blue-600 hover:text-blue-800 transition font-black">כלים וקסמים ✨</a>
-                <a href="videos.html" class="hover:text-blue-500 transition">סרטונים וטיפים</a>
+                <a href="#tools" class="hover:text-blue-500 transition">כלים וקסמים ✨</a>
+                <a href="videos.html" class="hover:text-blue-500 transition">סרטונים</a>
                 <a href="articles.html" class="hover:text-blue-500 transition">מאמרים</a>
-                <a href="questionnaire.html" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg font-black transition shadow-md">שאלון ADHD</a>
+                <a href="https://wa.me/972542347839" class="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded-full font-black transition shadow-md">ליווי אישי</a>
             </div>
 
             <button id="menu-toggle" class="lg:hidden text-blue-600 focus:outline-none">
@@ -50,11 +45,9 @@
         <div id="mobile-menu" class="lg:hidden bg-blue-50 border-t px-6 py-6 space-y-4 shadow-inner font-bold text-right">
             <a href="about.html" class="block py-2 text-gray-700">מי אני?</a>
             <a href="book.html" class="block text-blue-600 py-2">הספר "קסם וקשב"</a>
-            <a href="task-magic.html" class="block text-blue-700 py-2 font-black">כלים וקסמים ✨</a>
+            <a href="#tools" class="block text-blue-700 py-2">כלים וקסמים ✨</a>
             <a href="videos.html" class="block text-gray-700 py-2">סרטונים וטיפים</a>
-            <a href="articles.html" class="block text-gray-700 py-2">כל המאמרים</a>
-            <a href="learning-style.html" class="block text-gray-700 py-2">איך המוח שלי לומד?</a>
-            <a href="questionnaire.html" class="block text-orange-500 py-2 font-black">שאלון ADHD</a>
+            <a href="articles.html" class="block text-gray-700 py-2">מאמרים</a>
             <a href="https://wa.me/972542347839" class="block text-green-600 py-2 font-black">דברו איתי בוואטסאפ</a>
         </div>
     </nav>
@@ -63,14 +56,81 @@
         <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
             <div class="md:w-1/2 text-center md:text-right">
                 <h1 class="text-4xl md:text-6xl font-black mb-6 leading-tight italic">להפוך את הפרעת הקשב לקסם</h1>
-                <p class="text-lg md:text-xl mb-10 opacity-90 font-light max-w-xl">משה מדינה - מומחה ADHD, סופר ויוצר "קסם הקשב". המוח שלכם לא מקולקל - הוא פשוט בנוי אחרת.</p>
+                <p class="text-lg md:text-xl mb-10 opacity-90 font-light max-w-xl leading-relaxed">משה מדינה - מומחה ADHD, סופר ויוצר "קסם הקשב". המוח שלכם לא מקולקל - הוא פשוט בנוי אחרת.</p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start font-bold">
                     <a href="videos.html" class="bg-orange-500 hover:bg-orange-600 px-10 py-4 rounded-full shadow-xl transition text-center text-lg">צפו בסרטונים ←</a>
-                    <a href="task-magic.html" class="bg-white/10 hover:bg-white/20 border-2 border-white text-white px-10 py-4 rounded-full transition text-center text-lg">נסו את קוסם המשימות ✨</a>
+                    <a href="#tools" class="bg-white/10 hover:bg-white/20 border-2 border-white text-white px-10 py-4 rounded-full transition text-center text-lg">למעבדת הכלים</a>
                 </div>
             </div>
             <div class="md:w-1/2 flex justify-center mt-12 md:mt-0">
                 <img src="moshe-profile.jpeg" class="rounded-full w-56 h-56 md:w-72 md:h-72 object-cover border-8 border-white shadow-2xl">
+            </div>
+        </div>
+    </section>
+
+    <section id="tools" class="py-20 bg-white text-right">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-5xl font-black mb-4 text-blue-900 italic">המעבדה של קסם הקשב 🧪</h2>
+            <p class="text-lg text-gray-500 mb-16 max-w-2xl mx-auto italic">כלים אינטראקטיביים שיעזרו לכם להבין את המוח שלכם ולהפוך את הבלאגן לסדר.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <div class="bg-blue-50 p-10 rounded-[3rem] shadow-sm border-2 border-transparent hover:border-blue-400 transition card-hover flex flex-col items-center">
+                    <div class="text-6xl mb-6">🪄</div>
+                    <h3 class="text-2xl font-black text-blue-900 mb-4">קוסם המשימות</h3>
+                    <p class="text-gray-600 mb-8 text-sm leading-relaxed">הכלי שיהפוך את הבלאגן בראש לרשימת צעדים קטנים של 2 דקות. כולל טיימרים ומערכת ניקוד.</p>
+                    <a href="task-magic.html" class="mt-auto bg-blue-600 text-white px-10 py-4 rounded-full font-black shadow-md hover:scale-105 transition">להפוך בלאגן לקסם ✨</a>
+                </div>
+
+                <div class="bg-orange-50 p-10 rounded-[3rem] shadow-sm border-2 border-transparent hover:border-orange-400 transition card-hover flex flex-col items-center">
+                    <div class="text-6xl mb-6">🧠</div>
+                    <h3 class="text-2xl font-black text-blue-900 mb-4">איך אני לומד?</h3>
+                    <p class="text-gray-600 mb-8 text-sm leading-relaxed">מבדק עומק לגלוי סגנון הלמידה האישי שלכם. חזותי? שמיעתי? או תנועתי? בואו נגלה מה עובד בשבילכם.</p>
+                    <a href="learning-style.html" class="mt-auto bg-orange-500 text-white px-10 py-4 rounded-full font-black shadow-md hover:scale-105 transition">למבדק המלא ←</a>
+                </div>
+
+                <div class="bg-purple-50 p-10 rounded-[3rem] shadow-sm border-2 border-transparent hover:border-purple-400 transition card-hover flex flex-col items-center">
+                    <div class="text-6xl mb-6">📝</div>
+                    <h3 class="text-2xl font-black text-blue-900 mb-4">שאלון ADHD</h3>
+                    <p class="text-gray-600 mb-8 text-sm leading-relaxed">בדיקה עצמית ראשונית להבנת מאפייני הקשב שלכם. כלי מקצועי לשימוש אישי להורים ולמבוגרים.</p>
+                    <a href="questionnaire.html" class="mt-auto bg-purple-600 text-white px-10 py-4 rounded-full font-black shadow-md hover:scale-105 transition">להתחלת השאלון ←</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="magic-partner" class="py-20 magic-bg text-right">
+        <div class="container mx-auto px-6">
+            <div class="max-w-5xl mx-auto bg-white rounded-[3.5rem] shadow-2xl overflow-hidden flex flex-col md:flex-row border border-orange-100">
+                <div class="p-10 md:p-16 flex-1">
+                    <div class="inline-block bg-orange-100 text-orange-600 px-4 py-1 rounded-full text-xs font-black mb-6 uppercase tracking-wider">פתרון אמיתי לדחיינות ✨</div>
+                    <h2 class="text-3xl md:text-5xl font-black text-blue-900 mb-8 italic leading-tight">נמאס לכם להגיד "מחר"? בואו נסיים עם זה היום.</h2>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        מכירים את המשימה הזו שיושבת לכם על הראש שבועות? הכביסה שצריך לקפל, הדו"ח שצריך לכתוב, או המחסן שצריך לסדר? 
+                        <br><br>
+                        לפעמים כל מה שצריך זה **שותף למחויבות**. מישהו שיחכה לתמונה של "לפני ואחרי", שיפעיל איתכם טיימר וייתן את הדחיפה הקטנה כשהאנרגיה יורדת. 
+                    </p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10 font-bold text-blue-800">
+                        <div class="flex items-center gap-2"><span>🚀</span> ליווי אישי בוואטסאפ</div>
+                        <div class="flex items-center gap-2"><span>📸</span> צילומי "לפני ואחרי"</div>
+                        <div class="flex items-center gap-2"><span>⏱️</span> ניהול זמנים משותף</div>
+                        <div class="flex items-center gap-2"><span>❤️</span> בלי שיפוטיות, רק עשייה</div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row items-center gap-6">
+                        <a href="https://wa.me/972542347839?text=%D7%94%D7%99%D7%99%20%D7%9E%D7%A9%D7%94%2C%20%D7%A8%D7%90%D7%99%D7%AA%D7%99%20%D7%90%D7%AA%20%D7%94%D7%A9%D7%99%D7%A8%D7%95%D7%AA%20%D7%A9%D7%9C%20%D7%A9%D7%95%D7%A2%D7%AA%D7%A3%20%D7%9C%D7%A7%D7%A1%D7%9D%20-%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%93%D7%91%D7%A8%21" 
+                           class="bg-blue-600 text-white font-black py-5 px-10 rounded-[2rem] text-xl hover:bg-blue-700 transition shadow-xl w-full sm:w-auto text-center">
+                            אני רוצה שותף לקסם ←
+                        </a>
+                        <p class="text-xs text-gray-400 italic leading-tight">
+                            * השקעה סמלית במחויבות שלכם<br>(פרטים ותמחור בשיחה אישית)
+                        </p>
+                    </div>
+                </div>
+                <div class="md:w-1/3 bg-orange-500 flex items-center justify-center p-12 relative">
+                    <div class="relative z-10 text-center text-white">
+                        <div class="text-9xl mb-6 drop-shadow-lg">🤝</div>
+                        <div class="text-3xl font-black italic">ביחד זה קורה.</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -94,40 +154,8 @@
                     <p class="text-lg text-gray-700 mb-8 leading-relaxed">סיפור מרגש לילדים ולהורים שמפגיש אתכם עם "הקשב" שלכם – ומלמד איך לחיות איתו בשלום ובאהבה.</p>
                     <div class="flex flex-col gap-4">
                         <a href="https://wa.me/972542347839?text=%D7%94%D7%99%D7%99%20%D7%9E%D7%A9%D7%94%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A8%D7%9B%D7%95%D7%A9%20%D7%90%D7%AA%20%D7%94%D7%A1%D7%A4%D7%A8%20%27%D7%A7%D7%A1%D7%9D%20%D7%95%D7%A7%D7%A9%D7%91%27" class="bg-blue-600 text-white font-black py-4 px-6 rounded-2xl hover:bg-blue-700 shadow-xl transition text-center text-xl">לרכישה מהירה בוואטסאפ ←</a>
-                        <a href="book.html" class="bg-white border-2 border-blue-600 text-blue-600 font-black py-4 px-6 rounded-2xl hover:bg-blue-50 transition text-center text-xl italic">למידע נוסף וטעימה מהספר</a>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="tools" class="py-20 bg-white text-right">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-5xl font-black mb-4 text-blue-900 italic">המעבדה של קסם הקשב 🧪</h2>
-            <p class="text-lg text-gray-500 mb-16 max-w-2xl mx-auto">כלים אינטראקטיביים שיעזרו לכם להבין את המוח שלכם ולהפוך את הבלאגן לסדר דופמינרגי.</p>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                
-                <div class="bg-blue-50 p-10 rounded-[3rem] shadow-sm border-2 border-transparent hover:border-blue-400 transition card-hover flex flex-col items-center">
-                    <div class="text-6xl mb-6">🪄</div>
-                    <h3 class="text-2xl font-black text-blue-900 mb-4 italic">קוסם המשימות</h3>
-                    <p class="text-gray-600 mb-8 text-sm leading-relaxed">הכלי שיהפוך את הבלאגן בראש לרשימת צעדים קטנים של 2 דקות. כולל טיימרים, יומן חודשי ומערכת ניקוד.</p>
-                    <a href="task-magic.html" class="mt-auto bg-blue-600 text-white px-10 py-4 rounded-full font-black shadow-md hover:scale-105 transition">להפוך בלאגן לקסם ✨</a>
-                </div>
-
-                <div class="bg-orange-50 p-10 rounded-[3rem] shadow-sm border-2 border-transparent hover:border-orange-400 transition card-hover flex flex-col items-center">
-                    <div class="text-6xl mb-6">🧠</div>
-                    <h3 class="text-2xl font-black text-blue-900 mb-4 italic">איך אני לומד?</h3>
-                    <p class="text-gray-600 mb-8 text-sm leading-relaxed">מבדק עומק לגלוי סגנון הלמידה האישי שלכם. חזותי? שמיעתי? או תנועתי? בואו נגלה מה עובד בשבילכם.</p>
-                    <a href="learning-style.html" class="mt-auto bg-orange-500 text-white px-10 py-4 rounded-full font-black shadow-md hover:scale-105 transition">למבדק המלא ←</a>
-                </div>
-
-                <div class="bg-purple-50 p-10 rounded-[3rem] shadow-sm border-2 border-transparent hover:border-purple-400 transition card-hover flex flex-col items-center">
-                    <div class="text-6xl mb-6">📝</div>
-                    <h3 class="text-2xl font-black text-blue-900 mb-4 italic">שאלון ADHD</h3>
-                    <p class="text-gray-600 mb-8 text-sm leading-relaxed">בדיקה עצמית ראשונית להבנת מאפייני הקשב שלכם. כלי מקצועי לשימוש אישי להורים ולמבוגרים.</p>
-                    <a href="questionnaire.html" class="mt-auto bg-purple-600 text-white px-10 py-4 rounded-full font-black shadow-md hover:scale-105 transition">להתחלת השאלון ←</a>
-                </div>
-
             </div>
         </div>
     </section>
@@ -143,7 +171,7 @@
         </div>
     </section>
 
-    <section id="articles-preview" class="py-20 bg-white text-right">
+    <section id="articles-preview" class="py-20 bg-white text-right border-t">
         <div class="container mx-auto px-6">
             <h2 class="text-4xl font-black text-center mb-16 text-blue-900">תובנות מהבלוג</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
@@ -182,12 +210,12 @@
         <div class="container mx-auto px-6">
             <img src="logo-1.jpeg" class="h-16 w-16 md:h-20 md:w-20 rounded-full mx-auto mb-6 object-cover border-2 border-white/20">
             <div class="text-3xl font-black mb-2 italic">קסם הקשב</div>
-            <p class="mb-8 opacity-50 font-heebo">משה מדינה: 054-2347839</p>
+            <p class="mb-8 opacity-50">משה מדינה: 054-2347839</p>
             <div class="flex justify-center gap-10 mb-8 font-bold">
-                 <a href="https://vt.tiktok.com/ZSu9RXUXp/" target="_blank" class="hover:text-blue-400 transition text-lg font-heebo">TikTok</a>
-                 <a href="https://wa.me/972542347839" target="_blank" class="hover:text-green-400 transition text-lg font-heebo">WhatsApp</a>
+                 <a href="https://vt.tiktok.com/ZSu9RXUXp/" target="_blank" class="hover:text-blue-400 transition text-lg">TikTok</a>
+                 <a href="https://wa.me/972542347839" target="_blank" class="hover:text-green-400 transition text-lg">WhatsApp</a>
             </div>
-            <p class="text-xs opacity-30 font-heebo">© 2026 קסם הקשב - משה מדינה | כל הזכויות שמורות</p>
+            <p class="text-xs opacity-30">© 2026 קסם הקשב - משה מדינה | כל הזכויות שמורות</p>
         </div>
     </footer>
 
