@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>קוסם המשימות | משה מדינה</title>
+    <title>קוסם המשימות | קסם הקשב</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -11,27 +11,21 @@
         .tab-content { display: none; }
         .tab-content.active { display: block; animation: fadeIn 0.4s ease; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .bubble { animation: float 3s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-15px); } }
-        .nav-item.active { color: #2563eb; font-weight: 900; transform: scale(1.1); }
         .priority-urgent { border-right: 8px solid #ef4444; background: #fef2f2; }
         .priority-important { border-right: 8px solid #f59e0b; background: #fffbeb; }
         .priority-schedule { border-right: 8px solid #3b82f6; background: #eff6ff; }
+        .day-cell { aspect-ratio: 1; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 11px; background: #fff; cursor: pointer; }
         .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
-        .day-cell { aspect-ratio: 1; border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-size: 11px; background: #fff; cursor: pointer; transition: all 0.2s; }
-        .day-cell:hover { background: #e0f2fe; }
     </style>
 </head>
 <body class="text-right">
 
-    <nav class="bg-white/90 backdrop-blur-md shadow-sm p-4 sticky top-0 z-50 flex justify-between items-center">
+    <nav class="bg-white/80 backdrop-blur-md shadow-sm p-4 sticky top-0 z-50 flex justify-between items-center">
         <div class="flex items-center gap-2">
             <span class="text-2xl">🪄</span>
             <h1 class="text-xl font-black text-blue-600">קוסם המשימות</h1>
         </div>
-        <div class="bg-blue-600 text-white px-4 py-1 rounded-full font-black shadow-lg">
-            ✨ <span id="score-display">0</span>
-        </div>
+        <div class="bg-blue-600 text-white px-4 py-1 rounded-full font-black shadow-lg">✨ <span id="score-display">0</span></div>
     </nav>
 
     <main class="container mx-auto px-4 max-w-xl pt-6">
@@ -40,13 +34,13 @@
             <div class="bg-white p-8 rounded-[3rem] shadow-xl border-t-8 border-yellow-300">
                 <h2 class="text-2xl font-black mb-2 text-blue-900 italic">פנקס הבלאגן</h2>
                 <textarea id="taskInput" class="w-full h-64 p-5 bg-blue-50/30 rounded-3xl outline-none text-xl border-2 border-transparent focus:border-blue-200" placeholder="לסדר את המחסן...&#10;לקבוע תור לרופא..."></textarea>
-                <button onclick="startSorting()" class="w-full mt-6 bg-blue-600 text-white font-black py-5 rounded-2xl text-xl shadow-xl">התחל מיון קסום ✨</button>
+                <button onclick="startSorting()" class="w-full mt-6 bg-blue-600 text-white font-black py-5 rounded-2xl text-xl shadow-xl">סדר לי את הראש ✨</button>
             </div>
         </section>
 
         <section id="view-sort" class="tab-content text-center">
             <div class="bg-gradient-to-b from-blue-400 to-blue-600 p-8 rounded-[3rem] shadow-2xl min-h-[450px] flex flex-col justify-between items-center relative">
-                <div id="current-bubble" class="bubble bg-white p-10 rounded-full shadow-2xl max-w-[280px] min-w-[180px] aspect-square flex items-center justify-center font-extrabold text-blue-900 text-2xl leading-tight"></div>
+                <div id="current-bubble" class="bg-white p-10 rounded-full shadow-2xl max-w-[280px] min-w-[180px] aspect-square flex items-center justify-center font-extrabold text-blue-900 text-2xl leading-tight"></div>
                 <div class="w-full space-y-4">
                     <input type="date" id="datePicker" class="hidden">
                     <div class="grid grid-cols-3 gap-3">
@@ -59,59 +53,36 @@
         </section>
 
         <section id="view-list" class="tab-content">
-            <h2 class="text-2xl font-black text-blue-900 mb-6 italic">הסדר שלי 📋</h2>
+            <h2 class="text-2xl font-black text-blue-900 mb-6 italic">המשימות שלי 📋</h2>
             <div id="organized-tasks" class="space-y-6"></div>
         </section>
 
         <section id="view-calendar" class="tab-content">
             <div class="bg-white p-6 rounded-[2.5rem] shadow-xl">
-                <h2 class="text-xl font-black text-blue-900 mb-6 italic">היומן שלי 📅</h2>
-                <div class="calendar-grid text-center mb-4 text-[11px] text-gray-300 font-bold">
-                    <div>א</div><div>ב</div><div>ג</div><div>ד</div><div>ה</div><div>ו</div><div>ש</div>
-                </div>
+                <h2 class="text-xl font-black text-blue-900 mb-6 italic text-center">היומן שלי 📅</h2>
                 <div id="calendar-days" class="calendar-grid"></div>
-            </div>
-        </section>
-
-        <section id="view-social" class="tab-content">
-            <div class="bg-gray-900 text-white p-8 rounded-[3rem] shadow-2xl">
-                <h2 class="text-2xl font-black mb-8 text-orange-400 italic text-center">לוח הקוסמים 🏆</h2>
-                <div id="leaderboard" class="space-y-4"></div>
             </div>
         </section>
 
     </main>
 
-    <div id="day-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] hidden flex items-center justify-center p-6">
-        <div class="bg-white w-full max-w-sm rounded-[3rem] p-8 shadow-2xl">
-            <div class="flex justify-between items-center mb-6">
-                <h3 id="modal-date-title" class="text-xl font-black text-blue-900 italic"></h3>
-                <button onclick="closeDayModal()" class="text-2xl">✕</button>
-            </div>
-            <div id="day-task-list" class="space-y-4 max-h-80 overflow-y-auto mb-6"></div>
-            <p class="text-[10px] text-center opacity-40">לחצו על משימה כדי להזיז אותה או לסמן אותה</p>
-        </div>
-    </div>
-
-    <div id="subtask-modal" class="fixed inset-0 bg-black/70 backdrop-blur-md z-[70] hidden flex items-center justify-center p-6">
+    <div id="subtask-modal" class="fixed inset-0 bg-black/70 backdrop-blur-md z-[70] hidden flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-sm rounded-[3rem] p-8 shadow-2xl">
             <h3 id="modal-task-title" class="text-xl font-black text-blue-900 mb-4 leading-tight"></h3>
-            <div id="subtask-list" class="space-y-3 mb-6"></div>
-            <div class="flex gap-2 mb-6">
-                <input id="new-subtask" type="text" class="flex-1 bg-gray-100 rounded-2xl px-4 py-3 outline-none" placeholder="הצעד הבא...">
-                <button onclick="addSubTask()" class="bg-blue-600 text-white w-12 rounded-2xl font-black">+</button>
-            </div>
             
-            <div id="timer-container" class="hidden p-6 bg-blue-50 rounded-[2rem] text-center">
-                <div id="timer-clock" class="text-4xl font-black text-blue-600 mb-4">02:00</div>
-                <div id="timer-actions" class="hidden flex flex-col gap-2">
-                    <p class="text-sm font-bold text-red-500 mb-2">הזמן נגמר! מה עושים?</p>
-                    <button onclick="addTime(5)" class="bg-blue-600 text-white py-2 rounded-xl text-xs font-bold">עוד 5 דקות של קסם</button>
-                    <button onclick="breakFurther()" class="bg-amber-400 text-white py-2 rounded-xl text-xs font-bold">זה גדול עליי, בוא נפרק עוד</button>
-                    <a id="help-moshe" href="#" target="_blank" class="bg-green-500 text-white py-2 rounded-xl text-xs font-bold">צריך עזרה ממשה 🙋‍♂️</a>
-                </div>
+            <div id="subtask-list" class="space-y-3 mb-6 max-h-60 overflow-y-auto"></div>
+            
+            <div class="bg-gray-50 p-4 rounded-2xl mb-4">
+                <input id="new-subtask" type="text" class="w-full bg-transparent outline-none font-bold text-blue-600" placeholder="הקלד שלב ולחץ Enter..." onkeypress="if(event.key === 'Enter') addSubTask()">
             </div>
-            <button onclick="closeSubtasks()" class="w-full mt-4 text-gray-400 text-xs underline">סגור חלון</button>
+
+            <div id="timer-box" class="hidden p-6 bg-blue-600 rounded-[2rem] text-center text-white shadow-inner">
+                <div id="timer-clock" class="text-4xl font-black mb-2">00:00</div>
+                <div id="timer-label" class="text-[10px] opacity-80 mb-4">זמן עבודה על השלב הנוכחי</div>
+                <button id="timer-complete-btn" class="bg-white text-blue-600 px-6 py-2 rounded-xl font-black text-sm">סיימתי את השלב! ✅</button>
+            </div>
+
+            <button onclick="closeSubtasks()" class="w-full mt-4 text-gray-400 text-xs underline">חזרה לרשימה</button>
         </div>
     </div>
 
@@ -119,7 +90,6 @@
         <button onclick="switchTab('dump', this)" class="nav-item active flex flex-col items-center gap-1"><span class="text-xl">📝</span><span class="text-[10px] font-bold">פנקס</span></button>
         <button onclick="switchTab('list', this)" class="nav-item flex flex-col items-center gap-1"><span class="text-xl">📋</span><span class="text-[10px] font-bold">משימות</span></button>
         <button onclick="switchTab('calendar', this)" class="nav-item flex flex-col items-center gap-1"><span class="text-xl">📅</span><span class="text-[10px] font-bold">יומן</span></button>
-        <button onclick="switchTab('social', this)" class="nav-item flex flex-col items-center gap-1"><span class="text-xl">🌍</span><span class="text-[10px] font-bold">קהילה</span></button>
     </nav>
 
     <script>
@@ -127,8 +97,9 @@
         let tasks = JSON.parse(localStorage.getItem('k_tasks')) || [];
         let sortingQueue = [];
         let activeTaskId = null;
+        let activeSubId = null;
+        let startTime = null;
         let timerInterval = null;
-        let timeLeft = 0;
 
         function save() {
             localStorage.setItem('k_tasks', JSON.stringify(tasks));
@@ -150,8 +121,7 @@
             if(!val.trim()) return;
             sortingQueue = val.split('\n').filter(l => l.trim() !== "");
             document.getElementById('taskInput').value = "";
-            switchTab('sort');
-            nextBubble();
+            switchTab('sort'); nextBubble();
         }
 
         function nextBubble() {
@@ -160,10 +130,9 @@
         }
 
         function triggerDatePicker() {
-            const picker = document.getElementById('datePicker');
-            picker.classList.remove('hidden');
-            picker.showPicker();
-            picker.onchange = () => { assignCategory('schedule', picker.value); picker.classList.add('hidden'); };
+            const p = document.getElementById('datePicker');
+            p.classList.remove('hidden'); p.showPicker();
+            p.onchange = () => { assignCategory('schedule', p.value); p.classList.add('hidden'); };
         }
 
         function assignCategory(cat, date = null) {
@@ -182,35 +151,37 @@
                     html += `<h3 class="text-xs font-bold text-gray-400 mt-4 mb-2">${title}</h3>`;
                     catTasks.forEach(t => {
                         html += `<div class="p-5 rounded-[2rem] shadow-md flex justify-between bg-white border-r-8 ${key==='urgent'?'border-red-500':key==='important'?'border-amber-400':'border-blue-400'}">
-                            <div onclick="openSubtasks(${t.id})" class="flex-1">
+                            <div onclick="openSubtasks(${t.id})" class="flex-1 cursor-pointer">
                                 <p class="font-bold text-blue-900">${t.text}</p>
-                                <p class="text-[10px] opacity-40">${t.subtasks.length} צעדים</p>
+                                <p class="text-[10px] opacity-40">${t.subtasks.filter(s=>s.completed).length}/${t.subtasks.length} שלבים הושלמו</p>
                             </div>
-                            <button onclick="completeTask(${t.id})" class="text-2xl">⭕</button>
+                            <button onclick="completeMainTask(${t.id})" class="text-2xl">⭕</button>
                         </div>`;
                     });
                 }
             }
-            container.innerHTML = html || "<p class='text-center opacity-30 py-10'>הכל נקי! זמן לשפוך משימות.</p>";
+            container.innerHTML = html || "<p class='text-center opacity-30 py-10'>הכל נקי!</p>";
         }
 
         function openSubtasks(id) {
             activeTaskId = id;
             const task = tasks.find(t => t.id === id);
             document.getElementById('modal-task-title').innerText = task.text;
-            document.getElementById('help-moshe').href = `https://wa.me/972542347839?text=היי משה, אני צריך עזרה בליווי של המשימה: ${encodeURIComponent(task.text)}`;
             renderSubtasks();
             document.getElementById('subtask-modal').classList.remove('hidden');
+            document.getElementById('new-subtask').focus();
         }
 
         function renderSubtasks() {
             const task = tasks.find(t => t.id === activeTaskId);
-            document.getElementById('subtask-list').innerHTML = task.subtasks.map(s => `
-                <div class="flex justify-between items-center p-4 bg-gray-50 rounded-2xl ${s.completed ? 'opacity-40' : ''}">
-                    <span class="text-sm font-bold">${s.text}</span>
-                    <div class="flex gap-3">
-                        ${!s.completed ? `<button onclick="startTimer()" class="text-blue-500 font-black text-xs">התחל</button>` : '✅'}
+            const container = document.getElementById('subtask-list');
+            container.innerHTML = task.subtasks.map(s => `
+                <div class="flex justify-between items-center p-4 rounded-2xl ${s.completed ? 'bg-green-50 opacity-60' : 'bg-gray-50'}">
+                    <div>
+                        <p class="text-sm font-bold">${s.text}</p>
+                        ${s.timeTaken ? `<p class="text-[9px] text-green-600 font-black">זמן: ${s.timeTaken}</p>` : ''}
                     </div>
+                    ${!s.completed ? `<button onclick="initiateTimer(${s.id})" class="bg-blue-600 text-white text-[10px] px-3 py-1 rounded-lg font-black">התחל ▶️</button>` : '✅'}
                 </div>
             `).join('');
         }
@@ -218,29 +189,49 @@
         function addSubTask() {
             const input = document.getElementById('new-subtask');
             if(!input.value.trim()) return;
-            tasks.find(t => t.id === activeTaskId).subtasks.push({ id: Date.now(), text: input.value, completed: false });
-            input.value = ""; renderSubtasks(); save();
+            const task = tasks.find(t => t.id === activeTaskId);
+            task.subtasks.push({ id: Date.now(), text: input.value, completed: false, timeTaken: null });
+            input.value = ""; input.focus();
+            renderSubtasks(); save();
         }
 
-        function startTimer() {
-            document.getElementById('timer-container').classList.remove('hidden');
-            document.getElementById('timer-actions').classList.add('hidden');
-            timeLeft = 120;
+        function initiateTimer(subId) {
+            activeSubId = subId;
+            startTime = Date.now();
+            document.getElementById('timer-box').classList.remove('hidden');
+            document.getElementById('timer-complete-btn').onclick = () => finishSubTask(subId);
+            
             if(timerInterval) clearInterval(timerInterval);
             timerInterval = setInterval(() => {
-                let m = Math.floor(timeLeft / 60), s = timeLeft % 60;
-                document.getElementById('timer-clock').innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
-                if(timeLeft <= 0) { clearInterval(timerInterval); document.getElementById('timer-actions').classList.remove('hidden'); }
-                timeLeft--;
+                const elapsed = Math.floor((Date.now() - startTime) / 1000);
+                const m = Math.floor(elapsed / 60), s = elapsed % 60;
+                document.getElementById('timer-clock').innerText = `${m < 10 ? '0' : ''}${m}:${s < 10 ? '0' : ''}${s}`;
             }, 1000);
         }
 
-        function addTime(mins) { timeLeft = mins * 60; startTimer(); }
-        function breakFurther() { alert("אוקי, בוא נוסיף עוד 3 צעדים קטנטנים למשימה הזו."); }
+        function finishSubTask(subId) {
+            clearInterval(timerInterval);
+            const task = tasks.find(t => t.id === activeTaskId);
+            const sub = task.subtasks.find(s => s.id === subId);
+            
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const m = Math.floor(elapsed / 60), s = elapsed % 60;
+            sub.timeTaken = `${m} דק' ו-${s} שנ'`;
+            sub.completed = true;
+            
+            score += 30;
+            document.getElementById('timer-box').classList.add('hidden');
+            save(); renderSubtasks();
+            
+            // Auto-focus next subtask if exists
+            const next = task.subtasks.find(s => !s.completed);
+            if(next) { initiateTimer(next.id); } 
+            else { alert("כל הכבוד! סיימת את כל השלבים של המשימה!"); }
+        }
 
-        function completeTask(id) {
+        function completeMainTask(id) {
             tasks.find(t => t.id === id).completed = true;
-            score += 100; save(); renderTasks();
+            score += 150; save(); renderTasks();
         }
 
         function renderCalendar() {
@@ -250,33 +241,13 @@
                 const dateStr = `2026-04-${i < 10 ? '0'+i : i}`;
                 const dayTasks = tasks.filter(t => t.date === dateStr);
                 const icons = dayTasks.map(t => t.completed ? '⭐' : '▲').join('');
-                container.innerHTML += `<div onclick="openDayModal('${dateStr}')" class="day-cell ${dayTasks.length > 0 ? 'border-2 border-blue-200' : ''}">
+                container.innerHTML += `<div class="day-cell border ${dayTasks.length > 0 ? 'border-blue-300 bg-blue-50' : 'border-gray-100'}">
                     <span class="opacity-30">${i}</span><div class="text-[8px]">${icons}</div></div>`;
             }
         }
 
-        function openDayModal(date) {
-            const dayTasks = tasks.filter(t => t.date === date);
-            document.getElementById('modal-date-title').innerText = date;
-            document.getElementById('day-task-list').innerHTML = dayTasks.map(t => `
-                <div class="p-4 bg-blue-50 rounded-2xl flex justify-between items-center">
-                    <span class="font-bold text-blue-900">${t.text}</span>
-                    <div class="flex gap-2">
-                        <button onclick="reschedule(${t.id})" class="text-xs bg-white px-2 py-1 rounded-lg shadow-sm">הזז</button>
-                        <button onclick="completeTask(${t.id}); closeDayModal();">✅</button>
-                    </div>
-                </div>
-            `).join('') || "<p class='text-center opacity-30'>אין משימות ליום זה</p>";
-            document.getElementById('day-modal').classList.remove('hidden');
-        }
-
-        function reschedule(id) {
-            const newDate = prompt("לאיזה תאריך להזיז? (YYYY-MM-DD)");
-            if(newDate) { tasks.find(t => t.id === id).date = newDate; save(); closeDayModal(); renderCalendar(); }
-        }
-
-        function closeDayModal() { document.getElementById('day-modal').classList.add('hidden'); }
         function closeSubtasks() { document.getElementById('subtask-modal').classList.add('hidden'); clearInterval(timerInterval); }
+        document.getElementById('score-display').innerText = score;
     </script>
 </body>
 </html>
