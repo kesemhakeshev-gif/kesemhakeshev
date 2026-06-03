@@ -3,113 +3,695 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>מאמרים ותובנות | קסם הקשב - משה מדינה</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <title>מאמרים | קסם הקשב – משה מדינה</title>
+    <meta name="description" content="תובנות, סיפורים וכלים פרקטיים על ADHD וקשב — מאת משה מדינה, קסם הקשב.">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Heebo', sans-serif; background-color: #f8fafc; }
-        .article-card { transition: all 0.3s ease; }
-        .article-card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        :root {
+            --navy: #0f1f3d;
+            --blue: #1d4ed8;
+            --blue-mid: #3b82f6;
+            --orange: #f97316;
+            --cream: #fafaf7;
+            --warm-gray: #f5f4f0;
+            --text: #1a1a2e;
+            --muted: #6b7280;
+            --white: #ffffff;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: var(--cream);
+            color: var(--text);
+            direction: rtl;
+            overflow-x: hidden;
+        }
+
+        /* ── NAV ── */
+        nav {
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 0.75rem 0;
+        }
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            text-decoration: none;
+        }
+        .nav-logo img {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--orange);
+        }
+        .nav-logo-text {
+            font-size: 1.35rem;
+            font-weight: 900;
+            color: var(--navy);
+            letter-spacing: -0.5px;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+            list-style: none;
+        }
+        .nav-links a {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-links a:hover { color: var(--blue); }
+        .nav-cta {
+            background: var(--orange);
+            color: white !important;
+            padding: 0.55rem 1.4rem;
+            border-radius: 999px;
+            font-weight: 800 !important;
+            font-size: 0.88rem !important;
+            transition: background 0.2s, transform 0.2s !important;
+        }
+        .nav-cta:hover { background: #ea6c0a !important; transform: translateY(-1px); }
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--navy);
+        }
+        .mobile-menu {
+            display: none;
+            background: white;
+            border-top: 1px solid #f0f0f0;
+            padding: 1.25rem 1.5rem 1.75rem;
+        }
+        .mobile-menu.open { display: block; }
+        .mobile-menu a {
+            display: block;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f5f5f5;
+            text-decoration: none;
+            font-weight: 600;
+            color: var(--text);
+        }
+        .mobile-menu a:last-child { border-bottom: none; }
+        .mobile-menu .m-cta {
+            margin-top: 1rem;
+            background: var(--orange);
+            color: white;
+            text-align: center;
+            padding: 0.85rem;
+            border-radius: 999px;
+            font-weight: 800;
+            border-bottom: none;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            background: var(--navy);
+            padding: 4.5rem 0 3.5rem;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: -5%;
+            width: 55%;
+            height: 150%;
+            background: radial-gradient(ellipse, rgba(249,115,22,0.13) 0%, transparent 65%);
+            pointer-events: none;
+        }
+        .hero-inner {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(249,115,22,0.15);
+            border: 1px solid rgba(249,115,22,0.4);
+            color: #fb923c;
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+        }
+        .hero-title {
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            font-weight: 900;
+            color: white;
+            line-height: 1.12;
+            letter-spacing: -1.2px;
+            margin-bottom: 1rem;
+        }
+        .hero-title span { color: var(--orange); }
+        .hero-sub {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.62);
+            line-height: 1.72;
+        }
+
+        /* ── FEATURED ARTICLE ── */
+        .featured-section {
+            padding: 4rem 0 2rem;
+        }
+        .featured-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .section-label {
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 1.25rem;
+            display: block;
+        }
+
+        /* featured card */
+        .featured-card {
+            background: white;
+            border-radius: 2rem;
+            overflow: hidden;
+            display: flex;
+            border: 1.5px solid rgba(0,0,0,0.05);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.07);
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .featured-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 50px rgba(0,0,0,0.1);
+        }
+        .featured-img {
+            width: 52%;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        .featured-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.35s;
+        }
+        .featured-card:hover .featured-img img { transform: scale(1.03); }
+        .featured-body {
+            flex: 1;
+            padding: 3rem 2.75rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .featured-tag {
+            display: inline-block;
+            background: var(--orange);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 0.25rem 0.7rem;
+            border-radius: 999px;
+            letter-spacing: 0.5px;
+            margin-bottom: 1rem;
+            width: fit-content;
+        }
+        .featured-title {
+            font-size: clamp(1.5rem, 2.5vw, 2.1rem);
+            font-weight: 900;
+            color: var(--navy);
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.85rem;
+        }
+        .featured-excerpt {
+            font-size: 1rem;
+            color: var(--muted);
+            line-height: 1.7;
+            font-style: italic;
+            margin-bottom: 1.75rem;
+            flex: 1;
+        }
+        .read-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: var(--blue);
+            transition: color 0.2s, gap 0.2s;
+        }
+        .featured-card:hover .read-link { color: var(--orange); gap: 0.55rem; }
+
+        /* ── GRID ── */
+        .grid-section {
+            padding: 2rem 0 5rem;
+        }
+        .grid-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .article-card {
+            background: white;
+            border-radius: 1.75rem;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1.5px solid rgba(0,0,0,0.05);
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+        }
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 40px rgba(0,0,0,0.09);
+            border-color: rgba(29,78,216,0.2);
+        }
+        .article-img-wrap {
+            overflow: hidden;
+            height: 192px;
+        }
+        .article-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        .article-card:hover .article-img-wrap img { transform: scale(1.04); }
+        .article-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .article-title {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--navy);
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+        .article-excerpt {
+            font-size: 0.87rem;
+            color: var(--muted);
+            line-height: 1.65;
+            font-style: italic;
+            flex: 1;
+            margin-bottom: 1.1rem;
+        }
+        .article-read {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: var(--blue);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: color 0.2s, gap 0.2s;
+        }
+        .article-card:hover .article-read { color: var(--orange); gap: 0.5rem; }
+
+        /* coming soon card */
+        .coming-card {
+            background: var(--warm-gray);
+            border-radius: 1.75rem;
+            border: 2px dashed rgba(29,78,216,0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            min-height: 280px;
+        }
+        .coming-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.6;
+        }
+        .coming-title {
+            font-size: 1rem;
+            font-weight: 900;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+            opacity: 0.7;
+        }
+        .coming-sub {
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* ── FINAL CTA ── */
+        .final-cta {
+            background: var(--orange);
+            padding: 4.5rem 0;
+            text-align: center;
+        }
+        .final-cta-inner {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        .final-cta h2 {
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            font-weight: 900;
+            color: white;
+            line-height: 1.2;
+            letter-spacing: -0.8px;
+            margin-bottom: 1rem;
+        }
+        .final-cta p {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.82);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+        .btn-white {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: white;
+            color: var(--orange);
+            font-weight: 900;
+            font-size: 1.05rem;
+            padding: 0.95rem 2.25rem;
+            border-radius: 999px;
+            text-decoration: none;
+            transition: all 0.22s;
+            box-shadow: 0 6px 24px rgba(0,0,0,0.12);
+        }
+        .btn-white:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,0,0,0.18); }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--navy);
+            color: white;
+            padding: 3.5rem 0 2rem;
+        }
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            text-align: center;
+        }
+        .footer-inner img {
+            width: 52px; height: 52px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255,255,255,0.12);
+            margin-bottom: 0.65rem;
+        }
+        .footer-brand { font-size: 1.3rem; font-weight: 900; margin-bottom: 0.25rem; }
+        .footer-phone { font-size: 0.82rem; color: rgba(255,255,255,0.35); margin-bottom: 1.5rem; }
+        .social-btns {
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+        .social-btns a {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            color: white;
+            text-decoration: none;
+            padding: 0.45rem 1rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+        }
+        .social-btns a:hover { opacity: 0.82; }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: rgba(255,255,255,0.45);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+        .footer-links a:hover { color: white; }
+        .footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.18); }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1024px) {
+            .articles-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .menu-btn { display: block; }
+            .featured-card { flex-direction: column; }
+            .featured-img { width: 100%; height: 220px; }
+            .featured-body { padding: 1.75rem; }
+            .articles-grid { grid-template-columns: 1fr; }
+        }
+
+        .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
     </style>
 </head>
-<body class="text-gray-800">
+<body>
 
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <img src="logo-1.jpeg" alt="לוגו" class="h-10 w-10 rounded-full object-cover border border-gray-100">
-                <a href="index.html" class="text-2xl font-black text-blue-600">קסם הקשב</a>
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">
+            <img src="logo-1.jpeg" alt="קסם הקשב">
+            <span class="nav-logo-text">קסם הקשב</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="about.html">מי אני?</a></li>
+            <li><a href="index.html#tools">כלים ✨</a></li>
+            <li><a href="videos.html">סרטונים</a></li>
+            <li><a href="articles.html" style="color:var(--orange);">מאמרים</a></li>
+            <li><a href="https://kesemhakeshev-gif.github.io/book001/" target="_blank">הספר</a></li>
+            <li><a href="https://wa.me/972542347839" class="nav-cta">ליווי אישי</a></li>
+        </ul>
+        <button class="menu-btn" id="menuBtn" aria-label="תפריט">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+                <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+        </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">עמוד הבית</a>
+        <a href="about.html">מי אני?</a>
+        <a href="index.html#tools">כלים וקסמים ✨</a>
+        <a href="videos.html">סרטונים</a>
+        <a href="articles.html">מאמרים</a>
+        <a href="https://kesemhakeshev-gif.github.io/book001/" target="_blank">הספר</a>
+        <a href="https://wa.me/972542347839" class="m-cta">דברו איתי בוואטסאפ 💬</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-badge">📚 בלוג · תובנות · כלים</div>
+        <h1 class="hero-title">בלוג <span>קסם הקשב</span></h1>
+        <p class="hero-sub">סיפורים, תובנות וכלים פרקטיים — לאנשים שהמוח שלהם עובד אחרת.</p>
+    </div>
+</section>
+
+<!-- FEATURED -->
+<section class="featured-section">
+    <div class="featured-inner">
+        <span class="section-label reveal">✦ מאמר מומלץ</span>
+        <a href="article-001.html" class="featured-card reveal">
+            <div class="featured-img">
+                <img src="mahamar-001.jpn.jpeg" alt="שיחה עם הקשב שלי">
             </div>
-            <a href="index.html" class="font-bold text-gray-400 hover:text-blue-600 transition font-heebo">← חזרה לבית</a>
-        </div>
-    </nav>
-
-    <header class="bg-blue-600 text-white py-16 md:py-24 text-center">
-        <div class="container mx-auto px-6">
-            <h1 class="text-4xl md:text-6xl font-black mb-6">בלוג קסם הקשב</h1>
-            <p class="text-xl opacity-90 max-w-2xl mx-auto font-light leading-relaxed">כל התובנות, הסיפורים והכלים הפרקטיים להתמודדות עם ADHD והפיכת הקושי למתנה.</p>
-        </div>
-    </header>
-
-    <section class="py-16 md:py-24">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                
-                <div class="bg-white rounded-[2rem] overflow-hidden shadow-lg border border-gray-100 flex flex-col article-card">
-                    <img src="mahamar-001.jpn.jpeg" class="h-56 w-full object-cover">
-                    <div class="p-8 flex-1 flex flex-col">
-                        <h3 class="text-2xl font-black mb-3 text-blue-800">שיחה עם הקשב שלי</h3>
-                        <p class="text-gray-600 mb-6 italic leading-relaxed flex-1">"למה זה קורה לי? למה אני לא יכול פשוט להיות... רגוע?"</p>
-                        <a href="article-001.html" class="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-full text-center hover:bg-blue-700 transition">לקריאת המאמר</a>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-[2rem] overflow-hidden shadow-lg border border-gray-100 flex flex-col article-card">
-                    <img src="mmr002.png" class="h-56 w-full object-cover">
-                    <div class="p-8 flex-1 flex flex-col">
-                        <h3 class="text-2xl font-black mb-3 text-blue-800">שקר וקשב</h3>
-                        <p class="text-gray-600 mb-6 italic leading-relaxed flex-1">"לא תכננתי לשקר. המוח שלי פשוט הגיב מהר מדי..."</p>
-                        <a href="article-002.html" class="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-full text-center hover:bg-blue-700 transition">לקריאת המאמר</a>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-[2rem] overflow-hidden shadow-lg border border-gray-100 flex flex-col article-card">
-                    <img src="mamr003.jpeg" class="h-56 w-full object-cover">
-                    <div class="p-8 flex-1 flex flex-col">
-                        <h3 class="text-2xl font-black mb-3 text-blue-800">למה אתה מתנצל?</h3>
-                        <p class="text-gray-600 mb-6 italic leading-relaxed flex-1">"זה לא שאין לך ביטחון, פשוט לא בטוח שמותר לך להיות עצמך."</p>
-                        <a href="article-003.html" class="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-full text-center hover:bg-blue-700 transition">לקריאת המאמר</a>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-[2rem] overflow-hidden shadow-lg border border-gray-100 flex flex-col article-card">
-                    <img src="mmr004.jpeg" class="h-56 w-full object-cover">
-                    <div class="p-8 flex-1 flex flex-col">
-                        <h3 class="text-2xl font-black mb-3 text-blue-800">למה אתה לא עונה?</h3>
-                        <p class="text-gray-600 mb-6 italic leading-relaxed flex-1">"הפער בין לדעת מה לומר לבין להקליד – זה כמו אוקיינוס."</p>
-                        <a href="article-004.html" class="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-full text-center hover:bg-blue-700 transition">לקריאת המאמר</a>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-[2rem] overflow-hidden shadow-lg border border-gray-100 flex flex-col article-card">
-                    <img src="mmr005.jpeg" class="h-56 w-full object-cover">
-                    <div class="p-8 flex-1 flex flex-col">
-                        <h3 class="text-2xl font-black mb-3 text-blue-800">איפה שמתי את זה?</h3>
-                        <p class="text-gray-600 mb-6 italic leading-relaxed flex-1">"זה לא שאתה לא זוכר, זה פשוט שהמוח שלך לא רשם."</p>
-                        <a href="article-005.html" class="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-full text-center hover:bg-blue-700 transition">לקריאת המאמר</a>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-[2rem] overflow-hidden shadow-lg border border-gray-100 flex flex-col article-card">
-                    <img src="mmr006.jpeg" class="h-56 w-full object-cover">
-                    <div class="p-8 flex-1 flex flex-col">
-                        <h3 class="text-2xl font-black mb-3 text-blue-800">למה לא עשית?</h3>
-                        <p class="text-gray-600 mb-6 italic leading-relaxed flex-1">"המוח שלך לא עובד על 'צריך', הוא עובד על 'רוצה'."</p>
-                        <a href="article-006.html" class="inline-block bg-blue-600 text-white font-bold py-3 px-8 rounded-full text-center hover:bg-blue-700 transition">לקריאת המאמר</a>
-                    </div>
-                </div>
-
-                <div class="bg-blue-50 border-4 border-dashed border-blue-200 rounded-[2rem] flex flex-col items-center justify-center p-10 text-center">
-                    <span class="text-5xl mb-4">✨</span>
-                    <h3 class="text-2xl font-black text-blue-900 mb-4 italic">עוד קסם בדרך...</h3>
-                    <p class="text-blue-700 leading-relaxed font-medium">המאמר הבא כבר נמצא בתהליך יצירה, כדי שתוכלו ליהנות ולקבל עוד כלים ותובנות לחיים עם קשב.</p>
-                    <p class="mt-4 text-sm text-blue-400 font-bold">המשיכו לעקוב!</p>
-                </div>
-
+            <div class="featured-body">
+                <span class="featured-tag">מאמר ראשון</span>
+                <h2 class="featured-title">שיחה עם הקשב שלי</h2>
+                <p class="featured-excerpt">"למה זה קורה לי? למה אני לא יכול פשוט להיות... רגוע?"</p>
+                <span class="read-link">לקריאת המאמר ←</span>
             </div>
-        </div>
-    </section>
+        </a>
+    </div>
+</section>
 
-    <footer class="py-16 bg-gray-900 text-white text-center">
-        <div class="container mx-auto px-6">
-            <img src="logo-1.jpeg" class="h-20 w-20 rounded-full mx-auto mb-6 object-cover border-2 border-white/20">
-            <div class="text-3xl font-black mb-4 font-heebo">קסם הקשב</div>
-            <div class="flex justify-center gap-10 mb-12">
-                 <a href="https://wa.me/972542347839" class="bg-green-600 hover:bg-green-700 px-8 py-3 rounded-full font-bold transition">בואו נדבר בוואטסאפ</a>
+<!-- GRID -->
+<section class="grid-section">
+    <div class="grid-inner">
+        <span class="section-label reveal">✦ כל המאמרים</span>
+        <div class="articles-grid">
+
+            <a href="article-002.html" class="article-card reveal">
+                <div class="article-img-wrap">
+                    <img src="mmr002.png" alt="שקר וקשב">
+                </div>
+                <div class="article-body">
+                    <div class="article-title">שקר וקשב</div>
+                    <p class="article-excerpt">"לא תכננתי לשקר. המוח שלי פשוט הגיב מהר מדי..."</p>
+                    <span class="article-read">קרא עוד ←</span>
+                </div>
+            </a>
+
+            <a href="article-003.html" class="article-card reveal">
+                <div class="article-img-wrap">
+                    <img src="mamr003.jpeg" alt="למה אתה מתנצל?">
+                </div>
+                <div class="article-body">
+                    <div class="article-title">למה אתה מתנצל?</div>
+                    <p class="article-excerpt">"זה לא שאין לך ביטחון, פשוט לא בטוח שמותר לך להיות עצמך."</p>
+                    <span class="article-read">קרא עוד ←</span>
+                </div>
+            </a>
+
+            <a href="article-004.html" class="article-card reveal">
+                <div class="article-img-wrap">
+                    <img src="mmr004.jpeg" alt="למה אתה לא עונה?">
+                </div>
+                <div class="article-body">
+                    <div class="article-title">למה אתה לא עונה?</div>
+                    <p class="article-excerpt">"הפער בין לדעת מה לומר לבין להקליד — זה כמו אוקיינוס."</p>
+                    <span class="article-read">קרא עוד ←</span>
+                </div>
+            </a>
+
+            <a href="article-005.html" class="article-card reveal">
+                <div class="article-img-wrap">
+                    <img src="mmr005.jpeg" alt="איפה שמתי את זה?">
+                </div>
+                <div class="article-body">
+                    <div class="article-title">איפה שמתי את זה?</div>
+                    <p class="article-excerpt">"זה לא שאתה לא זוכר, זה פשוט שהמוח שלך לא רשם."</p>
+                    <span class="article-read">קרא עוד ←</span>
+                </div>
+            </a>
+
+            <a href="article-006.html" class="article-card reveal">
+                <div class="article-img-wrap">
+                    <img src="mmr006.jpeg" alt="למה לא עשית?">
+                </div>
+                <div class="article-body">
+                    <div class="article-title">למה לא עשית?</div>
+                    <p class="article-excerpt">"המוח שלך לא עובד על 'צריך', הוא עובד על 'רוצה'."</p>
+                    <span class="article-read">קרא עוד ←</span>
+                </div>
+            </a>
+
+            <div class="coming-card reveal">
+                <div class="coming-icon">✨</div>
+                <div class="coming-title">עוד קסם בדרך...</div>
+                <p class="coming-sub">המאמר הבא כבר בתהליך יצירה.<br>המשיכו לעקוב!</p>
             </div>
-            <p class="text-sm opacity-30">© 2026 קסם הקשב - משה מדינה</p>
+
         </div>
-    </footer>
+    </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+    <div class="final-cta-inner reveal">
+        <h2>משהו נגע בך?</h2>
+        <p>אני כאן לשיחה — על מאמר, על שאלה, או סתם להגיד שגם אתם מכירים את התחושה.</p>
+        <a href="https://wa.me/972542347839?text=%D7%94%D7%99%D7%99%20%D7%9E%D7%A9%D7%94%2C%20%D7%A7%D7%A8%D7%90%D7%AA%D7%99%20%D7%90%D7%AA%20%D7%94%D7%91%D7%9C%D7%95%D7%92%20%D7%95%D7%A8%D7%A6%D7%99%D7%AA%D7%99%20%D7%9C%D7%A9%D7%AA%D7%A3..." class="btn-white">
+            דברו איתי בוואטסאפ ←
+        </a>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-inner">
+        <img src="logo-1.jpeg" alt="קסם הקשב">
+        <div class="footer-brand">קסם הקשב</div>
+        <div class="footer-phone">משה מדינה · 054-2347839</div>
+        <div class="social-btns">
+            <a href="https://wa.me/972542347839" target="_blank" style="background:#25D366;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.531 5.845L.057 23.486a.5.5 0 0 0 .609.61l5.701-1.474A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.693-.512-5.228-1.402l-.374-.22-3.883 1.004 1.028-3.773-.242-.389A9.96 9.96 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+                WhatsApp
+            </a>
+            <a href="https://www.instagram.com/kesemakeshev" target="_blank" style="background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+                Instagram
+            </a>
+            <a href="https://youtube.com/@kesemhakeshev" target="_blank" style="background:#FF0000;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+                YouTube
+            </a>
+            <a href="https://www.tiktok.com/@the.magic.of.adhd" target="_blank" style="background:#000;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+                TikTok
+            </a>
+            <a href="https://www.facebook.com/share/1ELkUrUjrx/" target="_blank" style="background:#1877F2;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="white"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                Facebook
+            </a>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">בית</a>
+            <a href="about.html">מי אני?</a>
+            <a href="https://kesemhakeshev-gif.github.io/book001/" target="_blank">הספר</a>
+            <a href="videos.html">סרטונים</a>
+            <a href="index.html#tools">כלים</a>
+        </div>
+        <div class="footer-copy">© 2026 קסם הקשב – משה מדינה | כל הזכויות שמורות</div>
+    </div>
+</footer>
+
+<script>
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    mobileMenu.querySelectorAll('a').forEach(a =>
+        a.addEventListener('click', () => mobileMenu.classList.remove('open'))
+    );
+
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => entry.target.classList.add('visible'), i * 70);
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => obs.observe(el));
+</script>
 
 </body>
 </html>
