@@ -312,7 +312,17 @@
         .hero-stat {
             display: flex;
             flex-direction: column;
+            max-width: 240px;
         }
+
+        .stat-link {
+            color: #fb923c;
+            text-decoration: none;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .stat-link:hover { text-decoration: underline; }
 
         .hero-stat strong {
             font-size: 1.7rem;
@@ -325,7 +335,8 @@
             font-size: 0.78rem;
             color: rgba(255,255,255,0.5);
             font-weight: 500;
-            margin-top: 0.2rem;
+            margin-top: 0.25rem;
+            line-height: 1.5;
         }
 
         .hero-stat-divider {
@@ -915,15 +926,14 @@
 <section class="hero">
     <div class="hero-inner">
         <div class="hero-content">
-            <div class="hero-badge">✨ מאמן קשב · סופר · יוצר תוכן</div>
+            <div class="hero-badge">✨ בואו איתי לגלות את העולם הקסום שנמצא בתוככם</div>
             <h1 class="hero-title">
                 להפוך את<br>
                 <span>הפרעת הקשב</span><br>
                 לקסם אמיתי
             </h1>
             <p class="hero-sub">
-                משה מדינה — מאמן אישי בהתמחות ADHD, סופר ויוצר תוכן.<br>
-                המוח שלכם לא מקולקל. הוא פשוט בנוי אחרת.
+                משה מדינה — מאמן אישי לחיים עם התמחות ב-ADHD, מרצה, סופר ויוצר תוכן.
             </p>
             <div class="hero-actions">
                 <a href="coaching.html" class="btn-primary">לליווי אישי ואימון קשב ←</a>
@@ -931,18 +941,18 @@
             </div>
             <div class="hero-stats">
                 <div class="hero-stat">
-                    <strong>1,000+</strong>
-                    <span>בקהילת הוואטסאפ</span>
+                    <strong>אלפי עוקבים</strong>
+                    <span>בקבוצות הוואטסאפ וברשתות · <a href="#social" class="stat-link">לתוכן ברשתות ←</a></span>
                 </div>
                 <div class="hero-stat-divider"></div>
                 <div class="hero-stat">
                     <strong>מאמן מוסמך</strong>
-                    <span>בהתמחות הפרעת קשב</span>
+                    <span>עם התמחות בהפרעת קשב</span>
                 </div>
                 <div class="hero-stat-divider"></div>
                 <div class="hero-stat">
                     <strong>"קסם וקשב"</strong>
-                    <span>הספר הראשון בסדרה</span>
+                    <span>ספר יסוד להבנת העולם הפנימי של ה-ADHD, הראשון בסדרה</span>
                 </div>
             </div>
         </div>
@@ -955,23 +965,28 @@
 <!-- COACHING – MAIN OFFER -->
 <section id="coaching">
     <div class="coaching-inner reveal">
-        <div class="coaching-tag">🤝 המוצר המרכזי</div>
+        <div class="coaching-tag">🤝 אימון אישי</div>
         <h2 class="coaching-title">
-            אתה יודע בדיוק מה אתה צריך לעשות.<br>
-            <span>ואתה עדיין לא עושה את זה.</span>
+            אתה יודע בדיוק מה אתה צריך לעשות<br>
+            <span>אבל עדיין לא עושה את זה.</span>
         </h2>
         <p class="coaching-sub">
-            זו לא עצלנות, וזה לא חוסר רצון. רוב מה שניסית עד היום נבנה באופן כללי — ולא עליך.
-            בליווי האישי אנחנו קודם מבינים איך אתה עובד, ורק אחר כך בונים דרך שמתאימה לחיים שלך בפועל.
+            זה מרגיש כמו דחיינות, עצלנות, חוסר עמוד שדרה, או אולי "אני פשוט לא בנוי לזה".
+            אולי אפילו ניסית כל מיני שיטות וטיפים, אבל זה לא עזר.
+            <br><br>
+            בליווי האישי אנחנו מבינים את הדפוסים האישיים שלך, את היכולות המיוחדות ואת הקשב הפרטי שלך,
+            לומדים שיטות וכלים, ובונים דרך מותאמת אישית לחיים, לסביבה ולכוחות שלך.
         </p>
         <div class="coaching-points">
-            <div class="coaching-point">תהליך אישי מובנה, לא אוסף טיפים</div>
-            <div class="coaching-point">לא צריך אבחון כדי להתחיל</div>
+            <div class="coaching-point">שיחת היכרות ובדיקת התאמה ללא עלות</div>
+            <div class="coaching-point">תהליך אישי מובנה</div>
+            <div class="coaching-point">מרחב פתוח להקשבה, הכלה וצמיחה</div>
             <div class="coaching-point">ליווי גם בין המפגשים</div>
-            <div class="coaching-point">שיחת היכרות ללא עלות והתחייבות</div>
+            <div class="coaching-point">אפשרות למפגשים דרך הזום</div>
+            <div class="coaching-point">ביטחון עצמי ותחושת מסוגלות</div>
+            <div class="coaching-point">פריצת גבולות והגשמה עצמית</div>
         </div>
         <a href="coaching.html" class="btn-primary">לכל הפרטים על התהליך ←</a>
-        <p class="coaching-note">* שיחת ההיכרות היא בדיקת התאמה. אם זה לא מתאים, אגיד לכם את זה בכנות.</p>
     </div>
 </section>
 
@@ -1053,24 +1068,24 @@
     <div class="section-inner">
         <div class="reveal" style="margin-bottom:3rem;">
             <span class="section-tag">💬 המלצות</span>
-            <h2 class="section-title">מה אומרים עליו</h2>
+            <h2 class="section-title">מה אנשים כתבו</h2>
         </div>
 
         <div class="testimonials-grid">
             <div class="testi-card is-coaching reveal">
                 <div class="testi-stars">★★★★★</div>
-                <p class="testi-text">"מה שאנחנו עושים באימון זה לא רק עזרה נקודתית לחיים. אני מרגיש שאני עובר שינוי עמוק ויסודי בחיים שלי. העשייה שלי הרבה יותר גדולה, חיה ושמחה."</p>
-                <div class="testi-author">ד.ב, בן 25 · ליווי אישי</div>
+                <p class="testi-text">"אני חייב לציין ולהודות שמה שאנחנו עושים באימון זה לא רק עזרה נקודתית לחיים. אני מרגיש שאני עובר שינוי טקטוני מאוד מאוד עמוק ויסודי בחיים שלי. העשייה שלי הרבה יותר גדולה, חיה ושמחה. אני מקבל ממך המון, תודה."</p>
+                <div class="testi-author">ד.ב, בן 25</div>
             </div>
-            <div class="testi-card reveal">
+            <div class="testi-card is-coaching reveal">
                 <div class="testi-stars">★★★★★</div>
-                <p class="testi-text">"סיפור מקסים, מרגש, ומאוד יפה שיועיל לכולם להבין קצת יותר את חווית הקשב."</p>
-                <div class="testi-author">ורד פ., פסיכודידקטית</div>
+                <p class="testi-text">"אני מרגיש שאני יכול סוף סוף לשלוט במחשבות שלי, לדעת איך ומתי להגיב בלי להתחרט, ולהביא את עצמי לסיים משימות שתמיד דחיתי."</p>
+                <div class="testi-author">א.ש, בן 40</div>
             </div>
-            <div class="testi-card reveal">
+            <div class="testi-card is-coaching reveal">
                 <div class="testi-stars">★★★★★</div>
-                <p class="testi-text">"נתתי לבת שלי בת ה-13 לקרוא. היא זיהתה את עצמה בספר... זה אומר המון."</p>
-                <div class="testi-author">עינת ה.</div>
+                <p class="testi-text">"מאז שמ׳ נמצא איתך הוא כאילו התבגר בכמה שנים בבת אחת. מגלה אחריות ורצינות, מסודר יותר, מקבל פידבקים טובים בבית הספר, ואפילו היחס עם האחים שלו השתנה."</p>
+                <div class="testi-author">הורים של מ׳, בן 14</div>
             </div>
         </div>
     </div>
@@ -1125,7 +1140,7 @@
             מוכנים להתחיל לראות את ה-ADHD אחרת?
         </h2>
         <p style="font-size:1rem; color:rgba(255,255,255,0.82); line-height:1.7; margin-bottom:2rem;">
-            ליווי אישי, ספר, כלים — הכל כאן. צעד ראשון קטן, שינוי גדול.
+            ליווי אישי, ספר, כלים — הכל כאן. צעד קטן, שינוי גדול.
         </p>
         <a href="coaching.html"
            style="display:inline-flex; align-items:center; gap:0.4rem; background:white; color:var(--orange); font-weight:900; font-size:1.05rem; padding:0.95rem 2.2rem; border-radius:999px; text-decoration:none; box-shadow:0 6px 24px rgba(0,0,0,0.15); transition:transform 0.2s;"
@@ -1145,7 +1160,7 @@
         <div class="footer-phone">משה מדינה · 054-2347839</div>
 
         <!-- Social buttons -->
-        <div style="display:flex; justify-content:center; gap:0.75rem; margin-bottom:2rem; flex-wrap:wrap;">
+        <div id="social" style="display:flex; justify-content:center; gap:0.75rem; margin-bottom:2rem; flex-wrap:wrap;">
 
             <!-- WhatsApp -->
             <a href="https://wa.me/972542347839" target="_blank"
